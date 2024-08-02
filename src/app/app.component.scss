@@ -1,0 +1,13 @@
+.nothighlighted{
+    position: relative; left: 3rem;
+    transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateX(+0.5rem);
+    opacity: 1;
+
+}
+.highlighted{
+    position: relative; right: 7rem;
+    transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateX(-0.5rem);
+    opacity: 1;
+}

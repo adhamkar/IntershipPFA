@@ -1,0 +1,121 @@
+
+<div class="relative w-full" style="height: 65vh;">
+  <img src="../../../assets/categoryPhoto.jpg" alt="Background Image" class="object-cover object-center w-full h-full" />
+  <img src="" alt="Background Image" class="absolute inset-0 w-full h-full object-cover filter blur-sm">
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center">
+    <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5">
+      <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-200">
+        Categories
+      </p>
+    </div>
+    <h1 class="text-4xl text-white font-bold">Trouvez tous vos categories de livres preferes</h1>
+   
+  </div>
+</div>
+<div class="bg-white" >
+  
+  <div class="bg-gray-100 mx-auto w-full px-4 py-16" >
+  <!--   <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5">
+      <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-700">
+        Categories
+      </p>
+      <form class="relative mt-5 sm:mt-0">
+        <button class="absolute left-2 -translate-y-1/2 top-1/2 p-1">
+          <svg
+            width="17"
+            height="16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="search"
+            class="w-5 h-5 text-gray-700"
+          >
+            <path
+              d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+              stroke="currentColor"
+              stroke-width="1.333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+        <input
+          class="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md"
+          placeholder="Search..."
+          required=""
+          type="text"
+        />
+        <button type="reset" class="absolute right-3 -translate-y-1/2 top-1/2 p-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+     -->
+    <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-10 mb-5" style="margin-left: 3rem;">
+      <button  class="button-grp" (click)="ToutButton()">TOUS</button>
+      <button class="button-grp" (click)="filterCategories('Informatique')">INFORMATIQUE</button>
+      <button class="button-grp" (click)="filterCategories('mathematique')">MATHEMATIQUE</button>
+      <button class="button-grp" (click)="filterCategories('Physique')">PHYSIQUE</button>
+
+    </div>
+    <div *ngIf="isTout" class="grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto" style="margin-left: 5.5rem;">
+     
+
+      <div  class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;" *ngFor="let item of categories">
+        <a href="#">
+          <img class="rounded-t-lg" src="../../../assets/enset.jpeg" alt="Image description" />
+        </a>
+        <div class="p-5">
+          <a href="#">
+            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" >{{item.sous_domaine}}</p>
+          </a>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!</p>
+          <button (click)="getLivresBySousDomaines(item.sous_domaine)"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800">
+            Livre Associés
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+     
+    </div>
+    <div *ngIf="!isTout" class="grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto" style="margin-left: 5.5rem;">
+     
+      <div class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;" *ngFor="let category of filter">
+          <a href="#">
+            <img class="rounded-t-lg" src="../../../assets/enset.jpeg" alt="Image description" />
+          </a>
+        <div class="p-5">
+          <a href="#">
+            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" >{{category.sous_domaine}}</p>
+          </a>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!</p>
+          <button (click)="getLivresBySousDomaines(category.sous_domaine)"class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800">
+            Livre Associés
+            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+     
+    </div>
+    
+  </div>
+</div>
+
+

@@ -1,0 +1,66 @@
+<div class="p-10" style="margin: 3rem; display: flex; justify-content: center; align-items: center;">
+    <div class="container p-10 w-full max-w-7xl border-2 border-gray-300 rounded-lg shadow-lg">
+      <div class="flex flex-wrap items-center justify-between mb-4">
+        <div class="text-lg font-medium">Etudiants</div>
+        <button class="boton-elegante py-2 px-4 rounded bg-brown-400" routerLink="/ajouter">Ajouter</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom Complet</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Télephone</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CNE</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">BlackList</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sexe</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let etu of Alletudiants">
+              <td scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
+                <img class="w-10 h-10 rounded-full" [src]="etu.imageUrl" alt="Jese image">
+                <div class="ml-3">
+                  <div class="text-base font-semibold">{{etu.etudiant.nom}} {{etu.etudiant.prenom}}</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{etu.etudiant.email}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                {{etu.etudiant.tel}}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{etu.etudiant.ville}}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{etu.etudiant.cne}}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{etu.etudiant.blackListed ? 'Oui' : 'Non'}}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{etu.etudiant.sexe}}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap">
+                <span class="inline-flex text-xs leading-5 font-semibold rounded-full p-1 m-1">
+                  <mat-icon>edit</mat-icon>
+                </span>
+                <span class="inline-flex text-xs leading-5 font-semibold rounded-full p-1 m-1">
+                  <mat-icon>account_circle</mat-icon>
+                </span>
+                <span class="inline-flex text-xs leading-5 font-semibold rounded-full p-1 m-1">
+                  <button (click)="deleteEtudiant(etu.etudiant.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

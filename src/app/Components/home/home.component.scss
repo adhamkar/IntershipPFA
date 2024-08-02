@@ -1,0 +1,38 @@
+.mat-drawer-container {
+    height: 100%;
+  }
+  
+  .mat-drawer {
+    width: 250px;
+    overflow: hidden;
+  }
+  
+  .mat-drawer-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .mat-list-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+  }
+  
+  .mat-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  .mat-icon {
+    margin-right: 16px;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
