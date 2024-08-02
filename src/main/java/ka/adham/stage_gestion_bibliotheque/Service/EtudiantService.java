@@ -1,6 +1,8 @@
 package ka.adham.stage_gestion_bibliotheque.Service;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -28,4 +30,5 @@ public interface EtudiantService {
     List<Livre> getLivresBySousDomaine(String sousDomaine);
 
 
+    Page<Livre> findAll(Pageable pageable);
 }

@@ -8,7 +8,12 @@ import ka.adham.stage_gestion_bibliotheque.Service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,12 @@ public class EtudiantController {
     @GetMapping("/livres")
     public List<Livre> getLivres(){
         return etudiantService.getLivres();
+    }
+        @GetMapping("/paginated")
+    public ResponseEntity<Page<Livre>> getLivresPaginated(@RequestParam int page, @RequestParam int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Livre> livres = etudiantService.findAll(pageable);
+        return ResponseEntity.ok(livres);
     }
     @GetMapping("/emprunts/{id}")
     public List<Emprunte> getEmprunts(@PathVariable Long id){

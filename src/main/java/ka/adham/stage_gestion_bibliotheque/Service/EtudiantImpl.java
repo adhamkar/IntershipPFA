@@ -7,6 +7,8 @@ import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -198,6 +200,11 @@ public class EtudiantImpl implements EtudiantService{
     public List<Livre> getLivresBySousDomaine(String sousDomaine) {
         List<Livre> livres=livreRepo.getLivresBySousDomaine(sousDomaine);
         return livres;
+    }
+
+    @Override
+    public Page<Livre> findAll(Pageable pageable) {
+        return livreRepo.findAll(pageable);
     }
 
 
