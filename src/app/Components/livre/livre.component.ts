@@ -1,9 +1,13 @@
-import { Component, OnInit,Input  } from '@angular/core';
+import { Component, OnInit,Input, ViewChild, ChangeDetectorRef  } from '@angular/core';
 import { LivreService } from '../../Services/livre.service';
 import { Router } from '@angular/router';
 import { Livre } from '../../Models/Livre.model';
 import { CategoryServiceService } from '../../Services/category-service.service';
 import { Category } from '../../Models/Category.model';
+import { SearchService } from '../../Services/search.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-livre',
@@ -14,8 +18,10 @@ export class LivreComponent implements OnInit{
   livres:Livre[] = [];
   filter: Livre[] = [];
   isTout:boolean = false;
-  @Input() isclicked=false;
-  
+  dataSource: MatTableDataSource<Livre> = new MatTableDataSource<Livre>(this.livres);
+  displayedColumns: string[] = ['titre', 'auteur', 'category', 'description',  'quantite','type'];
+  obs!: Observable<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   categories: Category[] = [];
   categoryName:string[]=[];
@@ -23,8 +29,10 @@ export class LivreComponent implements OnInit{
   total:number=0;
   isTables:boolean=true;
   isCards:boolean=false;
-
-  
+  query: string = '';
+  pageSize = 10;
+  pageIndex = 0;
+  totalItems = 0;
   ngOnInit(): void {
    this.getAllLivres();
    this.getAllCategories();
@@ -39,7 +47,24 @@ export class LivreComponent implements OnInit{
     this.isTables = false;
     this.isCards = true;
   }
-constructor(private router:Router, private livreService: LivreService,private CatService:CategoryServiceService) { }
+constructor(private router:Router, private livreService: LivreService,
+  private CatService:CategoryServiceService,
+  private searchService:SearchService,
+  private changeDetectorRef: ChangeDetectorRef
+  ) { }
+
+
+public onSearch(): void {
+  this.searchService.searchLivres(this.query).subscribe(
+    (data) => {
+      console.log(data);
+      this.livres = data;
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
+}
 
 public getAllLivres(): void {
 
@@ -51,12 +76,31 @@ public getAllLivres(): void {
         this.getNombreEmprunts(livre.id);
         ++this.total;
       });
+      
     },
     (error) => {
       console.log("il'y'a une erreur"+error);
     }
   );
 }
+loadPages(){
+  this.livreService.getLivresPage(this.pageIndex,this.pageSize).subscribe(
+    (data) => {
+      console.log(data);
+      this.livres = data.content;
+      this.totalItems = data.totalElements;
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
+}
+onPageChange(event: PageEvent) {
+  this.pageIndex = event.pageIndex;
+  this.pageSize = event.pageSize;
+  this.loadPages();
+}
+
 public getAllCategories(): void {
 
   this.CatService.getCategories().subscribe(

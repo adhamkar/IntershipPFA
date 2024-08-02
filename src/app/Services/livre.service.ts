@@ -10,7 +10,10 @@ export class LivreService {
   private url = "http://localhost:8085/bibliotecaire";
   private Etudianturl = "http://localhost:8085/etudiant";
   constructor(private http: HttpClient) { }
-  
+
+  public getLivresPage(page:number,size:number):Observable<any>  {
+    return this.http.get<any>(`${this.Etudianturl}/paginated?page=${page}&size=${size}`);
+  }
   public getLivres():Observable<Livre[]>  {
     return this.http.get<Livre[]>(`${this.url}`+"/livres");
   }
@@ -29,4 +32,5 @@ export class LivreService {
   public getMathematiqueLivres():Observable<Livre[]>  {
     return this.http.get<Livre[]>(`${this.Etudianturl}`+"/mathematique/livres");
   }
+  
 }

@@ -4,6 +4,7 @@ import { EmpruntService } from '../../Services/emprunt.service';
 import { Emprunte } from '../../Models/Emprunt.model';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { SearchService } from '../../Services/search.service';
 @Component({
   selector: 'app-emprunts',
   templateUrl: './emprunts.component.html',
@@ -11,19 +12,31 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 })
 export class EmpruntsComponent implements OnInit{
   emprunts:Emprunte[] = [];
-  currentPage:number = 1;
-  pageSize:number = 5;
-  totalPages:number = 0;
+  query: string = '';
+
   dataSource:any;
   displayedColumns: string[] = ['titre', 'category', 'type', 'etudiant', 'status', 'quantite', 'dateEmprunt', 'dateRetour', 'actions'];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-   constructor(private router:Router,private empruntService: EmpruntService) { }
+   constructor(private router:Router,private empruntService: EmpruntService,private searchService:SearchService,) { }
   ngOnInit(): void {
     this.getEmprunts();
 
    }
+  
+/*    public onSearch(): void {
+    this.searchService.searchLivres(this.query).subscribe(
+      (data) => {
+        console.log(data);
+        this.livres = [data];
+      },
+      (error) => {
+        console.log("il'y'a une erreur"+error);
+      }
+    );
+  } */
+  
   
    public getEmprunts(): void {
     this.empruntService.getEmprunts().subscribe(

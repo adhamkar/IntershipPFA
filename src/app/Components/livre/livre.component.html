@@ -20,14 +20,14 @@
     <img style="height: 430px;position: relative;top: 1rem;" src="../../../assets/ktab.jpg" alt="Leafs" class="w-full h-48 object-cover sm:h-screen sm:w-4/12">
   </div>
   
-  <div class="p-4  ml-20">
+  <div class="p-4  ml-24">
   <div class="flex justify-start  gap-2">
     <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
         <button  class="button-grp" (click)="getAllLivres()">TOUS</button>
         <button class="button-grp"  (click)="displayBooksOfInformatique()">INFORMATIQUE</button>
         <button class="button-grp" (click)="displayBooksOfMathematiques()">MATHEMATIQUE</button>
         <button class="button-grp" (click)="displayBooksOfPhysique()">PHYSIQUE</button>
-        <div class="icons">
+        <div style="padding-left: 6rem;">
             <div class="inline-flex rounded-md gap-2 ml-0 sm:ml-4 md:ml-8 lg:ml-20 xl:ml-80">
               <a 
                 class="h-10 w-10 px-4 py-2 rounded-lg focus:z-10 focus:ring-2 focus:ring-brown-500 focus:text-brown-500 active:bg-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-brown-500 dark:focus:text-white" 
@@ -147,6 +147,15 @@
 
         
     </ul>
+    <mat-paginator
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[3,6]"
+    [length]="totalItems"
+    (page)="onPageChange($event)"
+    showFirstLastButtons
+   >
+</mat-paginator> 
 
 </div>
 
@@ -159,6 +168,12 @@
                       <span class="text-gray-500">Nombre de Livres:</span>
                       <span class="dark:text-white">{{total}}</span>
                   </h5>
+              </div>
+              <div class="container-input">
+                <input [(ngModel)]="query" (input)="onSearch()" type="text" placeholder="Search" name="text" class="input">
+                <svg (click)="onSearch()" style="cursor: pointer; " fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+              </svg>
               </div>
               <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
                   <button type="button" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
