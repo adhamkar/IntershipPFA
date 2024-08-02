@@ -1,0 +1,523 @@
+[
+    {
+        "id": 1,
+        "titre": "To Kill a Mockingbird",
+        "auteur": "Harper Lee",
+        "dateSortie": 1960,
+
+
+
+        "description": "A classic novel depicting racial injustice in the American South.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 2,
+        "titre": "1984",
+        "auteur": "George Orwell",
+        "dateSortie": 1949,
+
+
+        "description": "A dystopian novel portraying a totalitarian society.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 3,
+        "titre": "Pride and Prejudice",
+        "auteur": "Jane Austen",
+        "dateSortie": 1813,
+
+
+
+        "description": "A classic novel exploring themes of love, marriage, and social norms.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 4,
+        "titre": "The Great Gatsby",
+        "auteur": "F. Scott Fitzgerald",
+        "dateSortie": 1925,
+
+
+
+        "description": "A tale of the American Dream, wealth, and love during the Roaring Twenties.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 5,
+        "titre": "Moby-Dick",
+        "auteur": "Herman Melville",
+        "dateSortie": 1851,
+
+
+
+        "description": "The epic tale of Captain Ahab's obsession with the white whale.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 6,
+        "titre": "The Lord of the Rings",
+        "auteur": "J.R.R. Tolkien",
+        "dateSortie": 1954,
+
+
+        "description": "An epic fantasy saga about the quest to destroy the One Ring.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 7,
+        "titre": "The Catcher in the Rye",
+        "auteur": "J.D. Salinger",
+        "dateSortie": 1951,
+
+
+        "description": "A classic coming-of-age novel following Holden Caulfield's journey.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 8,
+        "titre": "The Hobbit",
+        "auteur": "J.R.R. Tolkien",
+        "dateSortie": 1937,
+
+
+        "description": "The prequel to The Lord of the Rings, following Bilbo Baggins' journey.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 9,
+        "titre": "One Hundred Years of Solitude",
+        "auteur": "Gabriel Garcia Marquez",
+        "dateSortie": 1967,
+
+
+
+        "description": "A multi-generational saga of the Buendía family in the fictional town of Macondo.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 10,
+        "titre": "War and Peace",
+        "auteur": "Leo Tolstoy",
+        "dateSortie": 1869,
+
+
+        "description": "A monumental work depicting the events of Russian society during the Napoleonic era.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 11,
+        "titre": "The Odyssey",
+        "auteur": "Homer",
+        "dateSortie": "8th century BCE",
+
+
+
+        "description": "An ancient Greek epic poem recounting Odysseus' ten-year journey home after the Trojan War.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 12,
+        "titre": "The Divine Comedy",
+        "auteur": "Dante Alighieri",
+        "dateSortie": "1320",
+
+
+
+        "description": "An epic poem that follows the journey of the soul through Hell, Purgatory, and Heaven.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 13,
+        "titre": "The Brothers Karamazov",
+        "auteur": "Fyodor Dostoevsky",
+        "dateSortie": 1880,
+
+
+
+        "description": "A complex novel exploring themes of spirituality, morality, and human nature.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 14,
+        "titre": "Crime and Punishment",
+        "auteur": "Fyodor Dostoevsky",
+        "dateSortie": 1866,
+
+
+
+        "description": "A psychological thriller revolving around guilt, conscience, and redemption.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 15,
+        "titre": "The Picture of Dorian Gray",
+        "auteur": "Oscar Wilde",
+        "dateSortie": 1890,
+
+
+        "description": "A novel about a man whose portrait ages while he retains his youth and beauty.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 16,
+        "titre": "Brave New World",
+        "auteur": "Aldous Huxley",
+        "dateSortie": 1932,
+
+
+        "description": "A dystopian vision of a future society obsessed with pleasure and conformity.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 17,
+        "titre": "The Count of Monte Cristo",
+        "auteur": "Alexandre Dumas",
+        "dateSortie": 1844,
+
+
+
+        "description": "An adventure novel of revenge, love, and redemption set in the early 19th century.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 18,
+        "titre": "Anna Karenina",
+        "auteur": "Leo Tolstoy",
+        "dateSortie": 1877,
+
+
+
+        "description": "A tragic love story set against the backdrop of Russian high society.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 19,
+        "titre": "The Alchemist",
+        "auteur": "Paulo Coelho",
+        "dateSortie": 1988,
+
+
+
+        "description": "A philosophical novel about a shepherd boy's journey to find his personal legend.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 20,
+        "titre": "The Adventures of Huckleberry Finn",
+        "auteur": "Mark Twain",
+        "dateSortie": 1884,
+
+
+
+        "description": "A satirical novel following Huck Finn's journey down the Mississippi River.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 21,
+        "titre": "The Iliad",
+        "auteur": "Homer",
+        "dateSortie": "8th century BCE",
+
+
+
+        "description": "An ancient Greek epic poem about the Trojan War and the hero Achilles.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 22,
+        "titre": "The Lord of the Rings",
+        "auteur": "J.R.R. Tolkien",
+        "dateSortie": 1954,
+
+
+        "description": "A thrilling epic about the quest to destroy the One Ring and save Middle-earth from the dark lord Sauron.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 23,
+        "titre": "Don Quixote",
+        "auteur": "Miguel de Cervantes",
+        "dateSortie": 1605,
+
+
+
+        "description": "A satirical novel about a deluded knight and his faithful squire, Sancho Panza.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 24,
+        "titre": "Frankenstein",
+        "auteur": "Mary Shelley",
+        "dateSortie": 1818,
+
+
+        "description": "A novel about the creation of a monster and the consequences of playing god.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 25,
+        "titre": "Alice's Adventures in Wonderland",
+        "auteur": "Lewis Carroll",
+        "dateSortie": 1865,
+
+
+        "description": "A whimsical tale about a girl named Alice who falls into a magical world.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 26,
+        "titre": "The Little Prince",
+        "auteur": "Antoine de Saint-Exupéry",
+        "dateSortie": 1943,
+
+
+
+        "description": "A philosophical novella about a young prince's journey through the universe.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 27,
+        "titre": "The Book Thief",
+        "auteur": "Markus Zusak",
+        "dateSortie": 2005,
+
+
+        "description": "A story of a girl living in Nazi Germany, narrated by Death.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 28,
+        "titre": "Slaughterhouse-Five",
+        "auteur": "Kurt Vonnegut",
+        "dateSortie": 1969,
+
+
+
+        "description": "An anti-war novel that mixes science fiction and dark humor.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 29,
+        "titre": "The Grapes of Wrath",
+        "auteur": "John Steinbeck",
+        "dateSortie": 1939,
+
+
+        "description": "A novel about the plight of migrant workers during the Great Depression.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 30,
+        "titre": "Fahrenheit 451",
+        "auteur": "Ray Bradbury",
+        "dateSortie": 1953,
+
+
+        "description": "A dystopian novel depicting a future society where books are banned.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 31,
+        "titre": "The Lord of the Flies",
+        "auteur": "William Golding",
+        "dateSortie": 1954,
+
+                   "description": "A novel about a group of British boys stranded on an uninhabited island.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 32,
+        "titre": "The Hitchhiker's Guide to the Galaxy",
+        "auteur": "Douglas Adams",
+        "dateSortie": 1979,
+
+
+        "description": "A comedic science fiction series about the misadventures of Arthur Dent.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 33,
+        "titre": "A Tale of Two Cities",
+        "auteur": "Charles Dickens",
+        "dateSortie": 1859,
+
+
+        "description": "A historical novel set during the French Revolution, exploring themes of sacrifice and resurrection.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 34,
+        "titre": "The Chronicles of Narnia",
+        "auteur": "C.S. Lewis",
+        "dateSortie": 1950,
+
+
+        "description": "A series of fantasy novels set in the magical land of Narnia.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 35,
+        "titre": "The Handmaid's Tale",
+        "auteur": "Margaret Atwood",
+        "dateSortie": 1985,
+
+
+        "description": "A dystopian novel set in a totalitarian society where women are subjugated.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 36,
+        "titre": "The Name of the Rose",
+        "auteur": "Umberto Eco",
+        "dateSortie": 1980,
+
+
+        "description": "A medieval mystery novel set in an Italian monastery.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 37,
+        "titre": "The Trial",
+        "auteur": "Franz Kafka",
+        "dateSortie": 1925,
+
+
+
+        "description": "A surreal novel exploring themes of guilt, law, and justice.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 38,
+        "titre": "The Kite Runner",
+        "auteur": "Khaled Hosseini",
+        "dateSortie": 2003,
+
+
+        "description": "A novel about friendship, redemption, and the impact of war in Afghanistan.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 39,
+        "titre": "The Pillars of the Earth",
+        "auteur": "Ken Follett",
+        "dateSortie": 1989,
+
+
+        "description": "An epic historical novel set in 12th-century England, centered around the construction of a cathedral.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 40,
+        "titre": "The Shadow of the Wind",
+        "auteur": "Carlos Ruiz Zafón",
+        "dateSortie": 2001,
+
+
+        "description": "A mystery novel set in post-war Barcelona, revolving around a forgotten book and its auteur.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 41,
+        "titre": "The Secret Garden",
+        "auteur": "Frances Hodgson Burnett",
+        "dateSortie": 1911,
+
+
+        "description": "A classic children's novel about a young girl who discovers a hidden garden.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 42,
+        "titre": "The Giver",
+        "auteur": "Lois Lowry",
+        "dateSortie": 1993,
+
+
+        "description": "A dystopian novel about a society with strict control over emotions and memories.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 43,
+        "titre": "The Metamorphosis",
+        "auteur": "Franz Kafka",
+        "dateSortie": 1915,
+
+
+
+        "description": "A novella about a man who wakes up one morning transformed into a giant insect.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 44,
+        "titre": "Gone with the Wind",
+        "auteur": "Margaret Mitchell",
+        "dateSortie": 1936,
+
+
+        "description": "A historical novel set during the American Civil War, centered around Scarlett O'Hara.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 45,
+        "titre": "The Wind in the Willows",
+        "auteur": "Kenneth Grahame",
+        "dateSortie": 1908,
+
+
+        "description": "A children's novel about the adventures of anthropomorphic animals.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 46,
+        "titre": "Dracula",
+        "auteur": "Bram Stoker",
+        "dateSortie": 1897,
+
+
+        "description": "A Gothic horror novel about the vampire Count Dracula's attempt to move to England.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 47,
+        "titre": "The Call of the Wild",
+        "auteur": "Jack London",
+        "dateSortie": 1903,
+
+
+
+        "description": "An adventure novel about a domestic dog's life in the wilds of the Yukon.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 48,
+        "titre": "The Stand",
+        "auteur": "Stephen King",
+        "dateSortie": 1978,
+
+
+
+        "description": "A post-apocalyptic horror novel about a deadly pandemic and its aftermath.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 49,
+        "titre": "The Color Purple",
+        "auteur": "Alice Walker",
+        "dateSortie": 1982,
+
+
+
+        "description": "A novel about the life of African-American women in the Southern United States.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    },
+    {
+        "id": 50,
+        "titre": "The Silmarillion",
+        "auteur": "J.R.R. Tolkien",
+        "dateSortie": 1977,
+
+
+        "description": "A collection of mythopoeic stories about the history of Middle-earth.",
+        "imageCouverture": "https://fakeimg.pl/667x1000/cc6600"
+    }
+]
