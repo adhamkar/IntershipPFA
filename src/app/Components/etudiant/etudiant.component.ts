@@ -1,9 +1,11 @@
-  import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit, ViewChild } from '@angular/core';
   import { Router } from '@angular/router';
   import { EtudiantService } from '../../Services/etudiant.service';
   import { Etudiant } from '../../Models/Etudiant.model';
   import { Image } from '../../Models/Image.model';
   import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
   @Component({
     selector: 'app-etudiant',
     templateUrl: './etudiant.component.html',
@@ -14,18 +16,29 @@
     etudiants: Etudiant[] = [];
     Alletudiants: { etudiant: Etudiant, imageUrl: SafeUrl }[] = [];
     images: { image: Image, imageUrl: SafeUrl }[] = [];
+    number: number = 0;
+    pageSize = 8;
+    pageIndex = 0;
+    totalPages = 0;
+    paginatedEtudiants: { etudiant: Etudiant, imageUrl: SafeUrl }[] = [];
+  
   constructor(private router:Router, private etudiantService:EtudiantService,private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
     this.getAllEtudiants();
     this.fetchAllEtudiants();
+
+
     }
-    
+ 
      public getAllEtudiants(): void {
       this.etudiantService.getEtudiants().subscribe(
         (data) => {
           console.log(data);
           this.etudiants = data;
+          this.number = this.etudiants.length;
+          this.totalPages = Math.floor(this.number / this.pageSize);
+          this.updatePaginatedEtudiants();
         },
         (error) => {
           console.log("il'y'a une erreur :"+error);
@@ -84,6 +97,7 @@
               this.Alletudiants.push({ etudiant, imageUrl: '' });
             }
           });
+          this.updatePaginatedEtudiants();
         },
         error => {
           console.error('Error fetching students', error);
@@ -97,6 +111,7 @@
           const objectURL = URL.createObjectURL(blob);
           const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
           this.Alletudiants.push({ etudiant, imageUrl });
+          this.updatePaginatedEtudiants();
         },
         error => {
           console.error('Error fetching image', error);
@@ -115,4 +130,24 @@
         }
       );
     }
+    updatePaginatedEtudiants(): void {
+      const start = this.pageIndex * this.pageSize;
+      const end = start + this.pageSize;
+      this.paginatedEtudiants = this.Alletudiants.slice(start, end);
+    }
+  
+    nextPage(): void {
+      if (this.pageIndex + 1 < this.totalPages) {
+        this.pageIndex++;
+        this.updatePaginatedEtudiants();
+      }
+    }
+  
+    previousPage(): void {
+      if (this.pageIndex > 0) {
+        this.pageIndex--;
+        this.updatePaginatedEtudiants();
+      }
+    }
+    
   }

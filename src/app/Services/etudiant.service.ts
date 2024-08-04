@@ -13,8 +13,11 @@ export class EtudiantService {
 
   constructor(private http: HttpClient) { }
   
-  public getEtudiants():Observable<Etudiant[]>  {
-    return this.http.get<Etudiant[]>(`${this.url}`+"/etudiants");
+  public getEtudiants():Observable<any>  {
+    return this.http.get<any>(`${this.url}`+"/etudiants");
+  }
+  public getEtudiantsPage(page:number,size:number):Observable<any>  {
+    return this.http.get<any>(`${this.url}/paginated?page=${page}&size=${size}`);
   }
   public getImageUrl(fileName: string): string {
     return `${this.imageApiUrl+'/name'}${fileName}`;

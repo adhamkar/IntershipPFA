@@ -8,6 +8,7 @@ import { SearchService } from '../../Services/search.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { PDFsService } from '../../Services/pdfs.service';
 
 @Component({
   selector: 'app-livre',
@@ -30,7 +31,7 @@ export class LivreComponent implements OnInit{
   isTables:boolean=true;
   isCards:boolean=false;
   query: string = '';
-  pageSize = 10;
+  pageSize !:number;
   pageIndex = 0;
   totalItems = 0;
   ngOnInit(): void {
@@ -50,7 +51,8 @@ export class LivreComponent implements OnInit{
 constructor(private router:Router, private livreService: LivreService,
   private CatService:CategoryServiceService,
   private searchService:SearchService,
-  private changeDetectorRef: ChangeDetectorRef
+  private changeDetectorRef: ChangeDetectorRef,
+  
   ) { }
 
 
@@ -194,4 +196,6 @@ displayBooksOfPhysique(): void {
     console.log("il'y'a une erreur"+error);
   });
 }
+
+
 }

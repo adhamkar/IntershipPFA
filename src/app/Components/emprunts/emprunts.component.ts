@@ -13,6 +13,7 @@ import { SearchService } from '../../Services/search.service';
 export class EmpruntsComponent implements OnInit{
   emprunts:Emprunte[] = [];
   query: string = '';
+  number: number = 0;
 
   dataSource:any;
   displayedColumns: string[] = ['titre', 'category', 'type', 'etudiant', 'status', 'quantite', 'dateEmprunt', 'dateRetour', 'actions'];
@@ -43,6 +44,7 @@ export class EmpruntsComponent implements OnInit{
       (data) => {
         console.log(data);
         this.emprunts = data
+        this.number = this.emprunts.length;
         this.dataSource=new MatTableDataSource<Emprunte>(this.emprunts);
         this.dataSource.paginator=this.paginator;
       },
