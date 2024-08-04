@@ -11,6 +11,9 @@ import ka.adham.stage_gestion_bibliotheque.Service.StorageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +40,12 @@ public class AdminControllelr {
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
         return adminService.getAllEtudiants();
+    }
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Etudiant>> getLivresPaginated(@RequestParam int page, @RequestParam int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Etudiant> etudiants = adminService.findAllEtudiants(pageable);
+        return ResponseEntity.ok(etudiants);
     }
     @GetMapping("/etudiant/{id}")
     public Etudiant getEtudiant(@PathVariable Long id){
