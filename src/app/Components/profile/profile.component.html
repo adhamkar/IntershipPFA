@@ -1,0 +1,186 @@
+<!-- <div *ngIf="myProfil" class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white shadow-md rounded-lg">
+    <div class="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+      <div class="w-32 h-32 rounded-full overflow-hidden">
+        <img class="w-full h-full object-cover" [src]="'data:image/png;base64,' + myProfil.image.imageData" alt="{{ myProfil.nom }}">
+      </div>
+      <div class="flex-1">
+        <h1 class="text-2xl font-bold text-gray-800">{{ myProfil.nom }} {{ myProfil.prenom }}</h1>
+        <p class="text-gray-600">{{ myProfil.email }}</p>
+        <p class="text-gray-600">{{ myProfil.tel }}</p>
+        <p class="text-gray-600">{{ myProfil.ville }}</p>
+        <p class="mt-2" [ngClass]="{'text-red-600': myProfil.blackListed, 'text-green-600': !myProfil.blackListed}">
+          {{ myProfil.blackListed ? 'Blacklisted' : 'Active' }}
+        </p>
+        <p class="mt-2 text-gray-600">CNE: {{ myProfil.cne }}</p>
+      </div>
+    </div>
+  
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-800">Emprunts</h2>
+      <ul class="mt-2 space-y-2">
+        <li *ngFor="let emprunt of myProfil.emprunts" class="p-4 bg-gray-100 rounded-lg">
+          {{ emprunt.livre.titre }} - {{ emprunt.dateEmprunt | date: 'shortDate' }}
+        </li>
+      </ul>
+    </div>
+  
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-800">Reservations</h2>
+      <ul class="mt-2 space-y-2">
+        <li *ngFor="let reservation of myProfil.reservations" class="p-4 bg-gray-100 rounded-lg">
+          {{ reservation.livre.titre }} - {{ reservation.dateReservation | date: 'shortDate' }}
+        </li>
+      </ul>
+    </div>
+  
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-800">Comments</h2>
+      <ul class="mt-2 space-y-2">
+        <li *ngFor="let comment of myProfil.comments" class="p-4 bg-gray-100 rounded-lg">
+          {{ comment.commentaire }} - {{ comment.createdDate | date }}
+        </li>
+      </ul>
+    </div>
+  </div> -->
+
+
+  <section class="relative pt-40 pb-24"  *ngIf="myProfil">
+    <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60">
+    <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
+        <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
+            <img src="https://pagedone.io/asset/uploads/1705471668.png" alt="user-avatar-image"
+                class="border-4 border-solid border-white rounded-full">
+        </div>
+        <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between ">
+            <div class="block">
+                <h3 class="font-manrope font-bold text-4xl text-gray-900 max-sm:text-center">{{ myProfil.nom }} {{ myProfil.prenom }}</h3>
+                <p class="font-normal text-base leading-7 text-gray-500  max-sm:text-center">{{ myProfil.email }}
+            </div>
+            <button
+                class=" button-grp">
+               
+                <span class=" font-semibold text-white">Modifer le profile</span>
+            </button>
+        </div>
+        <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4 mt-4">
+            <a href="javascript:;" (click)="onInfo()" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">Mes Informations</a>
+            <a href="javascript:;" (click)="onEmpr()" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">Mes Emprunts</a>
+            <a href="javascript:;" (click)="onResv()" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;">Mes Reservations</a>
+        </div>
+        <div class="m-5"  *ngIf="isInfo">
+            <div class="max-w-4xl  p-6 bg-white shadow-md rounded-lg"  style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Profile Item 1 -->
+                  <div class="flex items-center">
+                    <img src="https://via.placeholder.com/50" alt="profile-pic" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                      <p class="text-gray-800 font-semibold">{{myProfil.nationalite}}</p>
+                      <p class="text-gray-500 text-sm">{{myProfil.ville}}</p>
+                    </div>
+                  </div>
+                  <!-- Profile Item 2 -->
+                  <div class="flex items-center">
+                    <img src="https://via.placeholder.com/50" alt="relationship-pic" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                      <p class="text-gray-800">Sexe :<span class="font-bold">{{myProfil.sexe}}</span></p>
+                    </div>
+                  </div>
+                  <!-- Profile Item 3 -->
+                  <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                      <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 7l9-5-9-5-9 5 9 5z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-gray-800 font-semibold">{{myProfil.email}}</p>
+                    </div>
+                  </div>
+                  <!-- Profile Item 4 -->
+                  <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                      <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 10h18m-7 5h7"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-gray-800">{{myProfil.tel}}</p>
+                     
+                    </div>
+                  </div>
+                  <!-- Profile Item 5 -->
+                  <div class="flex items-center">
+                    <img src="https://via.placeholder.com/50" alt="location-pic" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                      <p class="text-gray-800">Année : <span class="font-bold">{{myProfil.niveau}}</span></p>
+                      <p class="text-gray-500 text-sm">Filiére : <span class="font-semibold">{{myProfil.filiere}}</span></p>
+                    </div>
+                  </div>
+                  <!-- Profile Item 6 -->
+                  <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                      <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 10h18m-7 5h7"></path>
+                      </svg>
+                    </div>
+                    <div>
+                        <p class="text-gray-800">CNE :<span class="font-bold">{{myProfil.cne}}</span></p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+        </div>
+        <div class="m-5"   *ngIf="isEmpr">
+
+        <div class="overflow-x-auto" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" >
+              <thead class="text-xs text-gray-800 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 bg-gray-400" >
+                  <tr class="items-center">
+                     
+                      <th scope="col" class="px-4 py-3">Titre</th>
+                      <th scope="col" class="px-4 py-3">Category</th>
+                      <th scope="col" class="px-4 py-3">Type</th>
+                      <th scope="col" class="px-4 py-3">Status</th>
+                      <th scope="col" class="px-4 py-3">Date Empruntes</th>
+                      <th scope="col" class="px-4 py-3">Date Retour</th>
+                     
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor="let emp of myProfil.emprunts">
+                     
+                      <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{emp.livre.titre}}
+                      </th>
+                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          <div class="flex items-center">
+                              
+                              {{emp.livre.category.domaine}}
+                          </div>
+                      </td>
+                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{emp.livre.category.sous_domaine}}</td>
+                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{emp.status}}</td>
+                      
+                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white flex justify-center">
+                          <div>
+                            {{emp.dateEmprunt | date: 'shortDate'}}
+                          </div>
+                      </td>
+                      <td class="px-4 py-2 " >
+                        <div>
+                          {{emp.dateRetour| date: 'shortDate'}}
+                        </div>
+                    </td>
+                       
+                  
+                    </tr>
+              
+              </tbody>
+          </table>
+      </div>
+    </div>
+    </div>
+</section>
+                                        

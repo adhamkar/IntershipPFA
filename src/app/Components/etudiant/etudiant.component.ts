@@ -6,6 +6,9 @@
   import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AjouterComponent } from '../ajouter/ajouter.component';
+import { SearchService } from '../../Services/search.service';
   @Component({
     selector: 'app-etudiant',
     templateUrl: './etudiant.component.html',
@@ -21,8 +24,12 @@ import { MatTableDataSource } from '@angular/material/table';
     pageIndex = 0;
     totalPages = 0;
     paginatedEtudiants: { etudiant: Etudiant, imageUrl: SafeUrl }[] = [];
+    query: string = '';
+    isSearch:boolean=false
   
-  constructor(private router:Router, private etudiantService:EtudiantService,private sanitizer: DomSanitizer) { }
+  constructor(private router:Router, private etudiantService:EtudiantService,
+    private sanitizer: DomSanitizer,public dialog: MatDialog,
+    private searchService:SearchService) { }
 
     ngOnInit(): void {
     this.getAllEtudiants();
@@ -45,6 +52,46 @@ import { MatTableDataSource } from '@angular/material/table';
         }
       );
     } 
+    
+public onSearch(): void {
+  this.searchService.searchEtudiants(this.query).subscribe(
+    (data) => {
+      console.log(data);
+      this.isSearch=true;
+      this.etudiants = data;
+      this.number = this.etudiants.length;
+      if(this.query==''){
+        this.isSearch=false;
+
+      }
+      /* this.number = this.Alletudiants.length;
+      this.totalPages = Math.floor(this.number / this.pageSize);
+      this.updatePaginatedEtudiants();
+      this.paginatedEtudiants = this.Alletudiants.slice(0, this.pageSize);
+     */
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
+}
+    openDialog(): void {
+      const dialogRef = this.dialog.open(AjouterComponent, {
+        width: '40%',
+        height: '600px',
+        enterAnimationDuration:'500ms',
+        exitAnimationDuration:'500ms',
+        data: {}  
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // handle the result, e.g., save the new student
+          console.log('The dialog was closed with result: ', result);
+        }
+      });
+    }
+    
+    
   
      public getAllImages(): void {
       this.etudiantService.getImages().subscribe(
@@ -149,5 +196,9 @@ import { MatTableDataSource } from '@angular/material/table';
         this.updatePaginatedEtudiants();
       }
     }
+
+  viewProfile(id: number) {
+    this.router.navigate(['/profile', id]);
+  }
     
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AjouterService } from '../../Services/ajouter.service';
 import { Etudiant } from '../../Models/Etudiant.model';
+import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-ajouter',
@@ -16,9 +17,17 @@ export class AjouterComponent implements OnInit {
   selectedFile: File | null = null;
   isSelected: boolean = true;
   isUploaded: boolean = false;
- 
 
-  constructor(private formBuilder: FormBuilder,private service :AjouterService) { }
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
+
+  constructor(private formBuilder: FormBuilder,private service :AjouterService,
+    private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.etudiantForm = this.formBuilder.group({
@@ -57,6 +66,7 @@ onFileSelected(event: Event): void {
   if (input.files && input.files.length) {
     
     this.selectedFile = input.files[0];
+    
   }
 }
 
@@ -70,9 +80,13 @@ onUpload(): void {
     });
   }
 }
-Save(){
-  this.onUpload();
-  this.SaveEtudiant();
+async Save(){
+try{
+  await this.onUpload();
+  await this.SaveEtudiant();
+}catch(error){
+  console.error('Error saving etudiant', error);
+}
 }
 
 

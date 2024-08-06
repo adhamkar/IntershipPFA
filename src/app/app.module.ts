@@ -22,6 +22,16 @@ import { AjouterComponent } from './Components/ajouter/ajouter.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EmpruntsComponent } from './Components/emprunts/emprunts.component';
 import { RservesComponent } from './Components/rserves/rserves.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatInputModule} from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { ProfileComponent } from './Components/profile/profile.component';
+import { LivreProfilComponent } from './Components/livre-profil/livre-profil.component';
+import { CategoryProfilComponent } from './Components/category-profil/category-profil.component';
+
+
 
 @NgModule({
   declarations: [
@@ -34,6 +44,9 @@ import { RservesComponent } from './Components/rserves/rserves.component';
     AjouterComponent,
     EmpruntsComponent,
     RservesComponent,
+    ProfileComponent,
+    LivreProfilComponent,
+    CategoryProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +64,13 @@ import { RservesComponent } from './Components/rserves/rserves.component';
     MatPaginatorModule,
     BrowserAnimationsModule,
     MatTableModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+
   ],
   providers: [
     provideAnimationsAsync()

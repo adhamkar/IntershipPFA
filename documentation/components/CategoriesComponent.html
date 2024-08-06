@@ -1,0 +1,1118 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>library-management-v2 documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">library-management-v2 documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CategoriesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/Components/categories/categories.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-categories</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./categories.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./categories.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categories" >categories</a>
+                            </li>
+                            <li>
+                                <a href="#filter" >filter</a>
+                            </li>
+                            <li>
+                                <a href="#isInfo" >isInfo</a>
+                            </li>
+                            <li>
+                                <a href="#isMath" >isMath</a>
+                            </li>
+                            <li>
+                                <a href="#isPhysique" >isPhysique</a>
+                            </li>
+                            <li>
+                                <a href="#isTout" >isTout</a>
+                            </li>
+                            <li>
+                                <a href="#livres" >livres</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#filterCategories" >filterCategories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAllCategories" >getAllCategories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getLivresBySousDomaines" >getLivresBySousDomaines</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ToutButton" >ToutButton</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, Categoryservice: <a href="../injectables/CategoryServiceService.html" target="_self">CategoryServiceService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Components/categories/categories.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>Categoryservice</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CategoryServiceService.html" target="_self" >CategoryServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filterCategories</b></span>
+                        <a href="#filterCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterCategories(domaine: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/Components/categories/categories.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>domaine</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getAllCategories</b></span>
+                        <a href="#getAllCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllCategories()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/Components/categories/categories.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLivresBySousDomaines"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getLivresBySousDomaines</b></span>
+                        <a href="#getLivresBySousDomaines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getLivresBySousDomaines(sousDomaine: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/Components/categories/categories.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sousDomaine</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/Components/categories/categories.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ToutButton"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>ToutButton</b></span>
+                        <a href="#ToutButton"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ToutButton()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/Components/categories/categories.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categories"></a>
+                    <span class="name">
+                        <span ><b>categories</b></span>
+                        <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Category.html" target="_self" >Category[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Components/categories/categories.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filter"></a>
+                    <span class="name">
+                        <span ><b>filter</b></span>
+                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Category.html" target="_self" >Category[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/Components/categories/categories.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isInfo"></a>
+                    <span class="name">
+                        <span ><b>isInfo</b></span>
+                        <a href="#isInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/Components/categories/categories.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isMath"></a>
+                    <span class="name">
+                        <span ><b>isMath</b></span>
+                        <a href="#isMath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/Components/categories/categories.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPhysique"></a>
+                    <span class="name">
+                        <span ><b>isPhysique</b></span>
+                        <a href="#isPhysique"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Components/categories/categories.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isTout"></a>
+                    <span class="name">
+                        <span ><b>isTout</b></span>
+                        <a href="#isTout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/Components/categories/categories.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="livres"></a>
+                    <span class="name">
+                        <span ><b>livres</b></span>
+                        <a href="#livres"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Livre.html" target="_self" >Livre[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Components/categories/categories.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component,OnInit } from &#x27;@angular/core&#x27;;
+import { Category } from &#x27;../../Models/Category.model&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { CategoryServiceService } from &#x27;../../Services/category-service.service&#x27;;
+import { Livre } from &#x27;../../Models/Livre.model&#x27;;
+
+@Component({
+  selector: &#x27;app-categories&#x27;,
+  templateUrl: &#x27;./categories.component.html&#x27;,
+  styleUrl: &#x27;./categories.component.scss&#x27;
+})
+export class CategoriesComponent implements OnInit {
+  
+  categories: Category[] &#x3D; [];
+  filter: Category[] &#x3D; [];
+  livres:Livre[] &#x3D; [];
+  isTout:boolean &#x3D; false;
+  isInfo: boolean &#x3D; false;
+  isMath: boolean &#x3D; false;
+  isPhysique: boolean &#x3D; false;
+
+
+  constructor(private router:Router, private Categoryservice: CategoryServiceService) { }
+
+  ngOnInit(): void {
+    this.getAllCategories();
+    //this.getDomaine();
+  }
+
+  public getAllCategories(): void {
+    this.isTout &#x3D; true;
+    this.Categoryservice.getCategories().subscribe(
+      (data) &#x3D;&gt; {
+        console.log(data);
+        this.categories &#x3D; data;
+      },
+      (error) &#x3D;&gt; {
+        console.log(&quot;il&#x27;y&#x27;a une erreur&quot;+error);
+      }
+    );
+  }
+  public ToutButton(){
+    this.isTout &#x3D; true;
+    this.getAllCategories();
+  }
+
+  public filterCategories(domaine: string) {
+    this.isTout &#x3D; false;
+    this.filter &#x3D; this.categories.filter(category &#x3D;&gt; category.domaine &#x3D;&#x3D;&#x3D; domaine);
+    
+  }
+  public getLivresBySousDomaines(sousDomaine: string) {
+    this.Categoryservice.getLivresBySousDomaines(sousDomaine).subscribe(
+      (data) &#x3D;&gt; {
+        console.log(data);
+        this.livres &#x3D; data;
+      },
+      (error) &#x3D;&gt; {
+        console.log(&quot;il&#x27;y&#x27;a une erreur&quot;+error);
+      }
+    );
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div class&#x3D;&quot;relative w-full&quot; style&#x3D;&quot;height: 65vh;&quot;&gt;
+  &lt;img src&#x3D;&quot;../../../assets/categoryPhoto.jpg&quot; alt&#x3D;&quot;Background Image&quot; class&#x3D;&quot;object-cover object-center w-full h-full&quot; /&gt;
+  &lt;img src&#x3D;&quot;&quot; alt&#x3D;&quot;Background Image&quot; class&#x3D;&quot;absolute inset-0 w-full h-full object-cover filter blur-sm&quot;&gt;
+  &lt;div class&#x3D;&quot;absolute inset-0 bg-black bg-opacity-50&quot;&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;absolute inset-0 flex flex-col items-center justify-center&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5&quot;&gt;
+      &lt;p class&#x3D;&quot;text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-200&quot;&gt;
+        Categories
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;h1 class&#x3D;&quot;text-4xl text-white font-bold&quot;&gt;Trouvez tous vos categories de livres preferes&lt;/h1&gt;
+   
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;bg-white&quot; &gt;
+  
+  &lt;div class&#x3D;&quot;bg-gray-100 mx-auto w-full px-4 py-16&quot; &gt;
+  &lt;!--   &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5&quot;&gt;
+      &lt;p class&#x3D;&quot;text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-700&quot;&gt;
+        Categories
+      &lt;/p&gt;
+      &lt;form class&#x3D;&quot;relative mt-5 sm:mt-0&quot;&gt;
+        &lt;button class&#x3D;&quot;absolute left-2 -translate-y-1/2 top-1/2 p-1&quot;&gt;
+          &lt;svg
+            width&#x3D;&quot;17&quot;
+            height&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            role&#x3D;&quot;img&quot;
+            aria-labelledby&#x3D;&quot;search&quot;
+            class&#x3D;&quot;w-5 h-5 text-gray-700&quot;
+          &gt;
+            &lt;path
+              d&#x3D;&quot;M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              stroke-width&#x3D;&quot;1.333&quot;
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+            &gt;&lt;/path&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;input
+          class&#x3D;&quot;input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md&quot;
+          placeholder&#x3D;&quot;Search...&quot;
+          required&#x3D;&quot;&quot;
+          type&#x3D;&quot;text&quot;
+        /&gt;
+        &lt;button type&#x3D;&quot;reset&quot; class&#x3D;&quot;absolute right-3 -translate-y-1/2 top-1/2 p-1&quot;&gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            class&#x3D;&quot;w-5 h-5 text-gray-700&quot;
+            fill&#x3D;&quot;none&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+            &gt;&lt;/path&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+     --&gt;
+    &lt;div class&#x3D;&quot;flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-10 mb-5&quot; style&#x3D;&quot;margin-left: 3rem;&quot;&gt;
+      &lt;button  class&#x3D;&quot;button-grp&quot; (click)&#x3D;&quot;ToutButton()&quot;&gt;TOUS&lt;/button&gt;
+      &lt;button class&#x3D;&quot;button-grp&quot; (click)&#x3D;&quot;filterCategories(&#x27;Informatique&#x27;)&quot;&gt;INFORMATIQUE&lt;/button&gt;
+      &lt;button class&#x3D;&quot;button-grp&quot; (click)&#x3D;&quot;filterCategories(&#x27;mathematique&#x27;)&quot;&gt;MATHEMATIQUE&lt;/button&gt;
+      &lt;button class&#x3D;&quot;button-grp&quot; (click)&#x3D;&quot;filterCategories(&#x27;Physique&#x27;)&quot;&gt;PHYSIQUE&lt;/button&gt;
+
+    &lt;/div&gt;
+    &lt;div *ngIf&#x3D;&quot;isTout&quot; class&#x3D;&quot;grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto&quot; style&#x3D;&quot;margin-left: 5.5rem;&quot;&gt;
+     
+
+      &lt;div  class&#x3D;&quot;max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700&quot; style&#x3D;&quot;box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;&quot; *ngFor&#x3D;&quot;let item of categories&quot;&gt;
+        &lt;a href&#x3D;&quot;#&quot;&gt;
+          &lt;img class&#x3D;&quot;rounded-t-lg&quot; src&#x3D;&quot;../../../assets/enset.jpeg&quot; alt&#x3D;&quot;Image description&quot; /&gt;
+        &lt;/a&gt;
+        &lt;div class&#x3D;&quot;p-5&quot;&gt;
+          &lt;a href&#x3D;&quot;#&quot;&gt;
+            &lt;p class&#x3D;&quot;mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white&quot; &gt;{{item.sous_domaine}}&lt;/p&gt;
+          &lt;/a&gt;
+          &lt;p class&#x3D;&quot;mb-3 font-normal text-gray-700 dark:text-gray-400&quot; &gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!&lt;/p&gt;
+          &lt;button (click)&#x3D;&quot;getLivresBySousDomaines(item.sous_domaine)&quot;  class&#x3D;&quot;inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800&quot;&gt;
+            Livre Associés
+            &lt;svg class&#x3D;&quot;rtl:rotate-180 w-3.5 h-3.5 ms-2&quot; aria-hidden&#x3D;&quot;true&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 14 10&quot;&gt;
+              &lt;path stroke&#x3D;&quot;currentColor&quot; stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M1 5h12m0 0L9 1m4 4L9 9&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+     
+    &lt;/div&gt;
+    &lt;div *ngIf&#x3D;&quot;!isTout&quot; class&#x3D;&quot;grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto&quot; style&#x3D;&quot;margin-left: 5.5rem;&quot;&gt;
+     
+      &lt;div class&#x3D;&quot;max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700&quot; style&#x3D;&quot;box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;&quot; *ngFor&#x3D;&quot;let category of filter&quot;&gt;
+          &lt;a href&#x3D;&quot;#&quot;&gt;
+            &lt;img class&#x3D;&quot;rounded-t-lg&quot; src&#x3D;&quot;../../../assets/enset.jpeg&quot; alt&#x3D;&quot;Image description&quot; /&gt;
+          &lt;/a&gt;
+        &lt;div class&#x3D;&quot;p-5&quot;&gt;
+          &lt;a href&#x3D;&quot;#&quot;&gt;
+            &lt;p class&#x3D;&quot;mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white&quot; &gt;{{category.sous_domaine}}&lt;/p&gt;
+          &lt;/a&gt;
+          &lt;p class&#x3D;&quot;mb-3 font-normal text-gray-700 dark:text-gray-400&quot; &gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!&lt;/p&gt;
+          &lt;button (click)&#x3D;&quot;getLivresBySousDomaines(category.sous_domaine)&quot;class&#x3D;&quot;inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800&quot;&gt;
+            Livre Associés
+            &lt;svg class&#x3D;&quot;rtl:rotate-180 w-3.5 h-3.5 ms-2&quot; aria-hidden&#x3D;&quot;true&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; fill&#x3D;&quot;none&quot; viewBox&#x3D;&quot;0 0 14 10&quot;&gt;
+              &lt;path stroke&#x3D;&quot;currentColor&quot; stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M1 5h12m0 0L9 1m4 4L9 9&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+     
+    &lt;/div&gt;
+    
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="relative w-full" style="height: 65vh;">  <img src="../../../assets/categoryPhoto.jpg" alt="Background Image" class="object-cover object-center w-full h-full" />  <img src="" alt="Background Image" class="absolute inset-0 w-full h-full object-cover filter blur-sm">  <div class="absolute inset-0 bg-black bg-opacity-50"></div>  <div class="absolute inset-0 flex flex-col items-center justify-center">    <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5">      <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-200">        Categories      </p>    </div>    <h1 class="text-4xl text-white font-bold">Trouvez tous vos categories de livres preferes</h1>     </div></div><div class="bg-white" >    <div class="bg-gray-100 mx-auto w-full px-4 py-16" >  <!--   <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-56 mb-5">      <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight text-gray-700">        Categories      </p>      <form class="relative mt-5 sm:mt-0">        <button class="absolute left-2 -translate-y-1/2 top-1/2 p-1">          <svg            width="17"            height="16"            fill="none"            xmlns="http://www.w3.org/2000/svg"            role="img"            aria-labelledby="search"            class="w-5 h-5 text-gray-700"          >            <path              d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"              stroke="currentColor"              stroke-width="1.333"              stroke-linecap="round"              stroke-linejoin="round"            ></path>          </svg>        </button>        <input          class="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md"          placeholder="Search..."          required=""          type="text"        />        <button type="reset" class="absolute right-3 -translate-y-1/2 top-1/2 p-1">          <svg            xmlns="http://www.w3.org/2000/svg"            class="w-5 h-5 text-gray-700"            fill="none"            viewBox="0 0 24 24"            stroke="currentColor"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              d="M6 18L18 6M6 6l12 12"            ></path>          </svg>        </button>      </form>    </div>     -->    <div class="flex flex-col sm:flex-row items-center justify-center p-1 sm:gap-10 mb-5" style="margin-left: 3rem;">      <button  class="button-grp" (click)="ToutButton()">TOUS</button>      <button class="button-grp" (click)="filterCategories(\'Informatique\')">INFORMATIQUE</button>      <button class="button-grp" (click)="filterCategories(\'mathematique\')">MATHEMATIQUE</button>      <button class="button-grp" (click)="filterCategories(\'Physique\')">PHYSIQUE</button>    </div>    <div *ngIf="isTout" class="grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto" style="margin-left: 5.5rem;">           <div  class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;" *ngFor="let item of categories">        <a href="#">          <img class="rounded-t-lg" src="../../../assets/enset.jpeg" alt="Image description" />        </a>        <div class="p-5">          <a href="#">            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" >{{item.sous_domaine}}</p>          </a>          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!</p>          <button (click)="getLivresBySousDomaines(item.sous_domaine)"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800">            Livre Associés            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>            </svg>          </button>        </div>      </div>         </div>    <div *ngIf="!isTout" class="grid grid-cols-1  gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-6 md:p-8 lg:p-10 xl:p-12 mx-auto" style="margin-left: 5.5rem;">           <div class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;" *ngFor="let category of filter">          <a href="#">            <img class="rounded-t-lg" src="../../../assets/enset.jpeg" alt="Image description" />          </a>        <div class="p-5">          <a href="#">            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" >{{category.sous_domaine}}</p>          </a>          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sit deleniti nesciunt earum eos ullam animi et itaque quod ab magnam facilis officia distinctio, optio a error voluptates fuga. Molestiae!</p>          <button (click)="getLivresBySousDomaines(category.sous_domaine)"class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brown-400 rounded-lg hover:bg-brown-800 focus:ring-4 focus:outline-none focus:ring-brown-300 dark:bg-brown-600 dark:hover:bg-brown-700 dark:focus:ring-brown-800">            Livre Associés            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>            </svg>          </button>        </div>      </div>         </div>      </div></div></div>'
+    var COMPONENTS = [{'name': 'AjouterComponent', 'selector': 'app-ajouter'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CategoriesComponent', 'selector': 'app-categories'},{'name': 'CategoryProfilComponent', 'selector': 'app-category-profil'},{'name': 'EmpruntsComponent', 'selector': 'app-emprunts'},{'name': 'EtudiantComponent', 'selector': 'app-etudiant'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LivreComponent', 'selector': 'app-livre'},{'name': 'LivreProfilComponent', 'selector': 'app-livre-profil'},{'name': 'PowerBiComponent', 'selector': 'app-power-bi'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RservesComponent', 'selector': 'app-rserves'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CategoriesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CategoriesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

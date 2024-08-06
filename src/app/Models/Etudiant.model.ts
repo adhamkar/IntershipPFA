@@ -6,6 +6,9 @@ import { Reserve } from "./Reserve.model";
 import { Image } from "./Image.model";
 export class Etudiant extends User {
     blackListed: boolean;
+    niveau: string;
+    nationalite: string;
+    filiere: string;
   cne: string;
   emprunts: Emprunte[];
   reservations: Reserve[];
@@ -22,6 +25,9 @@ export class Etudiant extends User {
     image: Image,
     sexe: Genre,
     blackListed: boolean,
+    niveau: string,
+    nationalite: string,
+    filiere: string,
     cne: string,
     emprunts: Emprunte[],
     reservations: Reserve[],
@@ -33,6 +39,9 @@ export class Etudiant extends User {
     this.emprunts = emprunts;
     this.reservations = reservations;
     this.comments = comments;
+    this.niveau = niveau;
+    this.nationalite = nationalite;
+    this.filiere = filiere;
   }
 
   }

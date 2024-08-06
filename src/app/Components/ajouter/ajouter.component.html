@@ -1,205 +1,242 @@
-
-<!-- <form>
-    <div class="space-y-12">
-        <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-      
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
-                <div class="mt-2">
-                  <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-60 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-3">
-                <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
-                <div class="mt-2">
-                  <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-60 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-4">
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                <div class="mt-2">
-                  <input id="email" name="email" type="email" autocomplete="email" class="block w-80 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-3">
-                <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
-                <div class="mt-2">
-                  <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
-                </div>
-              </div>
-      
-              <div class="col-span-full">
-                <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
-                <div class="mt-2">
-                  <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-2 sm:col-start-1">
-                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
-                <div class="mt-2">
-                  <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-2">
-                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
-                <div class="mt-2">
-                  <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-      
-              <div class="sm:col-span-2">
-                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
-                <div class="mt-2">
-                  <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-              </div>
-            </div>
+<!-- <div class="container mx-auto p-4 mt-6">
+  <form [formGroup]="etudiantForm" (ngSubmit)="Save()" class="max-w-xl mx-auto p-6 border border-gray-300 rounded-lg shadow-lg bg-white">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="nom" id="nom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nom" required />
+            <label for="nom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nom</label>
           </div>
-      <div class="border-b border-gray-900/10 pb-12">  
-        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          
-          <div class="col-span-full">
-            <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
-            <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-              <div class="text-center">
-                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-                </svg>
-                <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                  <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                  </label>
-                  <p class="pl-1">or drag and drop</p>
-                </div>
-                <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-              </div>
-            </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="prenom" id="prenom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="prenom" required />
+            <label for="prenom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Prenom</label>
           </div>
         </div>
-      </div>
-  
-      
-  
-     
-    </div>
-  
-    <div class="mt-6 flex items-center justify-end gap-x-6">
-      <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-      <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
-    </div>
-  </form> -->
-
-<!--   <div class="container mx-auto p-4 mt-6" style="height: auto; width: 30rem;" *ngIf="isSelected">
-<div class="flex items-center justify-center w-full">
-  <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-      <div class="flex flex-col items-center justify-center pt-5 pb-6">
-          <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-          </svg>
-          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-          <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-      </div>
-      <input id="dropzone-file" type="file" (change)="onFileSelected($event)" class="hidden" />
-      <button *ngIf="isUploaded" (click)="onUpload()">Upload</button>
-  </label>
-</div> 
-</div> -->
-
-   <div class="container mx-auto p-4 mt-6" >
-    <form [formGroup]="etudiantForm" (ngSubmit)="Save()" class="max-w-xl mx-auto p-6 border border-gray-300 rounded-lg shadow-lg bg-white" >
         <div class="grid md:grid-cols-2 md:gap-6">
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="nom" id="nom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nom" required />
-                <label for="nom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nom</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="prenom" id="prenom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="prenom" required />
-                <label for="prenom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Prenom</label>
-            </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="city" id="city" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="ville" required />
+            <label for="city" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Ville</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="gender" id="gender" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="sexe" required />
+            <label for="gender" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sexe</label>
+          </div>
         </div>
         <div class="grid md:grid-cols-2 md:gap-6">
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="city" id="city" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="ville"  required />
-                <label for="city" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Ville</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="gender" id="gender" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="sexe"  required />
-                <label for="gender" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sexe</label>
-            </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="cne" id="cne" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="cne" required />
+            <label for="cne" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CNE</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="nationality" id="nationality" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nationalite" required />
+            <label for="nationality" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nationalité</label>
+          </div>
         </div>
-        <div class="grid md:grid-cols-2 md:gap-6">
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="cne" id="cne" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  formControlName="cne"  required />
-                <label for="cne" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CNE</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="nationality" id="nationality" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nationalite"  required />
-                <label for="nationality" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nationalité</label>
-            </div>
-        </div>
+        
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Fill out your address</ng-template>
         <div class="relative z-0 w-full mb-6 group">
-            <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="email"  required />
-            <label for="email" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+          <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="email" required />
+          <label for="email" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
         </div>
         <div class="grid md:grid-cols-2 md:gap-6">
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="filiere" id="filiere" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="filiere"  required />
-                <label for="filiere" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Filiére</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="level" id="level" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="niveau"  required />
-                <label for="level" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Niveau</label>
-            </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="filiere" id="filiere" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="filiere" required />
+            <label for="filiere" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Filiére</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="text" name="level" id="level" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="niveau" required />
+            <label for="level" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Niveau</label>
+          </div>
         </div>
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-0 w-full mb-6 group">
             <input type="tel" name="tel" id="tel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="tel" required />
             <label for="tel" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telephone</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="password" required />
+            <label for="password" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+          </div>
+        </div>
+      
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="container mx-auto p-4 mt-6" style="height: auto;" *ngIf="isSelected">
+          <div class="flex items-center justify-center w-full">
+            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+              </div>
+              <input id="dropzone-file" type="file" (change)="onFileSelected($event)" class="hidden" />
+              <button *ngIf="isUploaded" (click)="onUpload()">Upload</button>
+            </label>
+          </div>
+        </div>
+     
+      </mat-step>
+    </mat-stepper>
+    <button type="submit" [disabled]="!etudiantForm.valid || etudiantForm.pristine" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Envoyer</button>
+  </form>
+</div> -->
+
+
+ 
+<div class="container mx-auto p-4 mt-6" >
+  <form [formGroup]="etudiantForm" (ngSubmit)="Save()" class="max-w-xl mx-auto p-6 border border-gray-300 rounded-lg shadow-lg bg-white" >
+      <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="nom" id="nom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nom" required />
+              <label for="nom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nom</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="prenom" id="prenom" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="prenom" required />
+              <label for="prenom" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Prenom</label>
+          </div>
+      </div>
+      <div class="grid md:grid-cols-2 md:gap-6">
+        <div class="relative z-0 w-full mb-6 group">
+          <mat-form-field appearance="fill" class="w-full custom-form-field ">
+            <mat-label>Ville</mat-label>
+            <mat-select formControlName="ville" required >
+              <mat-option value="" disabled selected></mat-option>
+              <mat-option value="Tanger-Tetouan-Al Hoceima">Tanger-Tetouan-Al Hoceima</mat-option>
+              <mat-option value="Oriental">Oriental</mat-option>
+              <mat-option value="Fès-Meknès">Fès-Meknès</mat-option>
+              <mat-option value="Rabat-Salé-Kénitra">Rabat-Salé-Kénitra</mat-option>
+              <mat-option value="Béni Mellal-Khénifra">Béni Mellal-Khénifra</mat-option>
+              <mat-option value="Casablanca-Settat">Casablanca-Settat</mat-option>
+              <mat-option value="Marrakesh-Safi">Marrakesh-Safi</mat-option>
+              <mat-option value="Drâa-Tafilalet">Drâa-Tafilalet</mat-option>
+              <mat-option value="Souss-Massa">Souss-Massa</mat-option>
+              <mat-option value="Guelmim-Oued Noun">Guelmim-Oued Noun</mat-option>
+              <mat-option value="Laâyoune-Sakia El Hamra">Laâyoune-Sakia El Hamra</mat-option>
+              <mat-option value="Dakhla-Oued Ed-Dahab">Dakhla-Oued Ed-Dahab</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+          <div class="relative z-0 w-full mb-6 group">
+              <!-- <input type="text" name="gender" id="gender" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="sexe"  required />
+              <label for="gender" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sexe</label>
+               -->
+              <mat-form-field appearance="fill" class="w-full custom-form-field">
+                <mat-label>Sexe</mat-label>
+                <mat-select formControlName="sexe" required>
+                  <mat-option value="" disabled selected></mat-option>
+                  <mat-option value="Masculin">Masculin</mat-option>
+                  <mat-option value="Feminin">Feminin</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+      </div>
+      <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="cne" id="cne" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  formControlName="cne"  required />
+              <label for="cne" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CNE</label>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+              <!-- <input type="text" name="nationality" id="nationality" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="nationalite"  required />
+              <label for="nationality" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nationalité</label>
+ -->
+            
+              
+                <input type="tel" name="tel" id="tel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="tel" required />
+                <label for="tel" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telephone</label>
+            
+          </div>
+      </div>
+      <div class="grid md:grid-cols-2 md:gap-6">
+        <div class="relative z-0 w-full mb-6 group">
+
+          <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="email"  required />
+          <label for="email" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
         </div>
         <div class="relative z-0 w-full mb-6 group">
           <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="password"  required />
           <label for="password" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
       </div>
-      </div>
-        
-      <div class="container mx-auto p-4 mt-6" style="height: auto; width: 30rem;" *ngIf="isSelected">
-        <div class="flex items-center justify-center w-full">
-          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                  </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-              </div>
-              <input id="dropzone-file" type="file" (change)="onFileSelected($event)" class="hidden" />
-<!--               <button *ngIf="isUploaded" (click)="onUpload()">Upload</button>
- -->          </label>
-        </div> 
         </div>
+      <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-6 group">
+              <!-- <input type="text" name="filiere" id="filiere" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="filiere"  required />
+              <label for="filiere" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Filiére</label>
+ -->
+              <mat-form-field appearance="fill" class="w-full custom-form-field">
+                <mat-label>Filiere</mat-label>
+                <mat-select formControlName="filiere" required>
+                  <mat-option value="" disabled selected></mat-option>
+                  <mat-option value="BDCC">BDCC</mat-option>
+                  <mat-option value="GLSID">GLSID</mat-option>
+                  <mat-option value="CCN">CCN</mat-option>
+                  <mat-option value="SDIA">SDIA</mat-option>
+                  <mat-option value="GECSI">GECSI</mat-option>
+                  <mat-option value="GMSI">GMSI</mat-option>
+                  <mat-option value="GIL">GIL</mat-option>
+                  <mat-option value="GEII">GEII</mat-option>
+                 
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="relative z-0 w-full mb-6 group">
+              <!-- <input type="text" name="level" id="level" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " formControlName="niveau"  required />
+              <label for="level" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Niveau</label>
+               -->
+              <mat-form-field appearance="fill" class="w-full custom-form-field">
+                <mat-label>Niveau</mat-label>
+                <mat-select formControlName="niveau" required>
+                  <mat-option value="" disabled selected></mat-option>
+                  <mat-option value="FI-1">FI-1</mat-option>
+                  <mat-option value="FI-2">FI-2</mat-option>
+                  <mat-option value="FI-3">FI-3</mat-option>
+                  <mat-option value="M-1">M-1</mat-option>
+                  <mat-option value="M-2">M-2</mat-option>
+                 
+                </mat-select>
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="grid md:grid-cols-2 md:gap-6">
+          <mat-form-field appearance="fill" class="w-full custom-form-field">
+            <mat-label>Nationalité</mat-label>
+            <mat-select formControlName="nationalite" required>
+              <mat-option value="" disabled selected></mat-option>
+              <mat-option value="Marocain">Marocain</mat-option>
+              <mat-option value="Etranger">Etranger</mat-option>
+            </mat-select>
+          </mat-form-field>
+     
+      
+    </div>
+  
+      
+    <div class="container mx-auto p-4 mt-6" style="height: auto; width: 30rem;" *ngIf="isSelected">
+      <div class="flex items-center justify-center w-full">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input id="dropzone-file" type="file" (change)="onFileSelected($event)" class="hidden" />
+            <button *ngIf="isUploaded" (click)="onUpload()">Upload</button>
+        </label>
+</div> 
+</div>
 
-        <button type="submit" [disabled]="!etudiantForm.valid || etudiantForm.pristine" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Envoyer</button>
-    </form>
+<button type="submit" [disabled]="!etudiantForm.valid || etudiantForm.pristine" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Envoyer</button>
+</form>
 </div> 
 
 
-<!--  <div class="relative z-0 w-full mb-6 group">
-  <input type="file" (change)="onFileSelected($event)" name="photo" id="photo" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-  <label for="photo" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-0 peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Photo</label>
-  <button (click)="onUpload()">Upload</button>
-</div>  -->
 
 

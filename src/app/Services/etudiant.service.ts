@@ -33,4 +33,7 @@ export class EtudiantService {
   public deleteEtudiant(id: number): Observable<Etudiant[]> {
     return this.http.delete<Etudiant[]>(`${this.url}/etudiant/${id}`);
   }
+  public getEtudiant(id: number): Observable<Etudiant> {
+    return this.http.get<Etudiant>(`${this.url}/etudiant/${id}`);
+  }
 }

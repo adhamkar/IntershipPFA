@@ -8,6 +8,7 @@ import { LivreComponent } from './Components/livre/livre.component';
 import { AjouterComponent } from './Components/ajouter/ajouter.component';
 import { EmpruntsComponent } from './Components/emprunts/emprunts.component';
 import { RservesComponent } from './Components/rserves/rserves.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'powerbi', component: PowerBiComponent },
   { path: 'etudiant', component: EtudiantComponent },
   { path: 'livres', component: LivreComponent },
+  { path: 'profile/:id', component: ProfileComponent },
 
 ];
 
