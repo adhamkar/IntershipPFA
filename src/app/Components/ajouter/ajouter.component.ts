@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AjouterService } from '../../Services/ajouter.service';
 import { Etudiant } from '../../Models/Etudiant.model';
 import { MatDialogRef, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { timeInterval, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-ajouter',
@@ -17,6 +18,7 @@ export class AjouterComponent implements OnInit {
   selectedFile: File | null = null;
   isSelected: boolean = true;
   isUploaded: boolean = false;
+  alertType: string | null = null;
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -54,9 +56,11 @@ export class AjouterComponent implements OnInit {
       console.log(data);
       this.etudiant=data;
       this.etudiantForm.reset();
+      this.alertType = 'success';
     },
     (error)=>{
       console.log(error);
+      this.alertType = 'echec';
     }
   )
 }
@@ -70,7 +74,7 @@ onFileSelected(event: Event): void {
   }
 }
 
-onUpload(): void {
+onUpload() {
   
   if (this.selectedFile) {
     this.service.uploadImage(this.selectedFile).subscribe(response => {
@@ -80,13 +84,12 @@ onUpload(): void {
     });
   }
 }
-async Save(){
-try{
-  await this.onUpload();
-  await this.SaveEtudiant();
-}catch(error){
-  console.error('Error saving etudiant', error);
-}
+ Save(){
+   this.onUpload();
+   setTimeout(() => {
+    this.SaveEtudiant();
+   }, 1500);
+   
 }
 
 

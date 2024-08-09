@@ -14,10 +14,16 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
   filter: Category[] = [];
   livres:Livre[] = [];
+
   isTout:boolean = false;
   isInfo: boolean = false;
   isMath: boolean = false;
   isPhysique: boolean = false;
+
+  isTables:boolean=true;
+  total:number=0;
+  totalBySD:number=0;
+
 
 
   constructor(private router:Router, private Categoryservice: CategoryServiceService) { }
@@ -33,6 +39,9 @@ export class CategoriesComponent implements OnInit {
       (data) => {
         console.log(data);
         this.categories = data;
+        this.categories.forEach(category => {
+          ++this.total;
+        })
       },
       (error) => {
         console.log("il'y'a une erreur"+error);
@@ -54,10 +63,23 @@ export class CategoriesComponent implements OnInit {
       (data) => {
         console.log(data);
         this.livres = data;
+        this.totalBySD=data.length;
       },
       (error) => {
         console.log("il'y'a une erreur"+error);
       }
     );
   }
+public getBookNumberBySousDomaine(sousDomaine: string):number{
+  this.Categoryservice.getBooksNUmberBySD(sousDomaine).subscribe(
+    (data) => {
+      console.log(data);
+      this.totalBySD = data;
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
+  return this.totalBySD;
+}
 }

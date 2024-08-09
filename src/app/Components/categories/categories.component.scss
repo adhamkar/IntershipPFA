@@ -31,25 +31,33 @@
     }
   }
   
-  .button-grp:before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    z-index: -1;
-    background: linear-gradient(90deg, #03a9f4, #464044, #3b48ff, #03a9f4);
-    background-size: 400%;
-    border-radius: 35px;
-    transition: 1s;
-  }
-  
-  .button-grp:hover::before {
-    filter: blur(20px);
-  }
-  
-  .button-grp:active {
-    background: linear-gradient(32deg, #03a9f4, #464044, #3b48ff, #03a9f4);
-  }
-  
+.container-input {
+  position: relative;
+}
+
+.input {
+  width: 150px;
+  padding: 10px 0px 10px 40px;
+  border-radius: 9999px;
+  border: solid 1px #333;
+  transition: all .2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+}
+
+.container-input svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+}
+
+.input:focus {
+  opacity: 1;
+  width: 250px;
+}
+.custom-header-cell {
+  height: 12px; /* Adjust this value as needed */
+  line-height: 12px; /* This ensures the text is vertically centered */
+  padding: 0; /* Adjust padding if necessary */
+}

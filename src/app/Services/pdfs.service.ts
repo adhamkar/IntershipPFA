@@ -16,4 +16,8 @@ export class PDFsService {
   public getLivresPDFs():Observable<any>  {
     return this.http.get<any>(`${this.url}`+"/livres");
   }
+
+  public getEmpruntPDFs():Observable<any>{
+    return this.http.get<any>(`${this.url}`+"/empruntes")
+  }
 }

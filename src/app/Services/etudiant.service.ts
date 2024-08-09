@@ -30,6 +30,7 @@ export class EtudiantService {
     return this.http.get<Image[]>(`${this.imageApiUrl}`+"images");
   }
 
+
   public deleteEtudiant(id: number): Observable<Etudiant[]> {
     return this.http.delete<Etudiant[]>(`${this.url}/etudiant/${id}`);
   }

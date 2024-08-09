@@ -3,6 +3,7 @@ import { Etudiant } from '../../Models/Etudiant.model';
 import { EtudiantComponent } from '../etudiant/etudiant.component';
 import { EtudiantService } from '../../Services/etudiant.service';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -15,8 +16,9 @@ export class ProfileComponent implements OnInit{
   isInfo:boolean = true;
   isEmpr:boolean = false;
   isResv:boolean = false;
+  imageUrl!: SafeUrl;
 
-  constructor(private etudiantService: EtudiantService,private route: ActivatedRoute) { }
+  constructor(private etudiantService: EtudiantService,private route: ActivatedRoute, private sanitizer: DomSanitizer, ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -30,6 +32,7 @@ export class ProfileComponent implements OnInit{
       data => {
         console.log(data);
         this.myProfil = data;
+        this.fetchImage(this.myProfil.image.name);
       },
       error => {
         console.log(error);
@@ -51,4 +54,16 @@ export class ProfileComponent implements OnInit{
     this.isEmpr = false;
     this.isResv = true;
   }
+  fetchImage(fileName: string): void {
+    this.etudiantService.getImage(fileName).subscribe(
+      (blob: Blob) => {
+        const objectURL = URL.createObjectURL(blob);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error => {
+        console.error('Error fetching image', error);
+      }
+    );
+  }
+
 }

@@ -9,6 +9,8 @@ import { Livre } from '../Models/Livre.model';
 })
 export class CategoryServiceService {
   private url = "http://localhost:8085/etudiant";
+  private baseUrl="http://localhost:8085/bibliotecaire";
+  list:Livre[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +24,11 @@ export class CategoryServiceService {
   public getLivresBySousDomaines(sousDomaine:string):Observable<Livre[]>{
     return this.http.get<Livre[]>(`${this.url}`+"/livres/"+sousDomaine);
   }
+  
   public getBooksByCategory(id:number):Observable<Livre[]>{
     return this.http.get<Livre[]>(`${this.url}`+"/livres/category/"+id);
+  }
+  public getBooksNUmberBySD(sous_domaine:string):Observable<number>{
+    return this.http.get<number>(`${this.baseUrl}`+"/livres/number"+sous_domaine);
   }
 }
