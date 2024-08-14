@@ -37,4 +37,6 @@ public interface BibliothecaireService {
     List<String> getCategoriesNames();
 
     Long getNombreEmpruntsParLivre(Long id);
+    Long getNombreLivresBySousDomaine(String sousDomaine);
+
 }

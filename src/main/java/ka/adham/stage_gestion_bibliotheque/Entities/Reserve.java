@@ -1,5 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class Reserve {
     @ManyToOne
     private Livre livre;
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private Etudiant etudiant;
     private String NomEtudiant;
     private String TitreLivre;

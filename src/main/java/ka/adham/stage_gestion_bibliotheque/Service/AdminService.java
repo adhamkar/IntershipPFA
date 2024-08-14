@@ -24,4 +24,5 @@ public interface AdminService {
     List<Etudiant> searchEtudiant(String nom);
     List<Etudiant> getBlackList();
     Page<Etudiant> findAllEtudiants(Pageable pageable);
+    List<Etudiant> searchEtudiants(String query);
 }

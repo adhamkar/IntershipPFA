@@ -43,8 +43,7 @@ public class EtudiantImpl implements EtudiantService{
 
     @Override
     public List<Category> getCategories() {
-        List<Category> categories=categoryRepo.findAll();
-        return categories;
+        return categoryRepo.findAll();
     }
 
     @Override
@@ -74,8 +73,10 @@ public class EtudiantImpl implements EtudiantService{
             emprunte.setTitreLivre(livre.getTitre());
             emprunte.setDomaine(livre.getCategory().getDomaine());
             emprunte.setStatus(EmpruntStatus.OK);
+
             Date borrowDate = new Date();
             emprunte.setDateEmprunt(borrowDate);
+
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(borrowDate);
             calendar.add(Calendar.DAY_OF_YEAR, 15);
@@ -205,6 +206,16 @@ public class EtudiantImpl implements EtudiantService{
     @Override
     public Page<Livre> findAll(Pageable pageable) {
         return livreRepo.findAll(pageable);
+    }
+
+    @Override
+    public Page<Category> findAllCategories(Pageable pageable) {
+        return categoryRepo.findAll(pageable);
+    }
+
+    @Override
+    public Page<Category> findCategoriesByDomaine(String domaine, Pageable pageable) {
+        return categoryRepo.findAllByDomaine(domaine, pageable);
     }
 
 

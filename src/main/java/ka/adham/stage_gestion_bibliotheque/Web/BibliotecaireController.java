@@ -66,7 +66,6 @@ public class BibliotecaireController {
     public Livre addLivre(@RequestBody Livre livre){
         return bibliothecaireService.addLivre(livre);
     }
-
     @PatchMapping("/livre")
     public Livre updateLivre(@RequestBody Livre livre){
         return bibliothecaireService.updateLivre(livre);
@@ -130,6 +129,10 @@ public class BibliotecaireController {
     @GetMapping("/NombreEmpruntsParLivre/{id}")
     public Long getNombreEmpruntsParLivre(@PathVariable Long id){
         return bibliothecaireService.getNombreEmpruntsParLivre(id);
+    }
+    @GetMapping("/livres/number/{sousDomaine}")
+    public Long getNombreLivresBySousDomaine(@PathVariable String sousDomaine){
+        return bibliothecaireService.getNombreLivresBySousDomaine(sousDomaine);
     }
 
 }

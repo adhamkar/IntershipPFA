@@ -13,4 +13,5 @@ public interface LivreRepo extends JpaRepository<Livre, Long>{
     List<Livre> getLivresBySousDomaine(String sousDomaine);
 
     List<Livre> findByTitreContainingOrAuteurContaining(String titre, String auteur);
+
 }

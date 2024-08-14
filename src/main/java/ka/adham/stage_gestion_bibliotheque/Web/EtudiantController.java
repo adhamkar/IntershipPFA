@@ -34,12 +34,20 @@ public class EtudiantController {
     public List<Livre> getLivres(){
         return etudiantService.getLivres();
     }
-        @GetMapping("/paginated")
-    public ResponseEntity<Page<Livre>> getLivresPaginated(@RequestParam int page, @RequestParam int size){
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Livre>> getLivresPaginated(@RequestParam int page, @RequestParam int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Livre> livres = etudiantService.findAll(pageable);
         return ResponseEntity.ok(livres);
     }
+    @GetMapping("/paginated/categories")
+    public ResponseEntity<Page<Category>> getCategoriesPaginated(@RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Category> categories = etudiantService.findAllCategories(pageable);
+        return ResponseEntity.ok(categories);
+    }
+
     @GetMapping("/emprunts/{id}")
     public List<Emprunte> getEmprunts(@PathVariable Long id){
         return etudiantService.getEmprunts(id);
@@ -111,6 +119,14 @@ public class EtudiantController {
         Category category=etudiantService.getCategoryById(id);
         return category.getLivres();
     }
+
+    @GetMapping("/livres/category/number/{id}")
+    public int getLivresNumberByCategory(@PathVariable Long id){
+        Category category=etudiantService.getCategoryById(id);
+        List<Livre> livres=category.getLivres();
+        return livres.size();
+
+    }
     @GetMapping("/informatique/livres")
     public List<Livre> getInformatiqueLivres(){
         List<Category> categories=etudiantService.getCategories();
@@ -121,6 +137,39 @@ public class EtudiantController {
             }
         });
         return livres;
+    }
+    @GetMapping("/informatique/categories")
+    public List<Category> getInformatiqueCategories(){
+        List<Category> categories=etudiantService.getCategories();
+        List<Category> Infos= new ArrayList<>();
+        categories.forEach(category -> {
+            if(category.getDomaine().equals("Informatique")){
+                Infos.add(category);
+            }
+        });
+        return Infos;
+    }
+    @GetMapping("/mathematique/categories")
+    public List<Category> getMathematiqueCategories(){
+        List<Category> categories=etudiantService.getCategories();
+        List<Category> Maths= new ArrayList<>();
+        categories.forEach(category -> {
+            if(category.getDomaine().equals("mathematique")){
+                Maths.add(category);
+            }
+        });
+        return Maths;
+    }
+    @GetMapping("/physique/categories")
+    public List<Category> getPhysiqueCategories(){
+        List<Category> categories=etudiantService.getCategories();
+        List<Category> Physq= new ArrayList<>();
+        categories.forEach(category -> {
+            if(category.getDomaine().equals("Physique")){
+                Physq.add(category);
+            }
+        });
+        return Physq;
     }
     @GetMapping("/mathematique/livres")
     public List<Livre> getMathematiqueLivres(){

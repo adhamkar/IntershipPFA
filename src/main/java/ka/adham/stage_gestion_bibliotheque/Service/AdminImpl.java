@@ -107,7 +107,11 @@ public class AdminImpl implements AdminService{
         return etudiantRepo.findAll(pageable);
     }
 
-    ;
+    @Override
+    public List<Etudiant> searchEtudiants(String query) {
+        return etudiantRepo.searchEtudiants(query);
+    }
+
 
     }
 

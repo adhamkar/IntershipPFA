@@ -18,20 +18,24 @@ import java.util.List;
 public class Etudiant extends User{
 
     private boolean blackListed;
+    @Column(nullable = false)
     private String cne;
+    @Column(nullable = false)
     private String filiere;
+    @Column(nullable = false)
     private String niveau;
+    @Column(nullable = false)
     private String nationalite;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Emprunte> emprunts;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Reserve> reservations;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Comment> comments;
 }

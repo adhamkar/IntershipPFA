@@ -3,6 +3,7 @@ package ka.adham.stage_gestion_bibliotheque.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
+import ka.adham.stage_gestion_bibliotheque.Entities.Category;
 import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
 import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
@@ -33,6 +34,11 @@ public class LivresImpl implements LivreService {
     @Override
     public List<Livre> SearchLivre(String query) {
         return LivreRepo.findByTitreContainingOrAuteurContaining(query, query);
+    }
+
+    @Override
+    public List<Category> SearchCategory(String search) {
+        return categoryRepo.search(search);
     }
 }
 

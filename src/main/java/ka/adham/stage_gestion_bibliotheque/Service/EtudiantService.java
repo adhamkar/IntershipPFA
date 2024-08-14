@@ -31,4 +31,7 @@ public interface EtudiantService {
 
 
     Page<Livre> findAll(Pageable pageable);
+    Page<Category> findAllCategories(Pageable pageable);
+
+    Page<Category> findCategoriesByDomaine(String domaine, Pageable pageable);
 }

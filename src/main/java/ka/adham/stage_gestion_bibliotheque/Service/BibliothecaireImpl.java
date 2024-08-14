@@ -172,4 +172,14 @@ public class BibliothecaireImpl implements BibliothecaireService{
         }
         return nombreEmprunts;
     }
+
+    @Override
+    public Long getNombreLivresBySousDomaine(String sous_domaine) {
+       List<Category> categories = categoryRepo.findAll();
+         Long nombreLivres = 0L;
+         categories.forEach(cat->{
+
+         });
+         return nombreLivres;
+    }
 }

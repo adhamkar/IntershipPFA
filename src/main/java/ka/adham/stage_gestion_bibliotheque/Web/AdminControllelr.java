@@ -1,9 +1,4 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.AdminService;
@@ -14,14 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +25,7 @@ public class AdminControllelr {
     private AdminService adminService;
     @Autowired
     private ImageRepo imageRepo;
+    @Autowired private StorageService storageService;
 
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
@@ -67,6 +57,8 @@ public class AdminControllelr {
     }
     @DeleteMapping("/etudiant/{id}")
     public void deleteEtudiant(@PathVariable Long id){
+        Image image=adminService.getEtudiantById(id).getImage();
+        storageService.deleteImage(image.getId());
         adminService.deleteEtudiant(id);
     }
    @GetMapping("/etudiant/{id}/empruntes")
