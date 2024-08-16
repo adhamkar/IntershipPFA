@@ -1,9 +1,13 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
+import ka.adham.stage_gestion_bibliotheque.Repositories.BibliothecaireRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.BibliothecaireService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,7 +21,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/bibliotecaire")
 public class BibliotecaireController {
 
+    @Autowired
     private BibliothecaireService bibliothecaireService;
+    @Autowired
+    private ImageRepo imageRepo;
+    @Autowired private CategoryRepo categoryRepo;
 
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
@@ -64,19 +72,40 @@ public class BibliotecaireController {
     }
     @PostMapping("/livre")
     public Livre addLivre(@RequestBody Livre livre){
+        List<Image> images = imageRepo.findAll();
+        Image image = images.get(images.size()-1);
+        livre.setImage(image);
         return bibliothecaireService.addLivre(livre);
     }
     @PatchMapping("/livre")
     public Livre updateLivre(@RequestBody Livre livre){
         return bibliothecaireService.updateLivre(livre);
     }
+
     @PostMapping("/category")
     public Category addCategory(@RequestBody Category category){
+        List<Image> images = imageRepo.findAll();
+        Image image = images.get(images.size()-1);
+        category.setImage(image);
         return bibliothecaireService.addCategory(category);
     }
-    @PatchMapping("/category")
-    public Category updateCategory(@RequestBody Category category){
-        return bibliothecaireService.updateCategory(category);
+    @PatchMapping("/category/{id}")
+    public Category updateCategory(@RequestBody Category category,@PathVariable Long id){
+        Category existingCategory = categoryRepo.getCategoryById(id);
+        if (category.getDomaine() != null) {
+            existingCategory.setDomaine(category.getDomaine());
+        }
+        if (category.getSous_domaine() != null) {
+            existingCategory.setSous_domaine(category.getSous_domaine());
+        }
+        if (category.getLivres() != null) {
+            existingCategory.setLivres(category.getLivres());
+        }
+        if (category.getImage() != null) {
+            existingCategory.setImage(category.getImage());
+        }
+        return bibliothecaireService.updateCategory(existingCategory);
+
     }
     @DeleteMapping("/category/{id}")
     public void deleteCategory(@PathVariable Long id){

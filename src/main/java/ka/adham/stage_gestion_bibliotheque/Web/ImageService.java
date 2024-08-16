@@ -70,4 +70,10 @@ public class ImageService {
         service.deleteImage(id);
     }
 
+    @DeleteMapping("/lastImage")
+    public void deleteLastImage(){
+        List<Image> images = service.getImages();
+        Image image = images.get(images.size()-1);
+        service.deleteImage(image.getId());
+    }
 }
