@@ -30,6 +30,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { LivreProfilComponent } from './Components/livre-profil/livre-profil.component';
 import { CategoryProfilComponent } from './Components/category-profil/category-profil.component';
+import { LivresAssociesComponent } from './Components/livres-associes/livres-associes.component';
+import { AddCategoryComponent } from './Components/add-category/add-category.component';
+import { UpdateCategoryComponent } from './Components/update-category/update-category.component';
+import { UpdateBookComponent } from './Components/update-book/update-book.component';
+import { AddBookComponent } from './Components/add-book/add-book.component';
 
 
 
@@ -47,6 +52,11 @@ import { CategoryProfilComponent } from './Components/category-profil/category-p
     ProfileComponent,
     LivreProfilComponent,
     CategoryProfilComponent,
+    LivresAssociesComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent,
+    UpdateBookComponent,
+    AddBookComponent,
   ],
   imports: [
     BrowserModule,

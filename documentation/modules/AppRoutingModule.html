@@ -140,6 +140,7 @@ import { AjouterComponent } from &#x27;./Components/ajouter/ajouter.component&#x
 import { EmpruntsComponent } from &#x27;./Components/emprunts/emprunts.component&#x27;;
 import { RservesComponent } from &#x27;./Components/rserves/rserves.component&#x27;;
 import { ProfileComponent } from &#x27;./Components/profile/profile.component&#x27;;
+import { LivresAssociesComponent } from &#x27;./Components/livres-associes/livres-associes.component&#x27;;
 
 const routes: Routes &#x3D; [
   { path: &#x27;&#x27;, component: CategoriesComponent },
@@ -150,7 +151,8 @@ const routes: Routes &#x3D; [
   { path: &#x27;powerbi&#x27;, component: PowerBiComponent },
   { path: &#x27;etudiant&#x27;, component: EtudiantComponent },
   { path: &#x27;livres&#x27;, component: LivreComponent },
-  { path: &#x27;profile&#x27;, component: ProfileComponent },
+  { path: &#x27;profile/:id&#x27;, component: ProfileComponent },
+  { path: &#x27;livresAssocies/:type&#x27;, component: LivresAssociesComponent },
 
 ];
 

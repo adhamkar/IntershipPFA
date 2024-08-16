@@ -1,0 +1,85 @@
+<section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5" *ngIf="size!=0">
+    <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
+        <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+            <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
+                <div class="flex items-center flex-1 space-x-4">
+                    <h5>
+                        <span class="text-gray-500">Livres Associes au type </span>
+                        <span class="dark:text-white">{{sousDomaine}}</span>
+                    </h5>
+                </div>
+                
+             
+                
+                <a routerLink="/categories"  type="button" class="flex items-center justify-center gap-1 flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                        <path fill-rule="evenodd" d="M12.5 9.75A2.75 2.75 0 0 0 9.75 7H4.56l2.22 2.22a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 0 1 1.06 1.06L4.56 5.5h5.19a4.25 4.25 0 0 1 0 8.5h-1a.75.75 0 0 1 0-1.5h1a2.75 2.75 0 0 0 2.75-2.75Z" clip-rule="evenodd" />
+                      </svg>
+                  retour
+                </a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
+                        <tr class="items-center">
+                           
+                            <th scope="col" class="px-4 py-3">Titre</th>
+                            <th scope="col" class="px-4 py-3">Category</th>
+                            <th scope="col" class="px-4 py-3">Auteur</th>
+                            <th scope="col" class="px-4 py-3">Etat</th>
+                            
+                            <th scope="col" class="px-4 py-3">Quantité</th>
+                            <th scope="col" class="px-4 py-3">Date Sortie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor="let livre of livres">
+                           
+                            <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              {{livre.titre}}
+                            </th>
+                            <td class="px-4 py-2">
+                                <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{livre.category.domaine}}</span>
+                            </td>
+                            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <div class="flex items-center">
+                                    
+                                    {{livre.auteur}}
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{livre.disponibilite}}</td>
+                            
+                            
+                            <td class="px-4 py-2 " >
+                              <div style="margin-left: 20px;">
+                              {{livre.quantite}}
+                          </div>
+                          </td>
+                            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{livre.dateSortie | date: 'shortDate'}}</td>
+                          
+                        
+                          </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+         
+        </div>
+    </div>
+  </section>
+  <div class="flex flex-row justify-center my-5 " *ngIf="size===0" style="background-color: transparent;">
+  <div role="alert" class="alert alert-warning basis-1/2 " >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span>Warning: Invalid email address!</span>
+  </div>
+</div>

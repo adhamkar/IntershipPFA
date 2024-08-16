@@ -1,13 +1,18 @@
-/* app.component.css */
+html, body, app-root, .container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrollbars if not needed */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .reportClass {
-    /* Add any styles you need for the embedded report */
-    width:max-content;
-    height: max-content;
-  }
-  .container {
-    /* Add any styles you need for the container */
-    padding: 3rem;
-    margin: 5rem;
-    width: 800px;
-    height: 500px;
-  }
+  width: 100%;
+  height: 100%;
+}

@@ -1,4 +1,5 @@
-  <section class="relative pt-40 pb-24"  *ngIf="myProfil">
+
+ <section class="relative pt-40 pb-24"  *ngIf="myProfil">
     <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60">
     <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
         <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
@@ -24,7 +25,7 @@
         <div class="m-5"  *ngIf="isInfo">
             <div class="max-w-4xl  p-6 bg-white shadow-md rounded-lg"  style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- Profile Item 1 -->
+                
                   <div class="flex items-center">
                     <img src="https://via.placeholder.com/50" alt="profile-pic" class="w-12 h-12 rounded-full mr-4">
                     <div>
@@ -32,14 +33,14 @@
                       <p class="text-gray-500 text-sm">{{myProfil.ville}}</p>
                     </div>
                   </div>
-                  <!-- Profile Item 2 -->
+                 
                   <div class="flex items-center">
                     <img src="https://via.placeholder.com/50" alt="relationship-pic" class="w-12 h-12 rounded-full mr-4">
                     <div>
                       <p class="text-gray-800">Sexe :<span class="font-bold">{{myProfil.sexe}}</span></p>
                     </div>
                   </div>
-                  <!-- Profile Item 3 -->
+                 
                   <div class="flex items-center">
                     <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
                       <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +51,7 @@
                       <p class="text-gray-800 font-semibold">{{myProfil.email}}</p>
                     </div>
                   </div>
-                  <!-- Profile Item 4 -->
+                  
                   <div class="flex items-center">
                     <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
                       <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +63,7 @@
                      
                     </div>
                   </div>
-                  <!-- Profile Item 5 -->
+                
                   <div class="flex items-center">
                     <img src="https://via.placeholder.com/50" alt="location-pic" class="w-12 h-12 rounded-full mr-4">
                     <div>
@@ -70,7 +71,7 @@
                       <p class="text-gray-500 text-sm">Filiére : <span class="font-semibold">{{myProfil.filiere}}</span></p>
                     </div>
                   </div>
-                  <!-- Profile Item 6 -->
+                 
                   <div class="flex items-center">
                     <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
                       <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -87,54 +88,210 @@
              
         </div>
         <div class="m-5"   *ngIf="isEmpr">
+      <!--   <div class="overflow-x-auto" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+            <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left ">
+                <ng-container matColumnDef="titre" >
+                  <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Titre </th>
+                  <td mat-cell *matCellDef="let element" 
+                  class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  > {{element.livre.titre}} </td>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Category </th>
+                  <td mat-cell *matCellDef="let element"> <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{element.livre.category.domaine}}</span> </td>
+                </ng-container>
 
-        <div class="overflow-x-auto" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 " >
-              <thead class="text-xs text-gray-800 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 bg-gray-400" >
-                  <tr class="items-center">
-                     
-                      <th scope="col" class="px-4 py-3">Titre</th>
-                      <th scope="col" class="px-4 py-3">Category</th>
-                      <th scope="col" class="px-4 py-3">Type</th>
-                      <th scope="col" class="px-4 py-3">Status</th>
-                      <th scope="col" class="px-4 py-3">Date Empruntes</th>
-                      <th scope="col" class="px-4 py-3">Date Retour</th>
-                     
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor="let emp of myProfil.emprunts">
-                     
-                      <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{emp.livre.titre}}
-                      </th>
-                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <div class="flex items-center">
-                              
-                              {{emp.livre.category.domaine}}
-                          </div>
-                      </td>
-                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{emp.livre.category.sous_domaine}}</td>
-                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{emp.status}}</td>
-                      
-                      <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white flex justify-center">
-                          <div>
-                            {{emp.dateEmprunt | date: 'shortDate'}}
-                          </div>
-                      </td>
-                      <td class="px-4 py-2 " >
-                        <div>
-                          {{emp.dateRetour| date: 'shortDate'}}
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Type </th>
+                  <td mat-cell *matCellDef="let element"
+                  class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  > {{element.livre.category.sous_domaine}} </td>
+                </ng-container>
+
+                  <ng-container matColumnDef="dateEmprunt">
+                    <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Emprunt </th>
+                    <td mat-cell *matCellDef="let element"
+                    class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    > {{element.dateEmprunt | date: 'shortDate'}} </td>
+                  </ng-container>
+                <ng-container matColumnDef="dateRetour">
+                    <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Retour </th>
+                    <td mat-cell *matCellDef="let element"
+                    class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    > {{element.dateRetour | date: 'shortDate'}} </td>
+                  </ng-container>
+                
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10]"
+                         showFirstLastButtons
+                        >
+          </mat-paginator> 
+            
+      </div> -->
+      <div class="overflow-x-auto" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 " >
+            <thead class="text-xs text-gray-800 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 bg-gray-400" >
+                <tr class="items-center">
+                   
+                    <th scope="col" class="px-4 py-3">Titre</th>
+                    <th scope="col" class="px-4 py-3">Category</th>
+                    <th scope="col" class="px-4 py-3">Type</th>
+                    <th scope="col" class="px-4 py-3">Date Empruntes</th>
+                    <th scope="col" class="px-4 py-3">Date Retour</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor="let emp of paginatedEmprunts">
+                   
+                    <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{emp.livre.titre}}
+                    </th>
+                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="flex items-center">
+                            
+                            {{emp.livre.category.domaine}}
                         </div>
                     </td>
-                       
-                  
-                    </tr>
-              
-              </tbody>
-          </table>
-      </div>
+                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{emp.livre.category.sous_domaine}}</td>                    
+                    <td class="px-4 py-2  ">
+                        <div>
+                          {{emp.dateEmprunt | date: 'shortDate'}}
+                        </div>
+                    </td>
+                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white" >
+                      <div>
+                        {{emp.dateRetour| date: 'shortDate'}}
+                      </div>
+                  </td>
+                     
+                
+                  </tr>
+            
+            </tbody>
+        </table>
+        <div class="flex justify-between items-center p-4">
+          <button (click)="previousPage()" [disabled]="pageIndex === 0" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">Previous</button>
+          <div>Page {{pageIndex + 1}} of {{totalPages}}</div>
+          <button (click)="nextPage()" [disabled]="pageIndex + 1 >= totalPages" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">Next</button>
+        </div>
+    </div>
     </div>
     </div>
 </section>
-                                        
+
+
+<!-- <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5" >
+  <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
+      <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+          <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
+              <div class="flex items-center flex-1 space-x-4">
+                  <h5>
+                      <span class="text-gray-500">Nombre de Livres:</span>
+                      <span class="dark:text-white">7ayed elia</span>
+                  </h5>
+              </div>
+              <div class="container-input">
+                  <input type="text" placeholder="Search" name="text" class="input">
+                  <svg style="cursor: pointer; " fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                </svg>
+                </div>
+                <a href="http://localhost:8085/openpdf/empruntes" target="_blank" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                  <svg style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                  Export
+                </a>
+                
+          </div>
+          <div class="overflow-x-auto" >
+  <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left ">
+
+      <ng-container matColumnDef="titre" >
+        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Titre </th>
+        <td mat-cell *matCellDef="let element" 
+        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        > {{element.livre.titre}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Category </th>
+        <td mat-cell *matCellDef="let element"> <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{element.livre.category.domaine}}</span> </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Type </th>
+        <td mat-cell *matCellDef="let element"
+        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        > {{element.livre.category.sous_domaine}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="etudiant">
+        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Etudiant </th>
+        <td mat-cell *matCellDef="let element"
+        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        > {{element.nomEtudiant}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Status </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.status}} </td>
+        </ng-container>
+    
+  
+      <ng-container matColumnDef="quantite">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Quantité </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.livre.quantite}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dateEmprunt">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Emprunt </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.dateEmprunt | date: 'shortDate'}} </td>
+        </ng-container>
+      <ng-container matColumnDef="dateRetour">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Retour </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.dateRetour | date: 'shortDate'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions" >
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Actions </th>
+          <td mat-cell *matCellDef="let element" > 
+              <span class="flex justify-beetween gap-1 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                </svg>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                </svg>
+                
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                  </svg>    
+              </span>
+          </td>
+        </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10]"
+               showFirstLastButtons
+              >
+</mat-paginator> 
+  </div>
+      </div>
+  </div>
+</section> -->

@@ -33,11 +33,16 @@ export class LivreComponent implements OnInit{
   query: string = '';
   pageSize !:number;
   pageIndex = 0;
-  totalItems = 0;
+  totalItems = 0
+  
+  ;
   ngOnInit(): void {
-   this.getAllLivres();
-   this.getAllCategories();
-   this.getCategoryName()
+   //this.getAllLivres();
+   //this.getAllCategories();
+   //this.getCategoryName();
+   this.pageSize = 3;
+   this.loadPages();
+   
   }
 
   public TableView(){
@@ -61,6 +66,9 @@ public onSearch(): void {
     (data) => {
       console.log(data);
       this.livres = data;
+      if(this.query===''){
+        this.loadPages();
+      }
     },
     (error) => {
       console.log("il'y'a une erreur"+error);
@@ -85,12 +93,17 @@ public getAllLivres(): void {
     }
   );
 }
+
 loadPages(){
   this.livreService.getLivresPage(this.pageIndex,this.pageSize).subscribe(
     (data) => {
       console.log(data);
       this.livres = data.content;
+      this.livres.forEach(livre => {
+        this.getNombreEmprunts(livre.id);
+      });
       this.totalItems = data.totalElements;
+      console.log(this.livres);
     },
     (error) => {
       console.log("il'y'a une erreur"+error);

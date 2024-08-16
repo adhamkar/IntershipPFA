@@ -269,8 +269,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/Services/etudiant.service.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/Services/etudiant.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -338,8 +338,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/app/Services/etudiant.service.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/Services/etudiant.service.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -787,6 +787,7 @@ export class EtudiantService {
   public getImages(): Observable&lt;Image[]&gt; {
     return this.http.get&lt;Image[]&gt;(&#x60;${this.imageApiUrl}&#x60;+&quot;images&quot;);
   }
+
 
   public deleteEtudiant(id: number): Observable&lt;Etudiant[]&gt; {
     return this.http.delete&lt;Etudiant[]&gt;(&#x60;${this.url}/etudiant/${id}&#x60;);

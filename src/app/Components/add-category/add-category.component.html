@@ -1,0 +1,73 @@
+<!-- Add Cancel button in second step (cancel button delete the last image uploaded) / Also add delete image button -->
+<div class="flex justify-center px-10  m-2 sm:mx-8 md:mt-12 lg:mx-12 xl:mx-32">
+  <div class="w-full max-w-3xl"> <!-- Adjust max-width as needed -->
+    <ol class="flex items-center w-full text-sm text-gray-500 font-medium sm:text-base mb-12">
+      <li [ngClass]="{'text-primary-500': currentStep === 1}" class="flex md:w-1/2 items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8" *ngIf="currentStep === 1">
+        <div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2">
+          Image de Category
+        </div>
+      </li>
+      <li [ngClass]="{'text-primary-500': currentStep === 2}" class="flex md:w-1/2 items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8" *ngIf="currentStep === 2">
+        <div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2">
+          Info de Categorie
+        </div>
+      </li>
+    </ol>
+
+    <div class="grid">
+      <form action="" *ngIf="currentStep === 1">
+        <div class="flex gap-x-6 mb-6 justify-center">
+          <div class="w-1/2 h-64 py-9 bg-gray-50 rounded-2xl border border-gray-300 gap-3 grid border-dashed">
+            <div class="grid gap-1">
+              <h2 class="text-center text-gray-400 text-xs leading-4">PNG, JPG or PDF, smaller than 15MB</h2>
+            </div>
+            <div class="grid gap-2">
+              <h4 class="text-center text-gray-900 text-sm font-medium leading-snug">Drag and Drop your file here or</h4>
+              <div class="flex items-center justify-center">
+                <label>
+                  <input type="file" class="hidden" (change)="onFileSelected($event)"/>
+                  <div 
+                  class="flex w-32 h-12 px-2 flex-col button-grp items-center justify-center cursor-pointer focus:outline-none">Choose File</div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-start mt-6" >
+          <button type="button" (click)="nextStep()" [disabled]="!isUploaded" [ngClass]="{ 'button-grp': true ,'not-allowed': !isUploaded}" 
+           *ngIf="currentStep === 1">Suivant</button>
+        </div>
+      </form>
+
+      <form *ngIf="currentStep === 2" [formGroup]="categoryForm" (ngSubmit)="Save()">
+        <div class="flex flex-col w-1/2 mx-auto">
+          <div class="relative mb-6">
+            <label for="domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium rounded-full">Type de categorie
+              <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
+              </svg>
+            </label>
+            <select formControlName="domaine" required  id="domaine" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+              <option selected>Choisir un Type</option>
+              <option value="Informatique">Informatique</option>
+              <option value="mathematique">Mathematique</option>
+              <option value="Physique">Physique</option>
+            </select>
+          </div>
+          <div class="relative mb-6">
+            <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Titre de la categorie
+              <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
+              </svg>
+            </label>
+            <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="Titre" required="">
+          </div>
+<!--           <button class="w-52 h-12 bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 rounded-full shadow-xs text-white text-base font-semibold leading-6 mb-6">Sign in</button>
+ -->        </div>
+ <div class="flex justify-start mt-6">
+  <button type="submit" class="button-grp" *ngIf="currentStep === 2">Ajouter</button>
+</div>
+      </form>
+    </div>
+  </div>
+</div>

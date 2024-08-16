@@ -9,6 +9,11 @@ import { AjouterComponent } from './Components/ajouter/ajouter.component';
 import { EmpruntsComponent } from './Components/emprunts/emprunts.component';
 import { RservesComponent } from './Components/rserves/rserves.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { LivresAssociesComponent } from './Components/livres-associes/livres-associes.component';
+import { AddCategoryComponent } from './Components/add-category/add-category.component';
+import { UpdateCategoryComponent } from './Components/update-category/update-category.component';
+import { AddBookComponent } from './Components/add-book/add-book.component';
+import { UpdateBookComponent } from './Components/update-book/update-book.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
@@ -20,7 +25,11 @@ const routes: Routes = [
   { path: 'etudiant', component: EtudiantComponent },
   { path: 'livres', component: LivreComponent },
   { path: 'profile/:id', component: ProfileComponent },
-
+  { path: 'livresAssocies/:type', component: LivresAssociesComponent },
+  { path: 'addCat', component: AddCategoryComponent },
+  { path: 'updateCat/:id', component: UpdateCategoryComponent },
+  { path: 'addBook', component: AddBookComponent },
+  { path: 'updateBook/:id', component: UpdateBookComponent },
 ];
 
 @NgModule({

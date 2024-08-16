@@ -23,7 +23,7 @@
   <div class="p-4  ml-24">
   <div class="flex justify-start  gap-2">
     <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
-        <button  class="button-grp" (click)="getAllLivres()">TOUS</button>
+        <button  class="button-grp" (click)="getAllLivres()" >TOUS</button>
         <button class="button-grp"  (click)="displayBooksOfInformatique()">INFORMATIQUE</button>
         <button class="button-grp" (click)="displayBooksOfMathematiques()">MATHEMATIQUE</button>
         <button class="button-grp" (click)="displayBooksOfPhysique()">PHYSIQUE</button>
@@ -43,57 +43,8 @@
               </a>
             </div>
           </div>
-          
-          
       </div>
-   <!--  <div  class="inline-flex rounded-full shadow-sm h-10  gap-2" role="group" >
-  
-   
-        <button (click)="getAllLivres()" type="button" 
-        class="flex justify-center w-20 items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg rounded-r-lg hover:bg-gray-100 hover:text-brown-500 focus:z-10 focus:ring-2 focus:ring-brown-500 focus:text-brown-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-brown-500 dark:focus:text-white ">
-       
-          <div class="w-40 text-lg">
-            <div >
-              Tout
-            </div>
-          </div>
-       </button>  
-          <button (click)="displayBooksOfInformatique()" type="button" 
-          class="flex justify-center  items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg rounded-r-lg hover:bg-gray-100 hover:text-brown-500 focus:z-10 focus:ring-2 focus:ring-brown-500 focus:text-brown-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-brown-500 dark:focus:text-white "
-          style="width: 130PX;"
-          >
-         
-            <div class="w-40 text-lg">
-              <div >
-                Informatique
-              </div>
-            </div>
-         </button>
-          <button (click)="displayBooksOfMathematiques()" type="button" 
-          style="width: 130PX;"
-          class="flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg rounded-r-lg hover:bg-gray-100 hover:text-brown-500 focus:z-10 focus:ring-2 focus:ring-brown-500 focus:text-brown-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-brown-500 dark:focus:text-white ">
-         
-            <div class="w-40 text-lg">
-              <div >
-                Mathematique
-              </div>
-            </div>
-          </button>
-          <button (click)="displayBooksOfPhysique()" type="button" 
-          style="width: 130PX;"
-          class="flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg rounded-r-lg hover:bg-gray-100 hover:text-brown-500 focus:z-10 focus:ring-2 focus:ring-brown-500 focus:text-brown-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-brown-500 dark:focus:text-white ">
-         
-            <div class="w-40 text-lg">
-              <div >
-                Physique
-              </div>
-            </div>
-          </button> 
-     
-        </div> -->
-  
       </div> 
-      
     </div>
     
    
@@ -166,7 +117,7 @@
               <div class="flex items-center flex-1 space-x-4">
                   <h5>
                       <span class="text-gray-500">Nombre de Livres:</span>
-                      <span class="dark:text-white">{{total}}</span>
+                      <span class="dark:text-white">{{totalItems}}</span>
                   </h5>
               </div>
               <div class="container-input">

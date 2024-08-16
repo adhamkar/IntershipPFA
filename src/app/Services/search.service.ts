@@ -17,5 +17,7 @@ export class SearchService {
   searchEtudiants(query: string): Observable<any> {
     return this.http.get<any>(`${this.url}/students?search=${query}`);
   }
-
+searchcategories(query: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/categories?search=${query}`);
+  }
 }

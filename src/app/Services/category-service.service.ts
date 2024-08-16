@@ -9,12 +9,12 @@ import { Livre } from '../Models/Livre.model';
 })
 export class CategoryServiceService {
   private url = "http://localhost:8085/etudiant";
-  private baseUrl="http://localhost:8085/bibliotecaire";
+  private BaseUrl = "http://localhost:8085/bibliotecaire";
   list:Livre[] = [];
 
   constructor(private http: HttpClient) { }
 
-  public getCategories():Observable<Category[]>  {
+  public getCategories():Observable<Category[]> {
     return this.http.get<Category[]>(`${this.url}`+"/categories");
   }
 
@@ -28,7 +28,23 @@ export class CategoryServiceService {
   public getBooksByCategory(id:number):Observable<Livre[]>{
     return this.http.get<Livre[]>(`${this.url}`+"/livres/category/"+id);
   }
-  public getBooksNUmberBySD(sous_domaine:string):Observable<number>{
-    return this.http.get<number>(`${this.baseUrl}`+"/livres/number"+sous_domaine);
+  public getCategoriesPage(page:number,size:number):Observable<any>  {
+    return this.http.get<any>(`${this.url}/paginated/categories?page=${page}&size=${size}`);
+  }
+
+  public getInformatiqueCategories():Observable<Category[]>  {
+    return this.http.get<Category[]>(`${this.url}`+"/informatique/categories");
+  }
+  public getPhysiqueCategories():Observable<Category[]>  {
+    return this.http.get<Category[]>(`${this.url}`+"/physique/categories");
+  }
+  public getMathematiqueCategories():Observable<Category[]>  {
+    return this.http.get<Category[]>(`${this.url}`+"/mathematique/categories");
+  }
+  public DeleteCategoryById(id:number):Observable<any> {
+    return this.http.delete(`${this.BaseUrl}/category/${id}`);
+  }
+  public updateCategory(category:Category,id:number):Observable<Category> {
+    return this.http.patch<Category>(`${this.BaseUrl}/category/${id}`,category);
   }
 }

@@ -135,6 +135,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#list" >list</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#url" >url</a>
                             </li>
@@ -160,11 +163,27 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#getCategoriesPage" >getCategoriesPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getDomaines" >getDomaines</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#getInformatiqueCategories" >getInformatiqueCategories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getLivresBySousDomaines" >getLivresBySousDomaines</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMathematiqueCategories" >getMathematiqueCategories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getPhysiqueCategories" >getPhysiqueCategories</a>
                             </li>
                         </ul>
                     </td>
@@ -189,7 +208,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/Services/category-service.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/Services/category-service.service.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -254,8 +273,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/Services/category-service.service.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -323,8 +342,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/Services/category-service.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -336,6 +355,87 @@
                             <b>Returns : </b>        <code><a href="../classes/Category.html" target="_self" >Observable&lt;Category[]&gt;</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCategoriesPage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getCategoriesPage</b></span>
+                        <a href="#getCategoriesPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCategoriesPage(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, size: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>size</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -362,8 +462,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/Services/category-service.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -373,6 +473,45 @@
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Observable&lt;String[]&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getInformatiqueCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getInformatiqueCategories</b></span>
+                        <a href="#getInformatiqueCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getInformatiqueCategories()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Category.html" target="_self" >Observable&lt;Category[]&gt;</a></code>
 
                         </div>
                 </td>
@@ -401,8 +540,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/Services/category-service.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -448,12 +587,121 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMathematiqueCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getMathematiqueCategories</b></span>
+                        <a href="#getMathematiqueCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMathematiqueCategories()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Category.html" target="_self" >Observable&lt;Category[]&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPhysiqueCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getPhysiqueCategories</b></span>
+                        <a href="#getPhysiqueCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPhysiqueCategories()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/Services/category-service.service.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Category.html" target="_self" >Observable&lt;Category[]&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="list"></a>
+                    <span class="name">
+                        <span ><b>list</b></span>
+                        <a href="#list"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Livre.html" target="_self" >Livre[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/Services/category-service.service.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -503,10 +751,11 @@ import { Livre } from &#x27;../Models/Livre.model&#x27;;
 })
 export class CategoryServiceService {
   private url &#x3D; &quot;http://localhost:8085/etudiant&quot;;
+  list:Livre[] &#x3D; [];
 
   constructor(private http: HttpClient) { }
 
-  public getCategories():Observable&lt;Category[]&gt;  {
+  public getCategories():Observable&lt;Category[]&gt; {
     return this.http.get&lt;Category[]&gt;(&#x60;${this.url}&#x60;+&quot;/categories&quot;);
   }
 
@@ -516,8 +765,22 @@ export class CategoryServiceService {
   public getLivresBySousDomaines(sousDomaine:string):Observable&lt;Livre[]&gt;{
     return this.http.get&lt;Livre[]&gt;(&#x60;${this.url}&#x60;+&quot;/livres/&quot;+sousDomaine);
   }
+  
   public getBooksByCategory(id:number):Observable&lt;Livre[]&gt;{
     return this.http.get&lt;Livre[]&gt;(&#x60;${this.url}&#x60;+&quot;/livres/category/&quot;+id);
+  }
+  public getCategoriesPage(page:number,size:number):Observable&lt;any&gt;  {
+    return this.http.get&lt;any&gt;(&#x60;${this.url}/paginated/categories?page&#x3D;${page}&amp;size&#x3D;${size}&#x60;);
+  }
+
+  public getInformatiqueCategories():Observable&lt;Category[]&gt;  {
+    return this.http.get&lt;Category[]&gt;(&#x60;${this.url}&#x60;+&quot;/informatique/categories&quot;);
+  }
+  public getPhysiqueCategories():Observable&lt;Category[]&gt;  {
+    return this.http.get&lt;Category[]&gt;(&#x60;${this.url}&#x60;+&quot;/physique/categories&quot;);
+  }
+  public getMathematiqueCategories():Observable&lt;Category[]&gt;  {
+    return this.http.get&lt;Category[]&gt;(&#x60;${this.url}&#x60;+&quot;/mathematique/categories&quot;);
   }
 }
 </code></pre>

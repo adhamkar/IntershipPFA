@@ -85,7 +85,6 @@ public onSearch(): void {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          // handle the result, e.g., save the new student
           console.log('The dialog was closed with result: ', result);
         }
       });

@@ -1,0 +1,43 @@
+    <div class="flex justify-center h-3/5 px-10 py-5 m-2  sm:mx-8 md:mt-12 lg:mx-12 xl:mx-32" 
+    style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; border-radius: 30px;">
+        <div class="w-full max-w-3xl"> <!-- Adjust max-width as needed -->
+        <ol class="flex items-center w-full text-sm text-gray-500 font-medium sm:text-base mb-12">
+    
+            <li  class=" text-primary-500 flex md:w-full items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8" >
+            <div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2">
+                Info de Categorie
+            </div>
+            </li>
+        </ol>
+    
+        <div class="grid">
+
+            <form [formGroup]="categoryForm" (ngSubmit)="update()">
+            <div class="flex flex-col w-1/2 mx-auto">
+                <div class="relative mb-6">
+                    <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Titre de la categorie&nbsp;
+                    <span> (Optional)</span>
+                    </label>
+                    <input placeholder="Titre" type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" >
+                </div>
+                <div class="relative mb-6">
+                <label for="domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium rounded-full">Type de categorie&nbsp;
+                <span> (Optional)</span>
+                </label>
+                <select formControlName="domaine" required  id="domaine" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                    <option disabled selected="" >Choisir un Type</option>
+                    <option value="Informatique">Informatique</option>
+                    <option value="mathematique">Mathematique</option>
+                    <option value="Physique">Physique</option>
+                </select>
+                </div>
+    </div>
+    <div class="flex justify-start mt-6">
+        <button type="submit"
+        class="button-grp" >Modifier</button>
+    </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    
