@@ -1,7 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
-import ka.adham.stage_gestion_bibliotheque.Repositories.BibliothecaireRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.BibliothecaireService;
@@ -79,9 +78,58 @@ public class BibliotecaireController {
     }
     @PatchMapping("/livre")
     public Livre updateLivre(@RequestBody Livre livre){
-        return bibliothecaireService.updateLivre(livre);
+        Livre UpdatedLivre = bibliothecaireService.getLivreById(livre.getId());
+        if(livre.getTitre() != null){
+            UpdatedLivre.setTitre(livre.getTitre());
+        }
+        if(livre.getAuteur() != null){
+            UpdatedLivre.setAuteur(livre.getAuteur());
+        }
+        if(livre.getDisponibilite() != null){
+            UpdatedLivre.setDisponibilite(livre.getDisponibilite());
+        }
+        if(livre.getQuantite() != null){
+            UpdatedLivre.setQuantite(livre.getQuantite());
+        }
+        if(livre.getBibliothecaire() != null){
+            UpdatedLivre.setBibliothecaire(livre.getBibliothecaire());
+        }
+        if (livre.getDateSortie()!=null){
+            UpdatedLivre.setDateSortie(livre.getDateSortie());
+        }
+        return bibliothecaireService.updateLivre(UpdatedLivre);
     }
 
+    @PatchMapping("addedBook/{domaine}/{sousDomaine}")
+    public Livre addBookCategory(@RequestBody Livre livre,@PathVariable String domaine,@PathVariable String sousDomaine){
+        List<Livre> livres = bibliothecaireService.getLivres();
+        livre=livres.get(livres.size()-1);
+        Livre existingLivre = bibliothecaireService.getLivreById(livre.getId());
+        if(livre.getTitre() != null){
+            existingLivre.setTitre(livre.getTitre());
+        }
+        if(livre.getAuteur() != null){
+            existingLivre.setAuteur(livre.getAuteur());
+        }
+        if(livre.getDisponibilite() != null){
+            existingLivre.setDisponibilite(livre.getDisponibilite());
+        }
+        if(livre.getQuantite() != null){
+            existingLivre.setQuantite(livre.getQuantite());
+        }
+        if(livre.getBibliothecaire() != null){
+            existingLivre.setBibliothecaire(livre.getBibliothecaire());
+        }
+        if(livre.getDateSortie()!=null){
+            existingLivre.setDateSortie(livre.getDateSortie());
+        }
+            Category category = categoryRepo.getCategoryByDomaineAndSousdomaine(domaine,sousDomaine);
+            if(category!=null){
+                existingLivre.setCategory(category);
+            }
+
+        return bibliothecaireService.updateLivre(existingLivre);
+    }
     @PostMapping("/category")
     public Category addCategory(@RequestBody Category category){
         List<Image> images = imageRepo.findAll();
