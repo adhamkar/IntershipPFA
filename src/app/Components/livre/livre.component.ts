@@ -9,6 +9,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { PDFsService } from '../../Services/pdfs.service';
+import { AddBookComponent } from '../add-book/add-book.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-livre',
@@ -57,7 +59,7 @@ constructor(private router:Router, private livreService: LivreService,
   private CatService:CategoryServiceService,
   private searchService:SearchService,
   private changeDetectorRef: ChangeDetectorRef,
-  
+  public dialog: MatDialog
   ) { }
 
 
@@ -209,6 +211,34 @@ displayBooksOfPhysique(): void {
     console.log("il'y'a une erreur"+error);
   });
 }
+openDialog(): void {
+  const dialogRef = this.dialog.open(AddBookComponent, {
+    width: '65%',
+    height: '500px',
+    enterAnimationDuration:'500ms',
+    exitAnimationDuration:'500ms',
+    data: {}  
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('The dialog was closed with result: ', result);
+    }
+  });
+}
+deleteBook(id:number){
+  this.livreService.deleteLivre(id).subscribe(
+    (data) => {
+      console.log(data);
+      this.loadPages();
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
+}
 
+navigateToUpdateBook(id: number) {
+  this.router.navigate(['/updateBook', id]);
 
+}
 }

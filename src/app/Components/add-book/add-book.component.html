@@ -12,6 +12,11 @@
             Info de Livre
           </div>
         </li>
+        <li [ngClass]="{'text-primary-500': currentStep === 3}" class="flex md:w-full items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8" *ngIf="currentStep === 3">
+            <div class="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2">
+              Category Associée
+            </div>
+          </li>
       </ol>
   
       <div class="grid">
@@ -43,73 +48,112 @@
         <form *ngIf="currentStep === 2" [formGroup]="livreForm" (ngSubmit)="Save()">
           <div class="flex flex-wrap w-full mx-auto gap-4">
             <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Titre du Livre
+                <label for="titre" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Titre du Livre
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="titre livre" required="">
+                <input  name="titre" id="titre" formControlName="titre" required class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="titre livre" required="">
               </div>
               <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Auteur
+                <label for="auteur" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Auteur
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="auteur" required="">
+                <input  type="text" name="auteur" id="auteur" formControlName="auteur" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="auteur" required="">
               </div>
               <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Etat
+                <label for="disponibilite" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Disponibilité
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="etat" required="">
-              </div>
+                <select  id="disponibilite" formControlName="disponibilite" required class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                    <option [disabled]="true" selected>Choisir une Disponibilité</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="Indisponible">Indisponible</option>
+                    <option value="Reserve">Reservé</option>
+                  </select>
+            </div>
 
               <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Quantité
+                <label for="quantite" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Quantité
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="quantite" required="">
+                <input  type="number" name="quantite" id="quantite" formControlName="quantite" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="quantite" required="">
               </div>
               <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Date de Sortie
+                <label for="dateSortie" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Date de Sortie
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="date" required="">
+                <input  type="date" name="dateSortie" id="dateSortie" formControlName="dateSortie" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="date" required="">
               </div>
+         
+            
             <div class="relative mb-6">
-                <label for="sous_domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Titre de la categorie
+                <label for="bibliothecaire" class="flex items-center mb-2 text-gray-600 text-sm font-medium rounded-full">Bibliothécaire
                   <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
                   </svg>
                 </label>
-                <input  type="text" name="sous_domaine" id="sous_domaine" formControlName="sous_domaine" required  class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="titre category" required="">
+                <select formControlName="bibliothecaire" required  id="bibliothecaire" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                    <option [disabled]="true" selected>Choisir un Bibliothecaire</option>
+                    <option *ngFor="let bibliothecaire of bibliothecaires" [ngValue]="bibliothecaire">{{bibliothecaire.nom}} {{bibliothecaire.prenom}}</option>
+                </select>
               </div>
-            <div class="relative mb-6">
-              <label for="domaine" class="flex items-center mb-2 text-gray-600 text-sm font-medium rounded-full">Type de categorie
-                <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
-                </svg>
-              </label>
-              <select formControlName="domaine" required  id="domaine" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
-                <option selected>Choisir un Type</option>
-                <option value="Informatique">Informatique</option>
-                <option value="mathematique">Mathematique</option>
-                <option value="Physique">Physique</option>
-              </select>
-            </div>
+            
+        </div>
+        <div class="sm:col-span-2">
+            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+            <textarea id="description" formControlName="description" required rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-900 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write a product description here...">
+            </textarea>
         </div>
    <div class="flex justify-between mt-6" *ngIf="currentStep === 2">
-    <button type="submit" class="button-grp" >Ajouter</button>
+    <!-- <button type="submit" class="button-grp" >Ajouter</button> -->
+    <button type="button" (click)="nextStep()" [ngClass]="{ 'button-grp': true }" >Suivant</button>
     <button type="button" (click)="Cancel()" class="button-grp-cancel" >Cancel</button>
   </div>
         </form>
+        <form *ngIf="currentStep === 3" >
+            <div class="flex flex-wrap w-full mx-auto gap-4">
+              <div class="relative mb-6">
+                <label for="categoryType" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Type de Catégorie
+                  <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
+                  </svg>
+                </label>
+                <select  id="categoryType" required #domaine (change)="onCategoryTypeChange($event)" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                  <option selected>Choisir un Type</option>
+                  <option value="Informatique">Informatique</option>
+                  <option value="mathematique">Mathematique</option>
+                  <option value="Physique">Physique</option>
+                </select>
+              </div>
+              <div class="relative mb-6">
+                <label for="categoryType" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Nom du Catégorie
+                  <svg width="7" height="7" class="ml-1" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444" />
+                  </svg>
+                </label>
+                <select  id="categoryType" required #sousDomaine  [disabled]="!selectedCategoryType" class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                  <option selected>Choisir un Type</option>
+                  <option *ngFor="let category of filteredCategories">{{category.sous_domaine}}</option>
+                  
+                </select>
+              </div>
+            </div>
+            <div class="flex justify-between mt-6">
+              <button type="button" class="button-grp" (click)="updateBookCategory(domaine.value,sousDomaine.value)">Ajouter</button>
+              <button type="button" (click)="CancelSave()" class="button-grp-cancel" >Cancel</button>
+
+            </div> 
+          </form>
+
       </div>
     </div>
   </div>

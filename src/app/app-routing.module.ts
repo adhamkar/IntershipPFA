@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'updateCat/:id', component: UpdateCategoryComponent },
   { path: 'addBook', component: AddBookComponent },
   { path: 'updateBook/:id', component: UpdateBookComponent },
+ 
 ];
 
 @NgModule({

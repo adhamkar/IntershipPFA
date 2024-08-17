@@ -39,7 +39,7 @@ export class CategoriesComponent implements OnInit {
 public alertMessage: string = '';
 
   constructor(private router:Router, private Categoryservice: CategoryServiceService,
-    private searchService:SearchService,public dialog: MatDialog,) {
+    private searchService:SearchService,public dialog: MatDialog) {
    }
 
   ngOnInit(): void {

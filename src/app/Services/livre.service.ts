@@ -32,5 +32,8 @@ export class LivreService {
   public getMathematiqueLivres():Observable<Livre[]>  {
     return this.http.get<Livre[]>(`${this.Etudianturl}`+"/mathematique/livres");
   }
+  public deleteLivre(id:number):Observable<any>  {
+    return this.http.delete(`${this.url}/livre/${id}`);
+  }
   
 }
