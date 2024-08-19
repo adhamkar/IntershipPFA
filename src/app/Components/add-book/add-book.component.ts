@@ -194,6 +194,7 @@ import { Category } from '../../Models/Category.model';
       
     }
     CancelSave(){
+      this.Cancel();
       this.deleteBook(this.livre.id);
       location.reload();
     }

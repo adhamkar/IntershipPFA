@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
+<div class="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md mt-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
       <!-- Book Image -->
@@ -7,35 +7,40 @@
       </div>
   
       <!-- Book Details -->
-      <div class="flex flex-col space-y-4">
+      <div class="flex flex-col space-y-1">
         
         <!-- Title and Author -->
-        <h1 class="text-3xl font-bold">titre</h1>
-        <h2 class="text-xl font-semibold text-gray-700">by Auteur</h2>
+        <h1 class="text-3xl font-bold">{{livre?.titre}}</h1>
+        <h2 class="text-xl font-semibold text-gray-700">by {{livre?.auteur}}</h2>
         
         <!-- Category -->
         <div class="text-sm text-gray-500">
-          Category: <span class="text-gray-900 font-medium">Domaine</span>
+          Categorie: <span class="text-gray-900 font-medium">{{livre?.category?.domaine}}</span>
         </div>
   
         <!-- Remaining Quantity -->
         <div class="text-sm text-gray-500">
-          Remaining Quantity: <span class="text-gray-900 font-medium">Quantite</span>
+          Quantité restante: <span class="text-gray-900 font-medium">{{livre?.quantite}}</span>
         </div>
   
         <!-- Description -->
-        <p class="text-gray-700">description</p>
+        <div class="text-sm text-gray-900 ">
+          Description:
+          <br><br>
+          <p class="text-gray-700 ">{{livre?.description}}</p>
+        </div>
+        
         
         <!-- Status -->
         <div>
-          <span class="inline-block px-3 py-1 text-xs font-semibold text-white rounded-full">
-            status 
+          <span class="inline-block text-sm font-semibold text-gray-900 rounded-full">
+          status : {{livre?.disponibilite}} 
           </span>
         </div>
         
         <!-- Created Date -->
         <div class="text-sm text-gray-500">
-          Created on: <span class="text-gray-900 font-medium">date</span>
+          Date Création: <span class="text-gray-900 font-medium">{{livre?.dateSortie | date}} </span>
         </div>
         
         <!-- Borrow Button -->
@@ -56,9 +61,10 @@
         
         <li *ngFor="let comment of comments" class="p-4 bg-gray-100 rounded-lg">
           <p class="text-gray-800">{{ comment.commentaire }}</p>
-          <span class="text-sm text-gray-500">- {{ comment.etudiant.nom }} {{ comment.etudiant.prenom }}</span>
-          <span class="text-sm text-gray-500"> {{ comment.createdDate | date }}</span>
+           <span class="text-sm text-gray-500">- {{ comment?.etudiant?.nom }} {{ comment?.etudiant?.prenom }}</span>
+          <span class="text-sm text-gray-500"> {{ comment?.createdDate | date }}</span> 
         </li>
+     
       </ul>
     </div>
     <div class="mt-6"  *ngIf="!showCommentForm">

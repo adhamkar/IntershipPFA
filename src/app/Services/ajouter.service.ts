@@ -16,10 +16,12 @@ export class AjouterService {
   constructor(private http: HttpClient) { }
   
   public addEtdudiant(etudiant: Etudiant): Observable<Etudiant> {
-    return this.http.post<Etudiant>(`${this.url}`+"/etudiant", etudiant);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Etudiant>(`${this.url}`+"/etudiant", etudiant, { headers });
 }
 public addCategory(category:Category): Observable<Category> {
-  return this.http.post<Category>(`${this.Caturl}`+"/category", category);
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  return this.http.post<Category>(`${this.Caturl}`+"/category", category, { headers });
 }
 
   public addImage(image: Image): Observable<Image> {
