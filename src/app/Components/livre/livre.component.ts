@@ -241,4 +241,7 @@ navigateToUpdateBook(id: number) {
   this.router.navigate(['/updateBook', id]);
 
 }
+navigateToProfileBook(id:number){
+  this.router.navigate(['/livreprofil',id])
+}
 }

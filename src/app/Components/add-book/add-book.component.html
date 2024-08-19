@@ -115,7 +115,7 @@
         </div>
    <div class="flex justify-between mt-6" *ngIf="currentStep === 2">
     <!-- <button type="submit" class="button-grp" >Ajouter</button> -->
-    <button type="button" (click)="nextStep()" [ngClass]="{ 'button-grp': true }" >Suivant</button>
+    <button type="button" [disabled]="livreForm.pristine || !livreForm.valid" (click)="nextStep()" [ngClass]="{ 'button-grp': true }" >Suivant</button>
     <button type="button" (click)="Cancel()" class="button-grp-cancel" >Cancel</button>
   </div>
         </form>

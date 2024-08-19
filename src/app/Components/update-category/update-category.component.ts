@@ -14,7 +14,8 @@ private category!:Category;
 categoryForm!: FormGroup;
 private id!:number;
 
-  constructor(private route: ActivatedRoute,private categoryService: CategoryServiceService,private formBuilder: FormBuilder,private router:Router) { }
+  constructor(private route: ActivatedRoute,private categoryService: CategoryServiceService,
+    private formBuilder: FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

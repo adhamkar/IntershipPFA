@@ -14,6 +14,7 @@ import { AddCategoryComponent } from './Components/add-category/add-category.com
 import { UpdateCategoryComponent } from './Components/update-category/update-category.component';
 import { AddBookComponent } from './Components/add-book/add-book.component';
 import { UpdateBookComponent } from './Components/update-book/update-book.component';
+import { LivreProfilComponent } from './Components/livre-profil/livre-profil.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'updateCat/:id', component: UpdateCategoryComponent },
   { path: 'addBook', component: AddBookComponent },
   { path: 'updateBook/:id', component: UpdateBookComponent },
+  { path: 'livreprofil/:id', component: LivreProfilComponent },
  
 ];
 

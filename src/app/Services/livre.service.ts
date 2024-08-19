@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Livre } from '../Models/Livre.model';
+import { Comment } from '../Models/Comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Livre } from '../Models/Livre.model';
 export class LivreService {
   private url = "http://localhost:8085/bibliotecaire";
   private Etudianturl = "http://localhost:8085/etudiant";
+  private adminUrl = "http://localhost:8085/admin";
   constructor(private http: HttpClient) { }
 
   public getLivresPage(page:number,size:number):Observable<any>  {
@@ -34,6 +36,12 @@ export class LivreService {
   }
   public deleteLivre(id:number):Observable<any>  {
     return this.http.delete(`${this.url}/livre/${id}`);
+  }
+  public updateBook(livre:Livre,id:number):Observable<Livre>  {
+    return this.http.patch<Livre>(`${this.url}/livre/${id}`,livre);
+  }
+  public getlivreComments(id:number):Observable<Comment[]>  {
+    return this.http.get<Comment[]>(`${this.adminUrl}/livre/${id}/comment`);
   }
   
 }

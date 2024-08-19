@@ -65,7 +65,7 @@
 <!--           <button class="w-52 h-12 bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 rounded-full shadow-xs text-white text-base font-semibold leading-6 mb-6">Sign in</button>
  -->        </div>
  <div class="flex justify-start mt-6">
-  <button type="submit" class="button-grp" *ngIf="currentStep === 2">Ajouter</button>
+  <button [disabled]="categoryForm.pristine || !categoryForm.valid" type="submit"  class="button-grp" *ngIf="currentStep === 2">Ajouter</button>
 </div>
       </form>
     </div>
