@@ -90,6 +90,11 @@ public class AdminControllelr {
         Etudiant etudiant= adminService.getEtudiantById(id);
        return etudiant.getComments();
     }
+   @GetMapping("/livre/{id}/comment")
+    public List<Comment> getCommentsLivre(@PathVariable Long id){
+        Livre livre= adminService.getLivreById(id);
+        return livre.getComments();
+    }
     @DeleteMapping("/comment/{idComment}")
     public void deleteComment(@PathVariable Long idComment){
         adminService.deleteComment(idComment);

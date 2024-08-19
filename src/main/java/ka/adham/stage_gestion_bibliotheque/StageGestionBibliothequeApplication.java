@@ -4,6 +4,7 @@ import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
 import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Enums.Genre;
+import ka.adham.stage_gestion_bibliotheque.Repositories.CommentRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.LivreRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ReserveRepo;
@@ -27,12 +28,15 @@ public class StageGestionBibliothequeApplication {
     @Autowired
     private ReserveRepo reserveRepo;
 
+
     public StageGestionBibliothequeApplication(LivreRepo livreRepo) {
         this.livreRepo = livreRepo;
+
     }
 
     public static void main(String[] args) {
         SpringApplication.run(StageGestionBibliothequeApplication.class, args);
+
     }
 
     //@Bean
@@ -149,51 +153,14 @@ public class StageGestionBibliothequeApplication {
         };
     }
 
-   //   @Bean
+     //@Bean
      CommandLineRunner cmLineRunner(EtudiantService etudiantService,
                                     AdminService adminService,
                                     BibliothecaireService bibliothecaireService,
-                                    EmprunteRepo emprunteRepo) {
+                                    EmprunteRepo emprunteRepo,CommentRepo commentRepo) {
 
         return args -> {
-            Long[] studentIds = {13L, 14L, 35L, 36L};
-            Long[] bookIds = {1L, 2L, 3L, 4L, 5L, 6L};
-
-            for (int i = 0; i < 20; i++) {
-                Emprunte emprunte = new Emprunte();
-                Calendar calendar = Calendar.getInstance();
-
-                // Generate random year, month, and day for 'dateEmprunt'
-                int year = 2024;
-                int month = (int) (Math.random() * 12); // Random month between 0 (Jan) and 11 (Dec)
-                int day = (int) (Math.random() * 28) + 1; // Random day between 1 and 28 to avoid invalid dates
-
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, day);
-                Date customDate = calendar.getTime();
-
-                emprunte.setDateEmprunt(customDate);
-
-                // Add 15 days for 'dateRetour'
-                calendar.add(Calendar.DAY_OF_MONTH, 15);
-                Date returnDate = calendar.getTime();
-                emprunte.setDateRetour(returnDate);
-
-                // Set random student and book
-                Long studentId = studentIds[(int) (Math.random() * studentIds.length)];
-                Long bookId = bookIds[(int) (Math.random() * bookIds.length)];
-
-                emprunte.setStatus(EmpruntStatus.OK);
-                emprunte.setEtudiant(adminService.getEtudiantById(studentId));
-                emprunte.setNomEtudiant(emprunte.getEtudiant().getNom());
-                emprunte.setLivre(bibliothecaireService.getLivreById(bookId));
-                emprunte.setTitreLivre(emprunte.getLivre().getTitre());
-                emprunte.setDomaine(emprunte.getLivre().getCategory().getDomaine());
-
-                // Save the emprunte
-                emprunteRepo.save(emprunte);
-        };
+            System.out.println(commentRepo.findAll());
 };
 }
 }

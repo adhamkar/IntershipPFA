@@ -1,5 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,11 @@ public class Comment {
     private Date CreatedDate;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
     private Etudiant etudiant;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Livre livre;
+
+
 }

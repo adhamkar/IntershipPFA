@@ -1,6 +1,7 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,13 +30,18 @@ public class Etudiant extends User{
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
     private List<Emprunte> emprunts;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
     private List<Reserve> reservations;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
     private List<Comment> comments;
+
+
 }

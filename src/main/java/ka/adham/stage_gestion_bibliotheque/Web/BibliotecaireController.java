@@ -76,9 +76,9 @@ public class BibliotecaireController {
         livre.setImage(image);
         return bibliothecaireService.addLivre(livre);
     }
-    @PatchMapping("/livre")
-    public Livre updateLivre(@RequestBody Livre livre){
-        Livre UpdatedLivre = bibliothecaireService.getLivreById(livre.getId());
+    @PatchMapping("/livre/{id}")
+    public Livre updateLivre(@RequestBody Livre livre,@PathVariable Long id){
+        Livre UpdatedLivre = bibliothecaireService.getLivreById(id);
         if(livre.getTitre() != null){
             UpdatedLivre.setTitre(livre.getTitre());
         }
@@ -96,6 +96,9 @@ public class BibliotecaireController {
         }
         if (livre.getDateSortie()!=null){
             UpdatedLivre.setDateSortie(livre.getDateSortie());
+        }
+        if(livre.getDescription() != null){
+            UpdatedLivre.setDescription(livre.getDescription());
         }
         return bibliothecaireService.updateLivre(UpdatedLivre);
     }

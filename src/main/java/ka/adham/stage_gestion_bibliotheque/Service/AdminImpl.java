@@ -4,10 +4,8 @@ import jakarta.transaction.Transactional;
 import ka.adham.stage_gestion_bibliotheque.Entities.Admin;
 import ka.adham.stage_gestion_bibliotheque.Entities.Bibliothecaire;
 import ka.adham.stage_gestion_bibliotheque.Entities.Etudiant;
-import ka.adham.stage_gestion_bibliotheque.Repositories.AdminRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.BibliothecaireRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.CommentRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.EtudiantRepo;
+import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,7 @@ public class AdminImpl implements AdminService{
     private CommentRepo commentRepo;
     @Autowired
     private BibliothecaireRepo bibliothecaireRepo;
+    @Autowired private LivreRepo livreRepo;
     @Override
     public List<Etudiant> getAllEtudiants() {
         return etudiantRepo.findAll();
@@ -112,6 +111,11 @@ public class AdminImpl implements AdminService{
         return etudiantRepo.searchEtudiants(query);
     }
 
-
+    @Override
+    public Livre getLivreById(Long id) {
+        return livreRepo.findById(id).orElseThrow();
     }
+
+
+}
 
