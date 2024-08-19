@@ -1,10 +1,12 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import ka.adham.stage_gestion_bibliotheque.Enums.Genre;
+import ka.adham.stage_gestion_bibliotheque.EtudiantViews;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +23,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @JsonView(EtudiantViews.CommentView.class)
     private String nom;
     @Column(nullable = false)
+    @JsonView(EtudiantViews.CommentView.class)
     private String prenom;
 
     @Column(unique = true,nullable = false)
@@ -47,5 +51,6 @@ public class User {
     private Genre sexe;
 
     @ManyToOne
+    @JsonView(EtudiantViews.DefaultView.class)
     private Image image;
 }

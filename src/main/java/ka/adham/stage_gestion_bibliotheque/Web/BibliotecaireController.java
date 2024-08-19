@@ -69,14 +69,14 @@ public class BibliotecaireController {
     public void deleteLivre(@PathVariable Long id){
         bibliothecaireService.deleteLivre(id);
     }
-    @PostMapping("/livre")
+    @PostMapping(value="/livre", consumes = "application/json")
     public Livre addLivre(@RequestBody Livre livre){
         List<Image> images = imageRepo.findAll();
         Image image = images.get(images.size()-1);
         livre.setImage(image);
         return bibliothecaireService.addLivre(livre);
     }
-    @PatchMapping("/livre/{id}")
+    @PatchMapping(value="/livre/{id}", consumes = "application/json")
     public Livre updateLivre(@RequestBody Livre livre,@PathVariable Long id){
         Livre UpdatedLivre = bibliothecaireService.getLivreById(id);
         if(livre.getTitre() != null){
@@ -103,7 +103,7 @@ public class BibliotecaireController {
         return bibliothecaireService.updateLivre(UpdatedLivre);
     }
 
-    @PatchMapping("addedBook/{domaine}/{sousDomaine}")
+    @PatchMapping(value="addedBook/{domaine}/{sousDomaine}", consumes = "application/json")
     public Livre addBookCategory(@RequestBody Livre livre,@PathVariable String domaine,@PathVariable String sousDomaine){
         List<Livre> livres = bibliothecaireService.getLivres();
         livre=livres.get(livres.size()-1);
@@ -133,14 +133,14 @@ public class BibliotecaireController {
 
         return bibliothecaireService.updateLivre(existingLivre);
     }
-    @PostMapping("/category")
+    @PostMapping(value="/category", consumes = "application/json")
     public Category addCategory(@RequestBody Category category){
         List<Image> images = imageRepo.findAll();
         Image image = images.get(images.size()-1);
         category.setImage(image);
         return bibliothecaireService.addCategory(category);
     }
-    @PatchMapping("/category/{id}")
+    @PatchMapping(value="/category/{id}", consumes = "application/json")
     public Category updateCategory(@RequestBody Category category,@PathVariable Long id){
         Category existingCategory = categoryRepo.getCategoryById(id);
         if (category.getDomaine() != null) {
@@ -166,7 +166,7 @@ public class BibliotecaireController {
     public Livre getLivre(@PathVariable Long id){
         return bibliothecaireService.getLivreById(id);
     }
-    @PostMapping("/emprunt/approve/{id}")
+    @PostMapping(value="/emprunt/approve/{id}", consumes = "application/json")
     public void approveEmprunt(@PathVariable Long id){
         bibliothecaireService.ConfirmerEmprunt(id);
     }
@@ -174,7 +174,7 @@ public class BibliotecaireController {
     public void refuseEmprunt(@PathVariable Long id){
         bibliothecaireService.RefuserEmprunt(id);
     }
-    @PostMapping("/reservation/approve/{id}")
+    @PostMapping(value="/reservation/approve/{id}", consumes = "application/json")
     public void approveReservation(@PathVariable Long id){
         bibliothecaireService.ConfirmerReservation(id);
     }
@@ -182,7 +182,7 @@ public class BibliotecaireController {
     public void refuseReservation(@PathVariable Long id){
         bibliothecaireService.RefuserReservation(id);
     }
-    @PostMapping("/blacklist/{id}")
+    @PostMapping(value="/blacklist/{id}", consumes = "application/json")
     public List<Etudiant> addToBlackList(@PathVariable Long id){
         return bibliothecaireService.addToBlackList(id);
     }

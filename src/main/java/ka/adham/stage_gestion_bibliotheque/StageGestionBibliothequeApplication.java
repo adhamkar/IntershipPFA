@@ -22,6 +22,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+
 public class StageGestionBibliothequeApplication {
 
     private final LivreRepo livreRepo;

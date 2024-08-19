@@ -1,5 +1,7 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
+import com.fasterxml.jackson.annotation.JsonView;
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
+import ka.adham.stage_gestion_bibliotheque.EtudiantViews;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.AdminService;
 import ka.adham.stage_gestion_bibliotheque.Service.StorageService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -42,7 +45,7 @@ public class AdminControllelr {
         return adminService.getEtudiantById(id);
     }
 
-    @PostMapping("/etudiant")
+    @PostMapping(value="/etudiant", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Etudiant addEtudiant(@RequestBody Etudiant etudiant){
         //String uploadImage = storageService.uploadImage(file);
         List<Image> images = imageRepo.findAll();
@@ -51,7 +54,7 @@ public class AdminControllelr {
         return adminService.addEtudiant(etudiant);
 
     }
-    @PatchMapping("/etudiant")
+    @PatchMapping(value="/etudiant", consumes = "application/json")
     public Etudiant updateEtudiant(@RequestBody Etudiant etudiant){
         return adminService.updateEtudiant(etudiant);
     }
@@ -91,6 +94,7 @@ public class AdminControllelr {
        return etudiant.getComments();
     }
    @GetMapping("/livre/{id}/comment")
+   @JsonView(EtudiantViews.CommentView.class)
     public List<Comment> getCommentsLivre(@PathVariable Long id){
         Livre livre= adminService.getLivreById(id);
         return livre.getComments();

@@ -1,5 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
@@ -28,6 +29,7 @@ public class Emprunte {
     private Livre livre;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonBackReference
     private Etudiant etudiant;
     private String NomEtudiant;
     private String TitreLivre;
