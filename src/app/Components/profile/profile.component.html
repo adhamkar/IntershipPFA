@@ -14,7 +14,7 @@
             <button
                 class=" button-grp">
                
-                <span class=" font-semibold text-white">Modifer le profile</span>
+                <span class=" font-semibold text-white" (click)="openModal()">Modifer le profile</span>
             </button>
         </div>
         <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4 mt-4">
@@ -141,6 +141,7 @@
                     <th scope="col" class="px-4 py-3">Type</th>
                     <th scope="col" class="px-4 py-3">Date Empruntes</th>
                     <th scope="col" class="px-4 py-3">Date Retour</th>
+                    <th scope="col" class="px-4 py-3">Actions</th>
                    
                 </tr>
             </thead>
@@ -167,6 +168,21 @@
                         {{emp.dateRetour| date: 'shortDate'}}
                       </div>
                   </td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white flex justify-beetween gap-2" >
+                    
+                    <button type='button'
+                     class='py-2 px-4 flex items-center gap-2 text-sm rounded-full border border-solid border-red-200 text-red-600 cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-red-600 hover:text-white'>
+
+                     Supprimer
+                     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 6.60001H21M4.8 6.60001H19.2V15C19.2 17.8284 19.2 19.2426 18.3213 20.1213C17.4426 21 16.0284 21 13.2 21H10.8C7.97157 21 6.55736 21 5.67868 20.1213C4.8 19.2426 4.8 17.8284 4.8 15V6.60001Z" stroke="black" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                      <path d="M7.49994 6.59994V4.99994C7.49994 3.89537 8.39537 2.99994 9.49994 2.99994H14.4999C15.6045 2.99994 16.4999 3.89537 16.4999 4.99994V6.59994M16.4999 6.59994H2.99994M16.4999 6.59994H21" stroke="black" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                      <path d="M10.2 11.1L10.2 16.5" stroke="black" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                      <path d="M13.8 11.1L13.8 16.5" stroke="black" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                      </svg>
+                    </button>
+                    
+                </td>
                      
                 
                   </tr>
@@ -183,115 +199,90 @@
     </div>
 </section>
 
-
-<!-- <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5" >
-  <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
-      <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
-              <div class="flex items-center flex-1 space-x-4">
-                  <h5>
-                      <span class="text-gray-500">Nombre de Livres:</span>
-                      <span class="dark:text-white">7ayed elia</span>
-                  </h5>
-              </div>
-              <div class="container-input">
-                  <input type="text" placeholder="Search" name="text" class="input">
-                  <svg style="cursor: pointer; " fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-                </svg>
-                </div>
-                <a href="http://localhost:8085/openpdf/empruntes" target="_blank" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                  <svg style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                  </svg>
-                  Export
-                </a>
-                
-          </div>
-          <div class="overflow-x-auto" >
-  <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left ">
-
-      <ng-container matColumnDef="titre" >
-        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Titre </th>
-        <td mat-cell *matCellDef="let element" 
-        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        > {{element.livre.titre}} </td>
-      </ng-container>
-    
-
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Category </th>
-        <td mat-cell *matCellDef="let element"> <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{element.livre.category.domaine}}</span> </td>
-      </ng-container>
-    
-
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Type </th>
-        <td mat-cell *matCellDef="let element"
-        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        > {{element.livre.category.sous_domaine}} </td>
-      </ng-container>
-    
-
-      <ng-container matColumnDef="etudiant">
-        <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Etudiant </th>
-        <td mat-cell *matCellDef="let element"
-        class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        > {{element.nomEtudiant}} </td>
-      </ng-container>
-      <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Status </th>
-          <td mat-cell *matCellDef="let element"
-          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          > {{element.status}} </td>
-        </ng-container>
-    
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-80 flex justify-center items-center z-50">
   
-      <ng-container matColumnDef="quantite">
-          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Quantité </th>
-          <td mat-cell *matCellDef="let element"
-          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          > {{element.livre.quantite}} </td>
-        </ng-container>
-        <ng-container matColumnDef="dateEmprunt">
-          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Emprunt </th>
-          <td mat-cell *matCellDef="let element"
-          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          > {{element.dateEmprunt | date: 'shortDate'}} </td>
-        </ng-container>
-      <ng-container matColumnDef="dateRetour">
-          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Retour </th>
-          <td mat-cell *matCellDef="let element"
-          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          > {{element.dateRetour | date: 'shortDate'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="actions" >
-          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Actions </th>
-          <td mat-cell *matCellDef="let element" > 
-              <span class="flex justify-beetween gap-1 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                </svg>
-                
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                </svg>
-                
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                  </svg>    
-              </span>
-          </td>
-        </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10]"
-               showFirstLastButtons
-              >
-</mat-paginator> 
-  </div>
+  <!-- Modal -->
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl mx-2">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-semibold">Modifier le profil</h3>
+      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Form inside the modal -->
+    <form [formGroup]="updateEtdForm" (ngSubmit)="updateprofil()">
+      <div class="flex flex-wrap gap-3">
+      <div class="relative mb-6">
+        <label for="nom" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Nom</label>
+        <input name="nom" id="nom" formControlName="nom" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="Nouveau Nom" required>
       </div>
+      <div class="relative mb-6">
+        <label for="prenom" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Prenom</label>
+        <input type="text" name="prenom" id="prenom" formControlName="prenom" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="Nouveau prenom" required>
+      </div>
+      <div class="relative mb-6">
+        <label for="tel" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Telephone</label>
+        <input name="tel" id="tel" formControlName="tel" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="Nouveau Telephone" required>
+      </div>
+      <div class="relative mb-6">
+        <label for="ville" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Ville</label>
+        <input type="text" name="ville" id="ville" formControlName="ville" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" placeholder="Nouvelle Ville" required>
+      </div>
+      <div class="relative mb-6">
+        <label for="sexe" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Sexe</label>
+        <select name="sexe" id="sexe" formControlName="sexe" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" required>
+          <option value="" disabled selected>Sélectionner le sexe</option>
+          <option value="Masculin" >Masculin</option>
+          <option value="Feminin">Féminin</option>
+        </select>
+      </div>
+      
+      <div class="relative mb-6">
+        <label for="niveau" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Niveau</label>
+        <select name="niveau" id="niveau" formControlName="niveau" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" required>
+          <option value="" disabled selected>Sélectionner le Niveau</option>
+          <option value="FI-1">FI-1</option>
+          <option value="FI-2">FI-2</option>
+          <option value="FI-3">FI-3</option>
+          <option value="M-1">M-1</option>
+          <option value="M-2">M-2</option>
+        </select>
+      </div>
+      <div class="relative mb-6">
+        <label for="nationalite" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Nationalité</label>
+        <select name="nationalite" id="nationalite" formControlName="nationalite" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" required>
+          <option value="" disabled selected>Sélectionner la Nationalité</option>
+          <option value="Marocain">Marocain</option>
+          <option value="Etranger">Etranger</option>
+        </select>
+      </div>
+      
+      <div class="relative mb-6">
+        <label for="filiere" class="flex items-center mb-2 text-gray-600 text-sm font-medium">Filière</label>
+        <select name="filiere" id="filiere" formControlName="filiere" class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none" required>
+          <option value="" disabled selected>Sélectionner la Filière</option>
+          <option value="BDCC">BDCC</option>
+          <option value="GLSID">GLSID</option>
+          <option value="CCN">CCN</option>
+          <option value="SDIA">SDIA</option>
+          <option value="GECSI">GECSI</option>
+          <option value="GMSI">GMSI</option>
+          <option value="GIL">GIL</option>
+          <option value="GEII">GEII</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+      
+    </div>
+      
+      <!-- Submit and Cancel buttons -->
+      <div class="flex justify-end space-x-4">
+        <button type="button" (click)="closeModal()" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700">Cancel</button>
+        <button type="submit" class="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">Modifier</button>
+      </div>
+    </form>
   </div>
-</section> -->
+</div>

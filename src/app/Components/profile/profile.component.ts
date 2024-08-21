@@ -7,6 +7,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Emprunte } from '../../Models/Emprunt.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +15,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
-
+  private id!:number;
+  isModalOpen = false;
   myProfil!:Etudiant;
+  updateEtdForm!:FormGroup;
   emprunts:Emprunte[] = [];
   paginatedEmprunts: Emprunte[] = [];
   isInfo:boolean = true;
@@ -23,21 +26,49 @@ export class ProfileComponent implements OnInit{
   isResv:boolean = false;
   imageUrl!: SafeUrl;
   number: number = 0;
-    pageSize = 8;
-    pageIndex = 0;
-    totalPages = 0;
+  pageSize = 8;
+  pageIndex = 0;
+  totalPages = 0;
 
  
   
-  constructor(private etudiantService: EtudiantService,private route: ActivatedRoute, private sanitizer: DomSanitizer, ) { }
+  constructor(private etudiantService: EtudiantService,private route: ActivatedRoute, private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = +params['id']; // Récupère l'ID de l'étudiant à partir de l'URL
-      this.getProfile(id);
+      this.id = +params['id']; // Récupère l'ID de l'étudiant à partir de l'URL
+      this.getProfile(this.id);
+      this.updateEtdForm = this.formBuilder.group({
+        nom: [null],
+        prenom: [null],
+        tel: [null],
+        ville: [null],
+        sexe: [null],
+        niveau: [null],
+        nationalite: [null],
+        filiere: [null],
+        //email: [null],
+
+      }); 
     });
   }
 
+  updateprofil(){
+    this.myProfil=this.updateEtdForm.value;
+      this.etudiantService.updateEtudiantById(this.myProfil,this.id).subscribe(
+        data => {
+          console.log(data);
+          this.myProfil = data;
+          this.closeModal();
+          this.updateEtdForm.reset();
+          this.closeModal();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 
   getProfile(id:number){
     this.etudiantService.getEtudiant(id).subscribe(
@@ -100,5 +131,13 @@ export class ProfileComponent implements OnInit{
       }
     );
   }
+ 
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }

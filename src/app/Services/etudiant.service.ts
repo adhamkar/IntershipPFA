@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Etudiant } from '../Models/Etudiant.model';
 import { Image } from '../Models/Image.model';
+import { Task } from '../Models/Task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Image } from '../Models/Image.model';
 export class EtudiantService {
   private url = "http://localhost:8085/admin";
   private imageApiUrl = 'http://localhost:8085/image/';
+  private etudiantUrl="http://localhost:8085/etudiant";
 
   constructor(private http: HttpClient) { }
   
@@ -37,4 +39,29 @@ export class EtudiantService {
   public getEtudiant(id: number): Observable<Etudiant> {
     return this.http.get<Etudiant>(`${this.url}/etudiant/${id}`);
   }
+  public updateEtudiantById(etudiant: Etudiant,id: number): Observable<Etudiant> {
+    return this.http.patch<Etudiant>(`${this.url}/etudiant/${id}`, etudiant);
+  }
+  // task management
+  public getStudentTasks(id: number): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.etudiantUrl}/tasks/${id}`);
+  }
+  public addTask(task: Task,studentId:number): Observable<Task> {
+    return this.http.post<Task>(`${this.etudiantUrl}/addtask/${studentId}`, task);
+  }
+  public updateTask(task: Task,id:number): Observable<Task> {
+    return this.http.patch<Task>(`${this.etudiantUrl}/updateTask/${id}`, task);
+  }
+  public deleteTask(id: number): Observable<Task> {
+    return this.http.delete<Task>(`${this.etudiantUrl}/delete/${id}`);
+  }
+  public markTaskComplete(id: number): Observable<Task> {
+    return this.http.patch<Task>(`${this.etudiantUrl}/complete/${id}`, {});
+  }
+  public markTaskAsComplete(id: number): Observable<Task> {
+    return this.http.patch<Task>(`${this.etudiantUrl}/complete/${id}`, {});
+  }
+  
+  
+
 }

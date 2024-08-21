@@ -35,6 +35,7 @@ import { AddCategoryComponent } from './Components/add-category/add-category.com
 import { UpdateCategoryComponent } from './Components/update-category/update-category.component';
 import { UpdateBookComponent } from './Components/update-book/update-book.component';
 import { AddBookComponent } from './Components/add-book/add-book.component';
+import { TasksComponent } from './Components/tasks/tasks.component';
 
 
 
@@ -57,6 +58,7 @@ import { AddBookComponent } from './Components/add-book/add-book.component';
     UpdateCategoryComponent,
     UpdateBookComponent,
     AddBookComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

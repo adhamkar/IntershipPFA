@@ -5,6 +5,7 @@ import { Comment } from '../../Models/Comment.model';
 import { Livre } from '../../Models/Livre.model';
 import { EtudiantService } from '../../Services/etudiant.service';
 import { Etudiant } from '../../Models/Etudiant.model';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-livre-profil',
@@ -16,9 +17,11 @@ export class LivreProfilComponent implements OnInit {
   showAllComments = false;
   comments: Comment[] = [];
   livre!:Livre;
+  imageUrl!: SafeUrl;
   etudiant:Etudiant[] = [];
   private id!:number;
-  constructor(private route: ActivatedRoute,private service: LivreService,private etudiantService: EtudiantService) { }
+  constructor(private route: ActivatedRoute,private service: LivreService,private etudiantService: EtudiantService,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -48,6 +51,7 @@ export class LivreProfilComponent implements OnInit {
     this.service.getLivreById(this.id).subscribe(
       data => {
         this.livre = data;
+        this.fetchImage(this.livre.image.name);
         console.log(data);
       },
       error => {
@@ -55,16 +59,15 @@ export class LivreProfilComponent implements OnInit {
       }
     );
   }
-/*   getEtudiant(){
-    this.etudiantService.getEtudiant(this.comments.).subscribe(
-      data => {
-        console.log(data);
-        this.etudiant = data;
-
+  fetchImage(fileName: string): void {
+    this.etudiantService.getImage(fileName).subscribe(
+      (blob: Blob) => {
+        const objectURL = URL.createObjectURL(blob);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       error => {
-        console.log(error);
+        console.error('Error fetching image', error);
       }
     );
-  } */
+  }
 }

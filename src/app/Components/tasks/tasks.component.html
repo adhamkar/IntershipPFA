@@ -1,0 +1,179 @@
+<section class="relative bg-stone-50 bg-slate-100">
+    <!--     <div class="bg-sky-400 w-full sm:w-40 h-40 rounded-full absolute top-1 opacity-20 max-sm:right-0 sm:left-56 z-0"></div>
+    <div class="bg-emerald-500 w-full sm:w-40 h-24 absolute top-0 -left-0 opacity-20 z-0"></div>
+    <div class="bg-purple-600 w-full sm:w-40 h-24 absolute top-40 -left-0 opacity-20 z-0"></div> -->
+    <section class="relative pt-36 ">
+    <img src="https://pagedone.io/asset/uploads/1705471739.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60">
+    <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
+        <div class="flex items-center justify-center relative z-10">
+            <img src="https://pagedone.io/asset/uploads/1705471668.png" alt="user-avatar-image" class="border-4 border-solid border-white rounded-full">
+        </div>
+      </div>
+    </section> 
+  
+    <div class="w-full pb-6 relative z-10 backdrop-blur-3xl">
+      
+      <div class="w-full max-w-7xl mx-auto px-2 lg:px-8">
+        <div class="flex justify-between m-5">
+          <h2 class="font-manrope  text-3xl leading-tight text-gray-900 ">Vos Taches</h2>
+          <button  class="mt-2 py-1 px-2 bg-indigo-600 text-lg text-white rounded-lg hover:bg-indigo-800 " (click)="openModal()">Ajouter une tache</button>
+          </div>
+        <div class="grid grid-cols-2  gap-8 max-w-4xl mx-auto xl:max-w-full">
+          
+          <div class="col-span-12 xl:col-span-5 ">
+           
+            <p class="text-lg font-normal text-gray-600  mb-8" style="margin-left: 20px;">Ne les rater pas !!</p>
+            <div class="grid grid-cols-2  gap-3">
+              <div *ngFor="let task of tasks" class="p-6 rounded-xl bg-white">
+                
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-2.5">
+                    <span *ngIf="task.completed===false" class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                    <span *ngIf="task.completed===true" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <p class="text-base font-medium text-gray-900">{{ task.startDateTime | date:'short' }} - {{ task.endDateTime | date:'short' }}</p>
+                  </div>
+                  <div class="dropdown relative inline-flex">
+                  
+                    <div class="dropdown relative inline-flex">
+                      <button type="button" (click)="toggleDropdown(task.id)" class="dropdown-toggle inline-flex justify-center py-2.5 px-1 items-center gap-2 text-sm text-black rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:text-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="4" viewBox="0 0 12 4" fill="none">
+                          <path d="M1.85624 2.00085H1.81458M6.0343 2.00085H5.99263M10.2124 2.00085H10.1707" stroke="currentcolor" stroke-width="2.5" stroke-linecap="round"></path>
+                        </svg>
+                      </button>
+                      <div *ngIf="isDropdownOpen(task.id)" id="dropdown-default" class="dropdown-menu rounded-xl shadow-lg bg-white absolute top-full -left-10 w-max mt-2">
+                        <ul class="py-2">
+                          <li>
+                            <button class="block px-6 py-2 text-xs hover:bg-gray-100 text-gray-600 font-medium"  (click)="openUpdateModal(task)" >
+                              Modifier
+                            </button>
+                          </li>
+                          <li>
+                            <button class="block px-6 py-2 text-xs hover:bg-gray-100 text-gray-600 font-medium"  (click)="deleteTask(task.id)" >
+                              Supprimer
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <h4 class="text-xl leading-8 font-semibold text-black mb-1">{{ task.title }}</h4>
+                <p class="text-base font-normal text-gray-600">{{ task.description }}</p>
+                <div class="flex justify-between gap-3">
+               <button  *ngIf="task.completed===false" [disabled]="task.completed" (click)="markTaskAsComplete(task.id)" class="flex gap-2 mt-2 py-1 px-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-700">Marquer Terminer
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12.4434L8.14339 16.5868C8.81006 17.2535 9.14339 17.5868 9.5576 17.5868C9.97182 17.5868 10.3051 17.2535 10.9718 16.5868L20.001 7.55762" stroke="#fafafa" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                  </svg>
+              </button>
+               
+               <button  *ngIf="task.completed===true" [disabled]="!task.completed" (click)="deleteTask(task.id)" class="mt-2 py-1 px-2 bg-red-100 text-white rounded-lg hover:bg-red-300">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 6.59998H21M4.8 6.59998H19.2V15C19.2 17.8284 19.2 19.2426 18.3213 20.1213C17.4426 21 16.0284 21 13.2 21H10.8C7.97157 21 6.55736 21 5.67868 20.1213C4.8 19.2426 4.8 17.8284 4.8 15V6.59998Z" stroke="#ff0000" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                <path d="M7.5 6.59994V4.99994C7.5 3.89537 8.39543 2.99994 9.5 2.99994H14.5C15.6046 2.99994 16.5 3.89537 16.5 4.99994V6.59994M16.5 6.59994H3M16.5 6.59994H21" stroke="#ff0000" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+                </svg>
+              </button>
+
+                <span *ngIf="task.completed===false" class='inline-flex items-center bg-amber-200 text-amber-600 text-xs font-medium mr-2 pl-2 pr-2.5 rounded-full'>
+                  <span class='w-1 h-1 mr-1 rounded-full bg-amber-500 flex'></span>En cours </span>
+                  <span *ngIf="task.completed===true" class='inline-flex items-center bg-emerald-50 text-emerald-600 text-xs font-medium mr-2 pl-2 pr-2.5 rounded-full py-1'>
+                    <span class='w-1 h-1 mr-1 rounded-full bg-emerald-500 flex'></span>Terminé</span>
+               
+              </div>
+              
+              </div>
+            </div>
+          </div>
+         
+        <!---Ajouter une tache--->
+        
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-80 flex justify-center items-center z-50 ">
+  
+    <!-- Modal -->
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-2 ">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Votre Tache</h3>
+        <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+  
+     
+      <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+        <div class="flex flex-row gap-5">
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Title</label>
+          <input type="text" name="title"required formControlName="title" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Description</label>
+          <input type="text" name="description" formControlName="description" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+      </div>
+      <div class="flex flex-row gap-5">
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Start DateTime</label>
+          <input type="datetime-local" name="startDateTime" formControlName="startDateTime" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">End DateTime</label>
+          <input type="datetime-local" name="endDateTime" formControlName="endDateTime" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+      </div>
+      <div class="flex items-center justify-end pt-4 border-t border-gray-200 space-x-4">
+        <button type="button" (click)="closeModal()" class="pd-dropdown-toggle py-2.5 px-5 text-xs bg-indigo-50 text-indigo-500 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-100 close-modal-button" data-pd-overlay="#pd-basic-modal" data-modal-target="pd-basic-modal">Cancel</button>
+        <button type="submit" class="py-2.5 px-5 text-xs  bg-indigo-500 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700 close-modal-button" data-pd-overlay="#pd-basic-modal" data-modal-target="pd-basic-modal">Ajouter</button>
+      </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="updateModal" class="fixed inset-0 bg-gray-800 bg-opacity-80 flex justify-center items-center z-50 ">
+  
+    <!-- Modal -->
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl mx-2 ">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Madifier la Tache</h3>
+        <button (click)="closeUpdateModal()" class="text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+  
+     
+      <form [formGroup]="updateTaskForm" (ngSubmit)="updateTask()">
+        <input type="hidden" formControlName="id">
+        <div class="flex flex-row gap-5">
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Title</label>
+          <input type="text" name="title"required formControlName="title" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Description</label>
+          <input type="text" name="description" formControlName="description" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+      </div>
+      <div class="flex flex-row gap-5">
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">Start DateTime</label>
+          <input type="datetime-local" name="startDateTime" formControlName="startDateTime" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="mb-4 w-full sm:w-1/2">
+          <label class="block text-sm font-medium text-gray-700">End DateTime</label>
+          <input type="datetime-local" name="endDateTime" formControlName="endDateTime" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+      </div>
+      <div class="flex items-center justify-end pt-4 border-t border-gray-200 space-x-4">
+        <button type="button" (click)="closeUpdateModal()" class="pd-dropdown-toggle py-2.5 px-5 text-xs bg-indigo-50 text-indigo-500 rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-100 close-modal-button" data-pd-overlay="#pd-basic-modal" data-modal-target="pd-basic-modal">Cancel</button>
+        <button type="submit" class="py-2.5 px-5 text-xs  bg-indigo-500 text-white rounded-full cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-indigo-700 close-modal-button" data-pd-overlay="#pd-basic-modal" data-modal-target="pd-basic-modal">Modifier</button>
+      </div>
+      </form>
+    </div>
+  </div>
