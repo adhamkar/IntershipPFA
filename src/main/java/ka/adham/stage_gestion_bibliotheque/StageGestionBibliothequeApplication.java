@@ -8,10 +8,7 @@ import ka.adham.stage_gestion_bibliotheque.Repositories.CommentRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.LivreRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ReserveRepo;
-import ka.adham.stage_gestion_bibliotheque.Service.AdminService;
-import ka.adham.stage_gestion_bibliotheque.Service.BibliothecaireService;
-import ka.adham.stage_gestion_bibliotheque.Service.EtudiantService;
-import ka.adham.stage_gestion_bibliotheque.Service.LivreService;
+import ka.adham.stage_gestion_bibliotheque.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -158,10 +155,23 @@ public class StageGestionBibliothequeApplication {
      CommandLineRunner cmLineRunner(EtudiantService etudiantService,
                                     AdminService adminService,
                                     BibliothecaireService bibliothecaireService,
-                                    EmprunteRepo emprunteRepo,CommentRepo commentRepo) {
+                                    EmprunteRepo emprunteRepo, CommentRepo commentRepo, TacheService tacheService) {
 
         return args -> {
-            System.out.println(commentRepo.findAll());
+            Etudiant etudiant=adminService.getEtudiantById(39L);
+            Tache tache = new Tache();
+            tache.setCompleted(false);
+            tache.setTitle("Tp de Spring Boot");
+            tache.setDescription("Excercice de l'injection de dependance");
+            tache.setStartDateTime(new Date());
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(tache.getStartDateTime());
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            Date endDate = calendar.getTime();
+            tache.setEndDateTime(endDate);
+            tache.setEtudiant(etudiant);
+            tacheService.addTask(tache);
 };
 }
 }

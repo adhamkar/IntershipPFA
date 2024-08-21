@@ -1,9 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
 
-import ka.adham.stage_gestion_bibliotheque.Entities.Category;
-import ka.adham.stage_gestion_bibliotheque.Entities.Comment;
-import ka.adham.stage_gestion_bibliotheque.Entities.Emprunte;
-import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +21,9 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/etudiant")
 public class EtudiantController {
-    private EtudiantService etudiantService;
+    @Autowired private EtudiantService etudiantService;
+    @Autowired private TacheService taskService;
+    @Autowired private AdminService adminService;
 
 
     private static void accept(String domaine) {
@@ -194,5 +193,43 @@ public class EtudiantController {
         return livres;
     }
 
-
+    @GetMapping("/tasks/{etudiantId}")
+    public List<Tache> getTasksByEtudiant(@PathVariable Long etudiantId) {
+        return taskService.getAllTasksByEtudiant(etudiantId);
+    }
+    @PostMapping("/addtask/{etudiantId}")
+    public Tache addTask(@RequestBody Tache task, @PathVariable Long etudiantId) {
+        Etudiant etudiant = adminService.getEtudiantById(etudiantId);
+        task.setEtudiant(etudiant);
+        task.setCompleted(false);
+        return taskService.addTask(task);
+    }
+    @PatchMapping("/updateTask/{taskId}")
+    public Tache updateTask(@RequestBody Tache task,@PathVariable Long taskId) {
+        Tache existedTache = taskService.getTaskById(taskId);
+        if(task.getTitle()!=null){
+            existedTache.setTitle(task.getTitle());
+        }
+        if(task.getDescription()!=null){
+            existedTache.setDescription(task.getDescription());
+        }
+        if(task.getStartDateTime()!=null){
+            existedTache.setStartDateTime(task.getStartDateTime());
+        }
+        if(task.getEndDateTime()!=null){
+            existedTache.setEndDateTime(task.getEndDateTime());
+        }
+        if(task.isCompleted()){
+            existedTache.setCompleted(true);
+        }
+        return taskService.updateTask(existedTache);
+    }
+    @DeleteMapping("/delete/{taskId}")
+    public void deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTask(taskId);
+    }
+    @PatchMapping("/complete/{taskId}")
+    public Tache markTaskAsComplete(@PathVariable Long taskId) {
+        return taskService.markTaskAsComplete(taskId);
+    }
 }

@@ -44,5 +44,10 @@ public class Etudiant extends User{
     @JsonManagedReference
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonManagedReference
+    private List<Tache> taches;
+
 
 }

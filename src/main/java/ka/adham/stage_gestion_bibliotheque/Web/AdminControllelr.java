@@ -54,14 +54,69 @@ public class AdminControllelr {
         return adminService.addEtudiant(etudiant);
 
     }
-    @PatchMapping(value="/etudiant", consumes = "application/json")
-    public Etudiant updateEtudiant(@RequestBody Etudiant etudiant){
-        return adminService.updateEtudiant(etudiant);
+    @PatchMapping(value="/etudiant/{id}", consumes = "application/json")
+    public Etudiant updateEtudiant(@RequestBody Etudiant etudiant, @PathVariable Long id){
+        Etudiant existingEtudiant = adminService.getEtudiantById(id);
+        if(etudiant.getNom() != null){
+            existingEtudiant.setNom(etudiant.getNom());
+        }
+        if(etudiant.getPrenom() != null){
+            existingEtudiant.setPrenom(etudiant.getPrenom());
+        }
+        if(etudiant.getCne()!=null){
+            existingEtudiant.setCne(etudiant.getCne());
+        }
+        if(etudiant.getEmail()!=null){
+            existingEtudiant.setEmail(etudiant.getEmail());
+        }
+        if(etudiant.getFiliere()!=null){
+            existingEtudiant.setFiliere(etudiant.getFiliere());
+        }
+        if(etudiant.getNiveau()!=null){
+            existingEtudiant.setNiveau(etudiant.getNiveau());
+        }
+        if(etudiant.getTel()!=null){
+            existingEtudiant.setTel(etudiant.getTel());
+        }
+        if(etudiant.getVille()!=null){
+            existingEtudiant.setVille(etudiant.getVille());
+        }
+        if(etudiant.getImage()!=null){
+            existingEtudiant.setImage(etudiant.getImage());
+        }
+        if(etudiant.getComments()!=null){
+            existingEtudiant.setComments(etudiant.getComments());
+        }
+        if(etudiant.getEmprunts()!=null){
+            existingEtudiant.setEmprunts(etudiant.getEmprunts());
+        }
+        if(etudiant.getReservations()!=null){
+            existingEtudiant.setReservations(etudiant.getReservations());
+        }
+        if(etudiant.getNationalite()!=null){
+            existingEtudiant.setNationalite(etudiant.getNationalite());
+        }
+        if(etudiant.getPassword()!=null){
+            existingEtudiant.setPassword(etudiant.getPassword());
+        }
+        if(etudiant.getSexe()!=null){
+            existingEtudiant.setSexe(etudiant.getSexe());
+        }
+        if(etudiant.isBlackListed()!=existingEtudiant.isBlackListed()){
+            existingEtudiant.setBlackListed(etudiant.isBlackListed());
+        }
+
+
+
+        return adminService.updateEtudiant(existingEtudiant);
     }
     @DeleteMapping("/etudiant/{id}")
     public void deleteEtudiant(@PathVariable Long id){
-        Image image=adminService.getEtudiantById(id).getImage();
-        storageService.deleteImage(image.getId());
+        Etudiant etudiant = adminService.getEtudiantById(id);
+        if (etudiant != null && etudiant.getImage() != null) {
+            Image image = etudiant.getImage();
+            storageService.deleteImage(image.getId());
+        }
         adminService.deleteEtudiant(id);
     }
    @GetMapping("/etudiant/{id}/empruntes")
