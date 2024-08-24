@@ -128,9 +128,6 @@ public class DatabasePDFService {
                 nationaliteCell.setPaddingRight(4);
                 table.addCell(nationaliteCell);
 
-
-
-
             }
             document.add(table);
 

@@ -29,4 +29,8 @@ public class SearchEngine {
     public Object searchCategory(@RequestParam String search){
         return livreService.SearchCategory(search);
     }
+    @GetMapping("/emprunts")
+    public Object searchEmprunte(@RequestParam String search){
+        return livreService.SearchEmprunte(search);
+    }
 }

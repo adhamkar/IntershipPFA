@@ -10,6 +10,7 @@ import ka.adham.stage_gestion_bibliotheque.EtudiantViews;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 @Data
 @AllArgsConstructor
@@ -53,4 +54,7 @@ public class User {
     @ManyToOne
     @JsonView(EtudiantViews.DefaultView.class)
     private Image image;
+
+    @Formula("Role")
+    private String role;
 }

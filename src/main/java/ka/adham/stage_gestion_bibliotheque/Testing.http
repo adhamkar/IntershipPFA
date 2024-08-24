@@ -1,0 +1,9 @@
+POST http://localhost:8085/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+email=yassin01@gmail.com&password=Yassin@123
+
+###
+GET http://localhost:8085/openpdf/etudiants
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXNzaW4wMUBnbWFpbC5jb20iLCJleHAiOjE3MjQ0NTgyNzYsImlhdCI6MTcyNDQ1NzY3Niwic2NvcGUiOiJST0xFX0V0dWRpYW50In0.7xNcz32LBpeoX-TMlIQFaXRy71gVsiH3TUjxvYBa90f-PUYkMUHBKKwDSvQYn7wAZkybQOJZgCmJdDcPfSsGxw
+
