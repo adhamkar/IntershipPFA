@@ -39,6 +39,9 @@ export class EtudiantService {
   public getEtudiant(id: number): Observable<Etudiant> {
     return this.http.get<Etudiant>(`${this.url}/etudiant/${id}`);
   }
+  public getAuthEtudiant(etudiant: Etudiant): Observable<Etudiant> {
+    return this.http.get<Etudiant>(`${this.url}/etudiant/${etudiant.id}`);
+  }
   public updateEtudiantById(etudiant: Etudiant,id: number): Observable<Etudiant> {
     return this.http.patch<Etudiant>(`${this.url}/etudiant/${id}`, etudiant);
   }

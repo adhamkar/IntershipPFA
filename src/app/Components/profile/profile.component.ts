@@ -37,7 +37,8 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = +params['id']; // Récupère l'ID de l'étudiant à partir de l'URL
+      this.id = +params['id']; 
+      
       this.getProfile(this.id);
       this.updateEtdForm = this.formBuilder.group({
         nom: [null],

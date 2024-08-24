@@ -5,6 +5,7 @@ import { Emprunte } from "./Emprunt.model";
 import { Reserve } from "./Reserve.model";
 import { Image } from "./Image.model";
 export class Etudiant extends User {
+  [x: string]: any;
     blackListed: boolean;
     niveau: string;
     nationalite: string;

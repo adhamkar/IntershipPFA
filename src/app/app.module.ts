@@ -15,7 +15,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { CategoriesComponent } from './Components/categories/categories.component';
 import { PowerBiComponent } from './Components/power-bi/power-bi.component';
 import { PowerBIEmbedModule } from 'powerbi-client-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LivreComponent } from './Components/livre/livre.component';
 import { EtudiantComponent } from './Components/etudiant/etudiant.component';
 import { AjouterComponent } from './Components/ajouter/ajouter.component';
@@ -36,6 +36,8 @@ import { UpdateCategoryComponent } from './Components/update-category/update-cat
 import { UpdateBookComponent } from './Components/update-book/update-book.component';
 import { AddBookComponent } from './Components/add-book/add-book.component';
 import { TasksComponent } from './Components/tasks/tasks.component';
+import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
+import { appInterceptorInterceptor } from './Interceptor/app-interceptor.interceptor';
 
 
 
@@ -59,6 +61,7 @@ import { TasksComponent } from './Components/tasks/tasks.component';
     UpdateBookComponent,
     AddBookComponent,
     TasksComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,8 +88,10 @@ import { TasksComponent } from './Components/tasks/tasks.component';
 
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {provide:HTTP_INTERCEPTORS, useClass:appInterceptorInterceptor, multi:true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //entryComponents: [ConfirmationDialogComponent]
 })
 export class AppModule { }

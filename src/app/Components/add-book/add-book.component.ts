@@ -6,6 +6,7 @@ import { Bibliothecaire } from '../../Models/Bibliothecaire.model';
 import { Livre } from '../../Models/Livre.model';
 import { CategoryServiceService } from '../../Services/category-service.service';
 import { Category } from '../../Models/Category.model';
+import { Router } from '@angular/router';
 
   @Component({
     selector: 'app-add-book',
@@ -27,7 +28,7 @@ import { Category } from '../../Models/Category.model';
     selectedCategoryType: string | null = null;
 
     constructor(private service :AjouterService,private formBuilder: FormBuilder,private adminService: AdminService,
-      private Categoryservice: CategoryServiceService) { }
+      private Categoryservice: CategoryServiceService,private router:Router) { }
 
     ngOnInit(): void {
       
@@ -70,12 +71,12 @@ import { Category } from '../../Models/Category.model';
           console.log(data);
           this.livre=data;
           this.livreForm.reset();
-          location.reload();
-          //this.alertType = 'success';
+          this.router.navigate(['/livres']);
+          
         },
         (error)=>{
           console.log(error);
-          //this.alertType = 'echec';
+         
         }
       )
     }
@@ -185,7 +186,7 @@ import { Category } from '../../Models/Category.model';
       this.service.deleteLastImage().subscribe(
         (data)=>{
           console.log(data);
-          location.reload();
+          this.router.navigate(['/livres']);
         },
         (error)=>{
           console.log(error);
@@ -196,6 +197,6 @@ import { Category } from '../../Models/Category.model';
     CancelSave(){
       this.Cancel();
       this.deleteBook(this.livre.id);
-      location.reload();
+      this.router.navigate(['/livres']);
     }
   }

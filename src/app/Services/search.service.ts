@@ -20,4 +20,7 @@ export class SearchService {
 searchcategories(query: string): Observable<any> {
     return this.http.get<any>(`${this.url}/categories?search=${query}`);
   }
+  searchEmprunte(query: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/emprunts?search=${query}`);
+  }
 }

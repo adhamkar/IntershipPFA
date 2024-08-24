@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AjouterComponent } from '../ajouter/ajouter.component';
 import { SearchService } from '../../Services/search.service';
+import { PDFsService } from '../../Services/pdfs.service';
   @Component({
     selector: 'app-etudiant',
     templateUrl: './etudiant.component.html',
@@ -29,13 +30,28 @@ import { SearchService } from '../../Services/search.service';
   
   constructor(private router:Router, private etudiantService:EtudiantService,
     private sanitizer: DomSanitizer,public dialog: MatDialog,
-    private searchService:SearchService) { }
+    private searchService:SearchService,
+    private pdfService: PDFsService
+    ) { }
 
     ngOnInit(): void {
     this.getAllEtudiants();
     this.fetchAllEtudiants();
 
 
+    }
+
+    exportEtudiantsPdf() {
+      this.pdfService.getEtudiantPdf().subscribe(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'etudiants.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }, error => {
+        console.error('Error exporting PDF:', error);
+      });
     }
  
      public getAllEtudiants(): void {

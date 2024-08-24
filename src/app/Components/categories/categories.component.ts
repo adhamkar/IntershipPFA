@@ -9,6 +9,7 @@ import { LivresAssociesComponent } from '../livres-associes/livres-associes.comp
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { UpdateCategoryComponent } from '../update-category/update-category.component';
+import { PDFsService } from '../../Services/pdfs.service';
 
 @Component({
   selector: 'app-categories',
@@ -39,13 +40,26 @@ export class CategoriesComponent implements OnInit {
 public alertMessage: string = '';
 
   constructor(private router:Router, private Categoryservice: CategoryServiceService,
-    private searchService:SearchService,public dialog: MatDialog) {
+    private searchService:SearchService,public dialog: MatDialog,private pdfService: PDFsService) {
    }
 
   ngOnInit(): void {
     this.pageSize = 6;
     //this.getAllCategories();
     this.loadPages();
+  }
+
+  exportCategoriesdf() {
+    this.pdfService.getCategoriesPdf().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'categories.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error exporting PDF:', error);
+    });
   }
 
   public getAllCategories(): void {

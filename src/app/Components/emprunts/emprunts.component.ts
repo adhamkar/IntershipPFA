@@ -5,6 +5,7 @@ import { Emprunte } from '../../Models/Emprunt.model';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { SearchService } from '../../Services/search.service';
+import { PDFsService } from '../../Services/pdfs.service';
 @Component({
   selector: 'app-emprunts',
   templateUrl: './emprunts.component.html',
@@ -12,6 +13,7 @@ import { SearchService } from '../../Services/search.service';
 })
 export class EmpruntsComponent implements OnInit{
   emprunts:Emprunte[] = [];
+  filteredEmprunts: Emprunte[] = [];
   query: string = '';
   number: number = 0;
 
@@ -20,12 +22,24 @@ export class EmpruntsComponent implements OnInit{
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-   constructor(private router:Router,private empruntService: EmpruntService,private searchService:SearchService,) { }
+   constructor(private router:Router,private empruntService: EmpruntService,private searchService:SearchService,
+    private pdfService: PDFsService) { }
   ngOnInit(): void {
     this.getEmprunts();
 
    }
-  
+   exportEmpruntsPdf() {
+    this.pdfService.getEmpruntPDFs().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'emprunts.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error exporting PDF:', error);
+    });
+  }
 /*    public onSearch(): void {
     this.searchService.searchLivres(this.query).subscribe(
       (data) => {
@@ -52,5 +66,21 @@ export class EmpruntsComponent implements OnInit{
         console.log("il'y'a une erreur"+error);
       }
     );
+}
+public onSearch(): void {
+  this.searchService.searchEmprunte(this.query).subscribe(
+    (data) => {
+      console.log(data);
+      this.filteredEmprunts = data;
+      this.dataSource=new MatTableDataSource<Emprunte>(this.filteredEmprunts);
+      if(this.query===''){
+        
+        this.getEmprunts();
+      }
+    },
+    (error) => {
+      console.log("il'y'a une erreur"+error);
+    }
+  );
 }
 }

@@ -59,7 +59,8 @@ constructor(private router:Router, private livreService: LivreService,
   private CatService:CategoryServiceService,
   private searchService:SearchService,
   private changeDetectorRef: ChangeDetectorRef,
-  public dialog: MatDialog
+  public dialog: MatDialog,
+  private pdfService: PDFsService
   ) { }
 
 
@@ -77,7 +78,18 @@ public onSearch(): void {
     }
   );
 }
-
+exportLivresPdf() {
+  this.pdfService.getLivresPdf().subscribe(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'livres.pdf';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }, error => {
+    console.error('Error exporting PDF:', error);
+  });
+}
 public getAllLivres(): void {
 
   this.livreService.getLivres().subscribe(

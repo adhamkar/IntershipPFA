@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../Models/Task.model';
+import { MatDialog } from '@angular/material/dialog';
 import { EtudiantService } from '../../Services/etudiant.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Etudiant } from '../../Models/Etudiant.model';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -14,15 +19,27 @@ export class TasksComponent implements OnInit{
   tasks: Task[] = [];
   newTask!: Task;
   updatedTask!: Task;
-  etudiantId: number = 39;
-  days: { number: number, date: Date }[] = [];
+  
+  etudiant!:Etudiant;
+  AllEtudiant!:Etudiant[];
   activeDropdownTaskId: number | null = null;
   taskForm!: FormGroup;
   updateTaskForm!: FormGroup;
+  imageUrl!: SafeUrl;
+  email!:string;
 
-  constructor(private service: EtudiantService,private formBuilder:FormBuilder,private updateformBuilder:FormBuilder) { }
+  constructor(private service: EtudiantService,private formBuilder:FormBuilder,private updateformBuilder:FormBuilder,
+    public dialog: MatDialog,private route: Router, private sanitizer: DomSanitizer,private authService: AuthService
+   ) { }
   ngOnInit(): void {
-    this.loadTasks();
+    this.getUser(this.authService.getAuthenticatedUser()).then(()=>{
+      this.loadAuthStudentImage();
+      
+      this.loadTasks();
+    });
+    
+
+   
     this.taskForm = this.formBuilder.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
@@ -38,40 +55,89 @@ export class TasksComponent implements OnInit{
       endDateTime: [null],
     });
   }
-  loadTasks(){
-    this.service.getStudentTasks(this.etudiantId).subscribe(
+ 
+  loadAuthStudentImage(){
+    if(this.etudiant){    
+    this.service.getEtudiant(this.etudiant.id).subscribe(
       data => {
-        console.log(data);
-        this.tasks = data;
-        this.generateCalendar();
-      }
-    );
+        this.etudiant = data;
+        this.fetchImage(this.etudiant.image.name);
+      },
+      error => {
+        console.log(error);
+      })
+    }
+  }
+  getUser(email:string): Promise<void> {
+    email=this.authService.getAuthenticatedUser();
+    return new Promise((resolve, reject) =>{
+      this.service.getEtudiants().subscribe(
+        data => {
+          this.AllEtudiant = data;
+          for(let i=0;i<this.AllEtudiant.length;i++){
+            if(this.AllEtudiant[i].email===email){
+              this.etudiant=this.AllEtudiant[i];
+              break;
+            }
+            resolve();
+          }
+          console.log(this.etudiant);
+        },
+        error => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    })
+    
+    
+  }
+  loadTasks(){
+    if(this.etudiant){
+      this.service.getStudentTasks(this.etudiant.id).subscribe(
+        data => {
+          console.log(data);
+          this.tasks = data;
+         
+        }
+      );
+    }
+ 
   }
   addTask(){
     this.newTask = this.taskForm.value;
-    this.service.addTask(this.newTask,this.etudiantId).subscribe(
+    this.service.addTask(this.newTask,this.etudiant.id).subscribe(
       data => {
         console.log(data);
+        this.closeModal();
         this.loadTasks();
-        location.reload();
+        this.taskForm.reset();
       }
     );
   }
   markTaskAsComplete(taskId: number): void {
-    this.service.markTaskAsComplete(taskId).subscribe(
-      data => {
-        console.log(data);
-        this.loadTasks();
-      }
-    );
+    const alert=window.confirm("Etes-vous sur de marquer la tache comme terminée?");
+    if(alert===true){
+      this.service.markTaskAsComplete(taskId).subscribe(
+        data => {
+          console.log(data);
+          this.loadTasks();
+        }
+      );
+    }else{
+      window.alert("Tache n'est pas marquer terminée");
+    }
+   
   }
   updateTask(): void {
     this.updatedTask = this.updateTaskForm.value;
     this.service.updateTask(this.updatedTask,this.updatedTask.id).subscribe(
       data => {
         console.log(data);
+        this.updateTaskForm.reset();
+        this.closeUpdateModal();
         this.loadTasks();
-        location.reload();
+      
       },
       error => {
         console.log(error);
@@ -79,32 +145,18 @@ export class TasksComponent implements OnInit{
     );
   }
   deleteTask(taskId: number): void {
-    this.service.deleteTask(taskId).subscribe(
-      data => {
-        console.log(data);
-        this.loadTasks();
-      });
-  }
-
-  generateCalendar(): void {
-    const currentDate = new Date();
-    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-    
-    const daysInMonth = endOfMonth.getDate();
-    for (let i = 1; i <= daysInMonth; i++) {
-      this.days.push({ 
-        number: i, 
-        date: new Date(currentDate.getFullYear(), currentDate.getMonth(), i) 
-      });
+    const alert=window.confirm("Voulez-vous vraiment suprrimer cette tache?");
+    if(alert===true){
+      this.service.deleteTask(taskId).subscribe(
+        data => {
+          console.log(data);
+          this.loadTasks();
+        });
     }
+ 
   }
 
-  isSameDay(date1: Date, date2: Date): boolean {
-    return date1.getFullYear() === date2.getFullYear() &&
-           date1.getMonth() === date2.getMonth() &&
-           date1.getDate() === date2.getDate();
-  }
+
   toggleDropdown(taskId: number): void {
     if (this.activeDropdownTaskId === taskId) {
       this.activeDropdownTaskId = null;
@@ -137,5 +189,16 @@ export class TasksComponent implements OnInit{
 
   closeUpdateModal() {
     this.updateModal = false;
+  }
+  fetchImage(fileName: string): void {
+    this.service.getImage(fileName).subscribe(
+      (blob: Blob) => {
+        const objectURL = URL.createObjectURL(blob);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error => {
+        console.error('Error fetching image', error);
+      }
+    );
   }
 }
