@@ -4,16 +4,16 @@ import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
 import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Enums.Genre;
-import ka.adham.stage_gestion_bibliotheque.Repositories.CommentRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.LivreRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.ReserveRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import ka.adham.stage_gestion_bibliotheque.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -34,6 +34,11 @@ public class StageGestionBibliothequeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(StageGestionBibliothequeApplication.class, args);
+
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
 
     }
 
@@ -131,7 +136,7 @@ public class StageGestionBibliothequeApplication {
                 comment.setEtudiant(adminService.getEtudiantById((long) random.nextInt(3) + 1));
                 comment.setLivre(bibliothecaireService.getLivreById((long) random.nextInt(6) + 1));
 
-                etudiantService.ajouterCommentaire(comment.getLivre().getId(), comment.getCommentaire(), comment.getEtudiant().getId());
+                //etudiantService.ajouterCommentaire(comment.getLivre().getId(), comment.getCommentaire(), comment.getEtudiant().getId());
             });
             etudiantService.emprunterLivre(1L, 1L);
             etudiantService.reserverLivre(5L, 2L);
@@ -155,23 +160,23 @@ public class StageGestionBibliothequeApplication {
      CommandLineRunner cmLineRunner(EtudiantService etudiantService,
                                     AdminService adminService,
                                     BibliothecaireService bibliothecaireService,
-                                    EmprunteRepo emprunteRepo, CommentRepo commentRepo, TacheService tacheService) {
+                                    EmprunteRepo emprunteRepo, CommentRepo commentRepo,
+                                    TacheService tacheService, UserService userService,
+                                    ImageRepo imageRepo, StorageService storageService
+                                    ) {
 
         return args -> {
-            Etudiant etudiant=adminService.getEtudiantById(39L);
-            Tache tache = new Tache();
-            tache.setCompleted(false);
-            tache.setTitle("Tp de Spring Boot");
-            tache.setDescription("Excercice de l'injection de dependance");
-            tache.setStartDateTime(new Date());
+            Admin admin = new Admin();
+            admin.setNom("Bargage");
+            admin.setPrenom("Lamia");
+                admin.setEmail("lamia99@gmail.com");
+            admin.setPassword("lamia@123");
+            admin.setTel("0660045678");
+            admin.setSexe(Genre.Feminin);
+            admin.setVille("Rabat");
+            adminService.addAdmin(admin);
+                //yassin10@gmail.com-yassin@123
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(tache.getStartDateTime());
-            calendar.add(Calendar.DAY_OF_YEAR, 7);
-            Date endDate = calendar.getTime();
-            tache.setEndDateTime(endDate);
-            tache.setEtudiant(etudiant);
-            tacheService.addTask(tache);
-};
+        };
 }
 }

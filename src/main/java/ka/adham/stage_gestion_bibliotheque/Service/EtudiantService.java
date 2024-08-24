@@ -19,7 +19,7 @@ public interface EtudiantService {
     void annulerReservation(Long idReservation);
     void rendreLivre(Long idEmprunt);
     void prolongerEmprunt(Long idEmprunt);
-    void ajouterCommentaire(Long idLivre, String commentaire, Long idEtudiant);
+    Comment ajouterCommentaire( Comment comment);
     List<Comment> getCommentaires(Long idLivre);
     void supprimerCommentaire(Long idCommentaire);
     Etudiant updateEtudiant(Etudiant etudiant);

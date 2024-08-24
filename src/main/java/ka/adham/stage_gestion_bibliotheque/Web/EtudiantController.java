@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,10 +23,12 @@ import java.util.List;
 @Slf4j
 @CrossOrigin("*")
 @RequestMapping("/etudiant")
+
 public class EtudiantController {
     @Autowired private EtudiantService etudiantService;
     @Autowired private TacheService taskService;
     @Autowired private AdminService adminService;
+    @Autowired private BibliothecaireService bibliothecaireService;
 
 
     private static void accept(String domaine) {
@@ -59,9 +64,16 @@ public class EtudiantController {
     public void prolongerEmprunt(@PathVariable Long idEmprunt){
         etudiantService.prolongerEmprunt(idEmprunt);
     }
-    @GetMapping("/commenter/{idLivre}/{commentaire}/{idEtudiant}")
-    public void ajouterCommentaire(@PathVariable Long idLivre, @PathVariable String commentaire, @PathVariable Long idEtudiant){
-        etudiantService.ajouterCommentaire(idLivre, commentaire, idEtudiant);
+    @PostMapping(value="/commenter/{idLivre}/{idEtudiant}")
+    public Comment ajouterCommentaire(@RequestBody Comment comment, @PathVariable Long idLivre, @PathVariable Long idEtudiant){
+        log.info("Received Content-Type: {}", RequestContextHolder.currentRequestAttributes().getAttribute("Content-Type", RequestAttributes.SCOPE_REQUEST));
+        log.info("Received Comment: {}", comment);
+        Livre livre=bibliothecaireService.getLivreById(idLivre);
+        Etudiant etudiant=adminService.getEtudiantById(idEtudiant);
+        comment.setEtudiant(etudiant);
+        comment.setLivre(livre);
+        comment.setCreatedDate(new Date());
+        return etudiantService.ajouterCommentaire(comment);
     }
     @GetMapping("/commentaires/{idLivre}")
     public List<Comment> getCommentaires(@PathVariable Long idLivre){

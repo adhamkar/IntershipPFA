@@ -1,0 +1,14 @@
+POST http://localhost:8085/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+email=yassin10@gmail.com&password=yassin@123
+
+###
+POST http://localhost:8085/etudiant/commenter/1/35
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXNzaW4xMEBnbWFpbC5jb20iLCJleHAiOjE3MjQ2OTE4MDksImlhdCI6MTcyNDY4ODIwOSwic2NvcGUiOiJST0xFX0V0dWRpYW50In0.UF17Lt8YAwgGcvHQak2jcEBbkODU5Pgtn2jRJTAAQEK3_xZeNKsmUZKutc3skQm9f3g7WkHPjDwbejUxXt9vkA
+
+{
+  "commentaire": "Bon livre"
+}
+

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class AdminImpl implements AdminService{
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private AdminRepo adminRepo;
     @Autowired
@@ -41,11 +43,13 @@ public class AdminImpl implements AdminService{
 
     @Override
     public Etudiant addEtudiant(Etudiant etudiant) {
+        etudiant.setPassword(passwordEncoder.encode(etudiant.getPassword()));
         return etudiantRepo.save(etudiant);
     }
 
     @Override
     public Bibliothecaire addBibliothecaire(Bibliothecaire bibliothecaire) {
+        bibliothecaire.setPassword(passwordEncoder.encode(bibliothecaire.getPassword()));
         return bibliothecaireRepo.save(bibliothecaire);
     }
 
@@ -66,6 +70,7 @@ public class AdminImpl implements AdminService{
 
     @Override
     public Admin addAdmin(Admin admin) {
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepo.save(admin);
     }
 

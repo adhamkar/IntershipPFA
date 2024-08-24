@@ -1,8 +1,10 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +19,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Etudiant extends User{
 
     private boolean blackListed;
@@ -41,7 +45,7 @@ public class Etudiant extends User{
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JsonManagedReference
+    //@JsonManagedReference
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)

@@ -1,9 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import ka.adham.stage_gestion_bibliotheque.EtudiantViews;
 import lombok.AllArgsConstructor;
@@ -17,20 +14,21 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(EtudiantViews.CommentView.class)
     private Long id;
     @JsonView(EtudiantViews.CommentView.class)
     private String commentaire;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonView(EtudiantViews.CommentView.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date CreatedDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonView(EtudiantViews.CommentView.class)
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    //@JsonManagedReference
-    @JsonBackReference
+    //@JsonBackReference
     private Etudiant etudiant;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

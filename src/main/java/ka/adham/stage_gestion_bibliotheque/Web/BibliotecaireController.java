@@ -2,6 +2,7 @@ package ka.adham.stage_gestion_bibliotheque.Web;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.BibliothecaireService;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class BibliotecaireController {
     @Autowired
     private ImageRepo imageRepo;
     @Autowired private CategoryRepo categoryRepo;
+    @Autowired private EmprunteRepo emprunteRepo;
 
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
@@ -33,7 +35,16 @@ public class BibliotecaireController {
 
     @GetMapping("/emprunts")
     public List<Emprunte> getEmprunts(){
-        return bibliothecaireService.getAllEmprunts();
+        List<Emprunte> emprunteList=bibliothecaireService.getAllEmprunts();
+        emprunteList.forEach(emprunte -> {
+            emprunte.setEtudiant(emprunte.getEtudiant());
+            emprunte.setNomEtudiant(emprunte.getEtudiant().getNom());
+            emprunte.setTitreLivre(emprunte.getLivre().getTitre());
+            emprunte.setDomaine(emprunte.getLivre().getCategory().getDomaine());
+            emprunteRepo.save(emprunte);
+
+        });
+        return emprunteList;
     }
     @GetMapping("/etudiant/{id}/emprunts")
     public List<Emprunte> getEmpruntsByEtudiant(@PathVariable Long id){
@@ -67,6 +78,8 @@ public class BibliotecaireController {
     }
     @DeleteMapping("/livre/{id}")
     public void deleteLivre(@PathVariable Long id){
+        Image image=bibliothecaireService.getLivreById(id).getImage();
+        imageRepo.delete(image);
         bibliothecaireService.deleteLivre(id);
     }
     @PostMapping(value="/livre", consumes = "application/json")
@@ -160,6 +173,8 @@ public class BibliotecaireController {
     }
     @DeleteMapping("/category/{id}")
     public void deleteCategory(@PathVariable Long id){
+        Image image=categoryRepo.getCategoryById(id).getImage();
+        imageRepo.delete(image);
         bibliothecaireService.deleteCategory(id);
     }
     @GetMapping("/livre/{id}")

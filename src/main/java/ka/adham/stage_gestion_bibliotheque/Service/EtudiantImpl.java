@@ -162,15 +162,9 @@ public class EtudiantImpl implements EtudiantService{
     }
 
     @Override
-    public void ajouterCommentaire(Long idLivre, String commentaire, Long idEtudiant) {
-        Livre livre=livreRepo.findById(idLivre).orElseThrow();
-        Etudiant etudiant=etudiantRepo.findById(idEtudiant).orElseThrow();
-        Comment comment=new Comment();
-        comment.setEtudiant(etudiant);
-        comment.setLivre(livre);
-        comment.setCommentaire(commentaire);
-        comment.setCreatedDate(new Date());
-        commentRepo.save(comment);
+    public Comment ajouterCommentaire( Comment comment) {
+        return commentRepo.save(comment);
+
     }
 
     @Override
