@@ -15,7 +15,7 @@
                       <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
                   </svg>
                   </div>
-                  <button  class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                  <button *ngIf="authService.roles.includes('Admin')" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     <svg style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
@@ -24,7 +24,7 @@
                   
             </div>
             <div class="overflow-x-auto" >
-    <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left ">
+    <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left " *ngIf="authService.roles.includes('Admin') || authService.roles.includes('Bibliothecaire')">
 
         <ng-container matColumnDef="titre" >
           <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Titre </th>
@@ -80,8 +80,8 @@
             class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             > {{element.dateRetour | date: 'shortDate'}} </td>
           </ng-container>
-          <ng-container matColumnDef="actions" >
-            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Actions </th>
+          <ng-container matColumnDef="actions" *ngIf="authService.roles.includes('Admin')">
+            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Actions </th>
             <td mat-cell *matCellDef="let element" > 
                 <span class="flex justify-beetween gap-1 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -101,6 +101,67 @@
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <table mat-table [dataSource]="dataSource" class="ngTable w-full text-sm text-left " *ngIf="authService.roles.includes('Etudiant') ">
+
+        <ng-container matColumnDef="titre" >
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" > Titre </th>
+          <td mat-cell *matCellDef="let element" 
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.titreLivre}} </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Category </th>
+          <td mat-cell *matCellDef="let element"> <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{element.domaine}}</span> </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Type </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.livre.category.sous_domaine}} </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="etudiant">
+          <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Etudiant </th>
+          <td mat-cell *matCellDef="let element"
+          class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          > {{element.nomEtudiant}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Status </th>
+            <td mat-cell *matCellDef="let element"
+            class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            > {{element.status}} </td>
+          </ng-container>
+      
+    
+        <ng-container matColumnDef="quantite">
+            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Quantité </th>
+            <td mat-cell *matCellDef="let element"
+            class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            > {{element.livre.quantite}} </td>
+          </ng-container>
+          <ng-container matColumnDef="dateEmprunt">
+            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Emprunt </th>
+            <td mat-cell *matCellDef="let element"
+            class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            > {{element.dateEmprunt | date: 'shortDate'}} </td>
+          </ng-container>
+        <ng-container matColumnDef="dateRetour">
+            <th mat-header-cell *matHeaderCellDef scope="col" class="custom-header-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Date Retour </th>
+            <td mat-cell *matCellDef="let element"
+            class=" px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            > {{element.dateRetour | date: 'shortDate'}} </td>
+          </ng-container>
+         
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsStudent"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsStudent;"></tr>
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10]"
                  showFirstLastButtons

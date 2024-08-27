@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   isMobileMenuOpen = false
   isLoggedIn=false;
 
-  constructor(private fb: FormBuilder,private authService:AuthService,private router: Router){}
+  constructor(private fb: FormBuilder,protected authService:AuthService,private router: Router){}
 
 
   ngOnInit(): void {

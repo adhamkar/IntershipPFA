@@ -42,4 +42,12 @@ export class AuthService {
     let decodedJwt:any=jwtDecode(this.accessToken);
     return decodedJwt.sub;
   }
+  logout(){
+    this.isAuthtenticated=false;
+    this.accessToken=undefined;
+    this.email=undefined;
+    this.roles=undefined;
+    window.localStorage.removeItem("jwt-Token");
+    location.reload();
+  }
 }

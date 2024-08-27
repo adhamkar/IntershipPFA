@@ -89,9 +89,8 @@ export class TasksComponent implements OnInit{
         }
       );
     })
-    
-    
   }
+  
   loadTasks(){
     if(this.etudiant){
       this.service.getStudentTasks(this.etudiant.id).subscribe(

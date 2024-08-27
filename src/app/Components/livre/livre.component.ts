@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { PDFsService } from '../../Services/pdfs.service';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-livre',
@@ -60,7 +61,7 @@ constructor(private router:Router, private livreService: LivreService,
   private searchService:SearchService,
   private changeDetectorRef: ChangeDetectorRef,
   public dialog: MatDialog,
-  private pdfService: PDFsService
+  private pdfService: PDFsService,protected authService: AuthService
   ) { }
 
 

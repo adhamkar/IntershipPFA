@@ -6,6 +6,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { SearchService } from '../../Services/search.service';
 import { PDFsService } from '../../Services/pdfs.service';
+import { AuthService } from '../../Services/auth.service';
 @Component({
   selector: 'app-emprunts',
   templateUrl: './emprunts.component.html',
@@ -19,15 +20,18 @@ export class EmpruntsComponent implements OnInit{
 
   dataSource:any;
   displayedColumns: string[] = ['titre', 'category', 'type', 'etudiant', 'status', 'quantite', 'dateEmprunt', 'dateRetour', 'actions'];
-  
+  displayedColumnsStudent: string[] = ['titre', 'category', 'type', 'etudiant', 'status', 'quantite', 'dateEmprunt', 'dateRetour'];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
    constructor(private router:Router,private empruntService: EmpruntService,private searchService:SearchService,
-    private pdfService: PDFsService) { }
+    private pdfService: PDFsService,protected authService: AuthService) { }
+
   ngOnInit(): void {
     this.getEmprunts();
 
    }
+
    exportEmpruntsPdf() {
     this.pdfService.getEmpruntPDFs().subscribe(blob => {
       const url = window.URL.createObjectURL(blob);

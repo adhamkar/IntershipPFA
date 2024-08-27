@@ -51,23 +51,32 @@
           borrow
         </button>
   
-      </div>
+      </div>  
     </div>
   
     <!-- Comments Section -->
-    <div class="mt-6">
+    <div class="mt-6  ">
       <h3 class="text-lg font-semibold">Comments:</h3>
       <ul class="space-y-4 mt-4">
         
         <li *ngFor="let comment of comments" class="p-4 bg-gray-100 rounded-lg">
+          <span class="text-sm text-gray-900 mt-2 font-semibold "> {{ comment?.etudiant?.nom }} {{ comment?.etudiant?.prenom }}</span>
           <p class="text-gray-800">{{ comment.commentaire }}</p>
-           <span class="text-sm text-gray-500">- {{ comment?.etudiant?.nom }} {{ comment?.etudiant?.prenom }}</span>
-          <span class="text-sm text-gray-500"> {{ comment?.createdDate | date }}</span> 
+          <div class="flex justify-between">
+          <span class="text-sm text-gray-500"> {{ comment?.createdDate | date }}</span>
+
+          <button class=" py-1 px-2 bg-red-100 text-white rounded-lg hover:bg-red-300" *ngIf="authService.roles.includes('Admin')" (click)="deleteComment(comment.id)">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 6.59998H21M4.8 6.59998H19.2V15C19.2 17.8284 19.2 19.2426 18.3213 20.1213C17.4426 21 16.0284 21 13.2 21H10.8C7.97157 21 6.55736 21 5.67868 20.1213C4.8 19.2426 4.8 17.8284 4.8 15V6.59998Z" stroke="#ff0000" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+            <path d="M7.5 6.59994V4.99994C7.5 3.89537 8.39543 2.99994 9.5 2.99994H14.5C15.6046 2.99994 16.5 3.89537 16.5 4.99994V6.59994M16.5 6.59994H3M16.5 6.59994H21" stroke="#ff0000" stroke-width="1.7" stroke-linecap="round" class="my-path"></path>
+            </svg>
+          </button>
+        </div>
         </li>
      
       </ul>
     </div>
-    <div class="mt-6"  *ngIf="!showCommentForm">
+    <div class="mt-6"  *ngIf="!showCommentForm && authService.roles.includes('Etudiant')">
         <button 
           
           class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700" 
@@ -87,25 +96,10 @@
       </div>
     <div *ngIf="showCommentForm" class="mt-6">
         
-        <!-- (ngSubmit)="addComment()" -->
-        <form  class="mt-4">
+       
+        <form  class="mt-4"  [formGroup]="commentForm" (ngSubmit)="addComment()">
           <div class="flex flex-col space-y-4">
-            
-            <!-- Author Input -->
-           <!--  [(ngModel)]="newComment.author" --> 
-           
-            
-            <!-- Comment Input -->
-            <!-- [(ngModel)]="newComment.text" -->
-            <textarea 
-              
-              name="text" 
-              placeholder="Your Comment" 
-              rows="3" 
-              required 
-              class="p-2 border rounded-lg"></textarea>
-    
-            <!-- Submit Button -->
+            <textarea placeholder="Your Comment" rows="3" formControlName="commentaire" required class="p-2 border rounded-lg"></textarea>
             <button 
               type="submit" 
               class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">

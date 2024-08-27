@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { UpdateCategoryComponent } from '../update-category/update-category.component';
 import { PDFsService } from '../../Services/pdfs.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-categories',
@@ -39,7 +40,7 @@ export class CategoriesComponent implements OnInit {
   public showAlert: boolean = false;
 public alertMessage: string = '';
 
-  constructor(private router:Router, private Categoryservice: CategoryServiceService,
+  constructor(private router:Router, private Categoryservice: CategoryServiceService,protected authService: AuthService,
     private searchService:SearchService,public dialog: MatDialog,private pdfService: PDFsService) {
    }
 

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AjouterComponent } from '../ajouter/ajouter.component';
 import { SearchService } from '../../Services/search.service';
 import { PDFsService } from '../../Services/pdfs.service';
+import { AuthService } from '../../Services/auth.service';
   @Component({
     selector: 'app-etudiant',
     templateUrl: './etudiant.component.html',
@@ -21,7 +22,7 @@ import { PDFsService } from '../../Services/pdfs.service';
     Alletudiants: { etudiant: Etudiant, imageUrl: SafeUrl }[] = [];
     images: { image: Image, imageUrl: SafeUrl }[] = [];
     number: number = 0;
-    pageSize = 8;
+    pageSize = 3;
     pageIndex = 0;
     totalPages = 0;
     paginatedEtudiants: { etudiant: Etudiant, imageUrl: SafeUrl }[] = [];
@@ -31,13 +32,13 @@ import { PDFsService } from '../../Services/pdfs.service';
   constructor(private router:Router, private etudiantService:EtudiantService,
     private sanitizer: DomSanitizer,public dialog: MatDialog,
     private searchService:SearchService,
-    private pdfService: PDFsService
+    private pdfService: PDFsService, protected authService: AuthService
     ) { }
 
     ngOnInit(): void {
     this.getAllEtudiants();
     this.fetchAllEtudiants();
-
+    console.log(this.pageIndex);
 
     }
 
@@ -59,8 +60,9 @@ import { PDFsService } from '../../Services/pdfs.service';
         (data) => {
           console.log(data);
           this.etudiants = data;
+          
           this.number = this.etudiants.length;
-          this.totalPages = Math.floor(this.number / this.pageSize);
+          this.totalPages = Math.ceil(this.number / this.pageSize);
           this.updatePaginatedEtudiants();
         },
         (error) => {
@@ -80,11 +82,7 @@ public onSearch(): void {
         this.isSearch=false;
 
       }
-      /* this.number = this.Alletudiants.length;
-      this.totalPages = Math.floor(this.number / this.pageSize);
-      this.updatePaginatedEtudiants();
-      this.paginatedEtudiants = this.Alletudiants.slice(0, this.pageSize);
-     */
+  
     },
     (error) => {
       console.log("il'y'a une erreur"+error);

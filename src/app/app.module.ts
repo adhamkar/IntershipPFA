@@ -38,6 +38,7 @@ import { AddBookComponent } from './Components/add-book/add-book.component';
 import { TasksComponent } from './Components/tasks/tasks.component';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { appInterceptorInterceptor } from './Interceptor/app-interceptor.interceptor';
+import { UserProfilComponent } from './Components/user-profil/user-profil.component';
 
 
 
@@ -62,6 +63,7 @@ import { appInterceptorInterceptor } from './Interceptor/app-interceptor.interce
     AddBookComponent,
     TasksComponent,
     ConfirmationDialogComponent,
+    UserProfilComponent,
   ],
   imports: [
     BrowserModule,

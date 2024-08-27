@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit{
   isResv:boolean = false;
   imageUrl!: SafeUrl;
   number: number = 0;
-  pageSize = 8;
+  pageSize = 5;
   pageIndex = 0;
   totalPages = 0;
 
