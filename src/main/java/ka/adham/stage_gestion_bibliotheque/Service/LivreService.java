@@ -3,6 +3,7 @@ package ka.adham.stage_gestion_bibliotheque.Service;
 import ka.adham.stage_gestion_bibliotheque.Entities.Category;
 import ka.adham.stage_gestion_bibliotheque.Entities.Emprunte;
 import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Entities.Reserve;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface LivreService {
 
     List<Category> SearchCategory(String search);
     List<Emprunte> SearchEmprunte(String search);
+    List<Reserve> SearchReservation(String search);
 }

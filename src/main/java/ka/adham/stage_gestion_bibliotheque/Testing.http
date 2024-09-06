@@ -4,11 +4,5 @@ Content-Type: application/x-www-form-urlencoded
 email=yassin10@gmail.com&password=yassin@123
 
 ###
-POST http://localhost:8085/etudiant/commenter/1/35
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXNzaW4xMEBnbWFpbC5jb20iLCJleHAiOjE3MjQ2OTE4MDksImlhdCI6MTcyNDY4ODIwOSwic2NvcGUiOiJST0xFX0V0dWRpYW50In0.UF17Lt8YAwgGcvHQak2jcEBbkODU5Pgtn2jRJTAAQEK3_xZeNKsmUZKutc3skQm9f3g7WkHPjDwbejUxXt9vkA
-
-{
-  "commentaire": "Bon livre"
-}
-
+POST http://localhost:8085/etudiant/borrow/2/45
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXNzaW4xMEBnbWFpbC5jb20iLCJleHAiOjE3MjQ5NjI1ODgsImlhdCI6MTcyNDk1ODk4OCwic2NvcGUiOiJST0xFX0V0dWRpYW50In0.BWzuF2AklxZizwDlZLY3ThgRyFbmQinOIg2WIaJghfZthOpUfivAQeEZQ-g2OonAAlF25zXffbCDqbrCrQykzg

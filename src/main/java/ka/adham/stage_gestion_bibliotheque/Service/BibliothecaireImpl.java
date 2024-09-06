@@ -1,7 +1,11 @@
 package ka.adham.stage_gestion_bibliotheque.Service;
 
+import com.google.zxing.WriterException;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
+import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
+import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import ka.adham.stage_gestion_bibliotheque.Web.BibliotecaireController;
 import lombok.AllArgsConstructor;
@@ -9,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +37,7 @@ public class BibliothecaireImpl implements BibliothecaireService{
     private EmprunteRepo emprunteRepo;
     @Autowired
     private ReserveRepo reserveRepo;
+    @Autowired private MailService mailService;
     @Override
     public Etudiant getEtudiantByCne(String cne) {
         return etudiantRepo.getEtudiantByCne(cne);
@@ -93,6 +99,25 @@ public class BibliothecaireImpl implements BibliothecaireService{
     }
 
     @Override
+    public void MarkEmpruntAsReturned(Etudiant etudiant,Emprunte emprunte) {
+        emprunte.setStatus(EmpruntStatus.Rendu);
+        emprunte.setDateEmprunt(null);
+        emprunte.setDateRetour(null);
+        try {
+            mailService.returnBookMailConfirmation(etudiant, emprunte);
+        } catch (MessagingException | IOException | WriterException e) {
+            throw new RuntimeException(e);
+        }
+        Livre livre=emprunte.getLivre();
+        livre.setQuantite(livre.getQuantite()+1);
+        if(livre.getQuantite()>0){
+            livre.setDisponibilite(EtatLivre.Disponible);
+        }
+        livreRepo.save(livre);
+        emprunteRepo.save(emprunte);
+    }
+
+    @Override
     public void ConfirmerEmprunt(Long idEmprunt) {
 
     }
@@ -110,6 +135,13 @@ public class BibliothecaireImpl implements BibliothecaireService{
     @Override
     public void RefuserReservation(Long idReservation) {
         reserveRepo.deleteById(idReservation);
+    }
+
+    @Override
+    public Etudiant getEtudiantEmprunt(String nomEtudiant,Long idEmprunt) {
+        Emprunte emprunte=emprunteRepo.findById(idEmprunt).orElseThrow();
+        nomEtudiant=emprunte.getNomEtudiant();
+        return etudiantRepo.getEtudiantByNom(nomEtudiant);
     }
 
     @Override

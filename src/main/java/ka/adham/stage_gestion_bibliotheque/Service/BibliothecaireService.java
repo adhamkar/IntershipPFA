@@ -21,11 +21,12 @@ public interface BibliothecaireService {
     Category updateCategory(Category category);
     List<Category> getAllCategories();
 
+    void MarkEmpruntAsReturned(Etudiant etudiant,Emprunte emprunte);
     void ConfirmerEmprunt(Long idEmprunt);
     void RefuserEmprunt(Long idEmprunt);
     void ConfirmerReservation(Long idReservation);
     void RefuserReservation(Long idReservation);
-
+    Etudiant getEtudiantEmprunt(String nomEtudiant,Long idEmprunte);
     List<Etudiant> addToBlackList(Long idEtudiant);
     List<Etudiant> getBlackList();
 
@@ -38,5 +39,4 @@ public interface BibliothecaireService {
 
     Long getNombreEmpruntsParLivre(Long id);
     Long getNombreLivresBySousDomaine(String sousDomaine);
-
 }

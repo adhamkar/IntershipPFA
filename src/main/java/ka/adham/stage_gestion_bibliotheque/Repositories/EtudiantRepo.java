@@ -14,4 +14,6 @@ public interface EtudiantRepo extends JpaRepository<Etudiant, Long>{
     Comment getCommentById(Long id);
     @Query("SELECT e FROM Etudiant e WHERE e.nom LIKE %?1% OR e.prenom LIKE %?1% OR e.cne LIKE %?1% OR e.email LIKE %?1% OR e.tel LIKE %?1% OR e.ville LIKE %?1%")
     List<Etudiant> searchEtudiants(String query);
+    List<Etudiant> getEtudiantsByBlackListedTrue();
+    Etudiant getEtudiantByNom(String nom);
 }

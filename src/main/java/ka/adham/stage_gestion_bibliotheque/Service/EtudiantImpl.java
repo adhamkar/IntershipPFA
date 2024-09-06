@@ -1,5 +1,7 @@
 package ka.adham.stage_gestion_bibliotheque.Service;
 
+import com.google.zxing.WriterException;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.*;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +36,7 @@ public class EtudiantImpl implements EtudiantService{
     private CommentRepo commentRepo;
     @Autowired
     private CategoryRepo categoryRepo;
-    //private CategoryRepo categoryRepo;
+    @Autowired MailService mailService;
 
     @Override
     public List<Livre> getLivres() {
@@ -53,55 +56,64 @@ public class EtudiantImpl implements EtudiantService{
     }
 
     @Override
-    public Emprunte emprunterLivre(Long idLivre, Long idEtudiant) {
-        Livre livre=livreRepo.findById(idLivre).orElseThrow();
-        Etudiant etudiant=etudiantRepo.findById(idEtudiant).orElseThrow();
-        Emprunte emprunte=new Emprunte();
-        Optional<Reserve> reserveOptional=reserveRepo.findByLivreAndEtudiant(livre, etudiant);
-        if(reserveOptional.isPresent()){
-            System.out.println("Vous avez déjà emprunté ce livre");
-            return null;
-        }
-        if(livre.getQuantite()>0 && livre.getDisponibilite()== EtatLivre.Disponible){
-            livre.setQuantite(livre.getQuantite()-1);
-            if (livre.getQuantite() == 0) {
-                livre.setDisponibilite(EtatLivre.Indisponible);
+    public void emprunterLivre(Emprunte emprunte,Long idLivre, Long idEtudiant) {
+        try {
+            Livre livre = livreRepo.findById(idLivre).orElseThrow();
+            Etudiant etudiant = etudiantRepo.findById(idEtudiant).orElseThrow();
+            Optional<Reserve> reserveOptional = reserveRepo.findByLivreAndEtudiant(livre, etudiant);
+
+            if (reserveOptional.isPresent()) {
+                throw new IllegalArgumentException("Vous avez déjà emprunté ce livre");
             }
-            emprunte.setLivre(livre);
-            emprunte.setEtudiant(etudiant);
-            emprunte.setNomEtudiant(etudiant.getNom());
-            emprunte.setTitreLivre(livre.getTitre());
-            emprunte.setDomaine(livre.getCategory().getDomaine());
-            emprunte.setStatus(EmpruntStatus.OK);
+            long borrowedBooksCount = emprunteRepo.countByEtudiantAndStatus(etudiant, EmpruntStatus.OK);
+            if (borrowedBooksCount >= 5) {
+                throw new IllegalArgumentException("Vous avez atteint la limite de 5 livres empruntés.");
 
-            Date borrowDate = new Date();
-            emprunte.setDateEmprunt(borrowDate);
+            }
+            if (livre.getQuantite() > 0 && livre.getDisponibilite() == EtatLivre.Disponible) {
+                livre.setQuantite(livre.getQuantite() - 1);
+                if (livre.getQuantite() == 0) {
+                    livre.setDisponibilite(EtatLivre.Indisponible);
+                }
+                livreRepo.save(livre);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(borrowDate);
-            calendar.add(Calendar.DAY_OF_YEAR, 15);
-            Date returnDate = calendar.getTime();
-            emprunte.setDateRetour(returnDate);
-            emprunteRepo.save(emprunte);
+                emprunte.setLivre(livre);
+                emprunte.setEtudiant(etudiant);
+                emprunte.setNomEtudiant(etudiant.getNom());
+                emprunte.setTitreLivre(livre.getTitre());
+                emprunte.setDomaine(livre.getCategory().getDomaine());
+                emprunte.setStatus(EmpruntStatus.OK);
+
+                Date borrowDate = new Date();
+                emprunte.setDateEmprunt(borrowDate);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(borrowDate);
+                calendar.add(Calendar.DAY_OF_YEAR, 15);
+                Date returnDate = calendar.getTime();
+                emprunte.setDateRetour(returnDate);
+                emprunteRepo.save(emprunte);
+                mailService.sendBorrowConfirmationEmail(etudiant, livre);
+                System.out.println("Livre emprunté avec succès");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-        return emprunte;
     }
 
     @Override
-    public Reserve reserverLivre(Long idLivre, Long idEtudiant) {
+    public void reserverLivre(Reserve reserve,Long idLivre, Long idEtudiant) {
+        try{
+
         Livre livre=livreRepo.findById(idLivre).orElseThrow();
         Etudiant etudiant=etudiantRepo.findById(idEtudiant).orElseThrow();
-        Reserve reserve=new Reserve();
+
         Optional<Reserve> reserveOptional=reserveRepo.findByLivreAndEtudiant(livre, etudiant);
         if(reserveOptional.isPresent()){
             System.out.println("Vous avez déjà réservé ce livre");
-            return null;
+            return;
         }
-        if(livre.getQuantite()>0){
-            livre.setQuantite(livre.getQuantite()-1);
-            if (livre.getQuantite() == 0) {
-                livre.setDisponibilite(EtatLivre.Indisponible);
-            }
+
             reserve.setLivre(livre);
             reserve.setEtudiant(etudiant);
             reserve.setNomEtudiant(etudiant.getNom());
@@ -109,8 +121,10 @@ public class EtudiantImpl implements EtudiantService{
             reserve.setDomaine(livre.getCategory().getDomaine());
             reserve.setDateReservation(new Date());
             reserveRepo.save(reserve);
+            mailService.sendReservationConfirmationEmail(etudiant, livre);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-        return reserve;
     }
 
     @Override

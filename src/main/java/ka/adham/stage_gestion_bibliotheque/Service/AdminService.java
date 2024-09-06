@@ -26,4 +26,5 @@ public interface AdminService {
     Page<Etudiant> findAllEtudiants(Pageable pageable);
     List<Etudiant> searchEtudiants(String query);
     Livre getLivreById(Long id);
+    void ToBlackList();
 }

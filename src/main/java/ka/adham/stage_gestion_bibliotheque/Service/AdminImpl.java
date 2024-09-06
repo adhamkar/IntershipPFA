@@ -1,20 +1,22 @@
 package ka.adham.stage_gestion_bibliotheque.Service;
 
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
-import ka.adham.stage_gestion_bibliotheque.Entities.Admin;
-import ka.adham.stage_gestion_bibliotheque.Entities.Bibliothecaire;
-import ka.adham.stage_gestion_bibliotheque.Entities.Etudiant;
-import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Entities.*;
+import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
 import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 @Service
 @Transactional
@@ -31,6 +33,9 @@ public class AdminImpl implements AdminService{
     @Autowired
     private BibliothecaireRepo bibliothecaireRepo;
     @Autowired private LivreRepo livreRepo;
+    @Autowired private EmprunteRepo emprunteRepo;
+    @Autowired private MailService mailService;
+    @Autowired private ReserveRepo reserveRepo;
     @Override
     public List<Etudiant> getAllEtudiants() {
         return etudiantRepo.findAll();
@@ -119,6 +124,74 @@ public class AdminImpl implements AdminService{
     @Override
     public Livre getLivreById(Long id) {
         return livreRepo.findById(id).orElseThrow();
+    }
+
+    @Override
+    @Scheduled(cron = "0 51 19 * * *")
+    public void ToBlackList() {
+        List<Emprunte> overdueEmprunts=emprunteRepo.findOverdueEmprunts();
+        overdueEmprunts.forEach(emprunte -> {
+            emprunte.setStatus(EmpruntStatus.NonRendu);
+            Etudiant etudiant=emprunte.getEtudiant();
+            etudiant.setBlackListed(true);
+            try {
+                mailService.sendBlackListEmail(etudiant);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            etudiantRepo.save(etudiant);
+        });
+    }
+    @Scheduled(cron = "0 51 19 * * *")
+    public void RemoveFromBlackList(){
+        List<Etudiant> etudiants=etudiantRepo.getEtudiantsByBlackListedTrue();
+        etudiants.forEach(etudiant -> {
+            List<Emprunte> empruntes=emprunteRepo.getEmpruntesByEtudiant(etudiant);
+            boolean allReturned=true;
+            for(Emprunte emprunte:empruntes){
+                if(emprunte.getStatus().equals(EmpruntStatus.NonRendu)){
+                    allReturned=false;
+                    break;
+                }
+            }
+            if(allReturned){
+                etudiant.setBlackListed(false);
+            }
+
+            etudiantRepo.save(etudiant);
+        });
+    }
+    @Transactional
+    @Scheduled(cron = "0 51 0 * * *")
+    public void ReservationToEmprunt(){
+        List<Reserve> reservations=reserveRepo.findAll();
+        reservations.forEach(reserve -> {
+            Livre livre=reserve.getLivre();
+            if(reserve.getLivre().getQuantite()>0){
+                Emprunte emprunte=new Emprunte();
+                emprunte.setEtudiant(reserve.getEtudiant());
+                emprunte.setDateEmprunt(new Date());
+                emprunte.setDomaine(reserve.getDomaine());
+                emprunte.setStatus(EmpruntStatus.OK);
+                emprunte.setNomEtudiant(reserve.getNomEtudiant());
+                emprunte.setLivre(livre);
+                emprunte.setTitreLivre(reserve.getTitreLivre());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(emprunte.getDateEmprunt());
+                calendar.add(Calendar.DAY_OF_YEAR, 15);
+                emprunte.setDateRetour(calendar.getTime());
+                emprunteRepo.save(emprunte);
+                livre.setQuantite(livre.getQuantite()-1);
+                livreRepo.save(livre);
+                reserveRepo.deleteById(reserve.getId());
+                try {
+                    mailService.sendBorrowConfirmationEmail(emprunte.getEtudiant(),livre);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
 

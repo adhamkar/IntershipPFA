@@ -244,4 +244,28 @@ public class EtudiantController {
     public Tache markTaskAsComplete(@PathVariable Long taskId) {
         return taskService.markTaskAsComplete(taskId);
     }
+
+    //borrow and reserve methodes
+    @PostMapping("/borrow/{bookId}/{studentId}")
+    public ResponseEntity<String> borrowBook(@PathVariable Long bookId, @PathVariable Long studentId) {
+        try {
+            Emprunte emprunte = new Emprunte();
+            etudiantService.emprunterLivre(emprunte,bookId, studentId);
+            return ResponseEntity.ok("Book borrowed successfully");
+        }catch (Exception e){
+            System.err.println("Error during borrowing process: " + e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/reserver/{bookId}/{studentId}")
+    public ResponseEntity<String> reserverLivre(@PathVariable Long bookId, @PathVariable Long studentId) {
+        try {
+            Reserve reserve = new Reserve();
+            etudiantService.reserverLivre(reserve,bookId, studentId);
+            return ResponseEntity.ok("Book borrowed successfully");
+        }catch (Exception e){
+            System.err.println("Error during borrowing process: " + e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

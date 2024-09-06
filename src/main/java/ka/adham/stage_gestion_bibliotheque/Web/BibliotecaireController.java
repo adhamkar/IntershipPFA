@@ -1,13 +1,13 @@
 package ka.adham.stage_gestion_bibliotheque.Web;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
-import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
-import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import ka.adham.stage_gestion_bibliotheque.Service.BibliothecaireService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ public class BibliotecaireController {
     private ImageRepo imageRepo;
     @Autowired private CategoryRepo categoryRepo;
     @Autowired private EmprunteRepo emprunteRepo;
+    @Autowired private ReserveRepo reserveRepo;
+    @Autowired private EtudiantRepo etudiantRepo;
 
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
@@ -46,6 +48,23 @@ public class BibliotecaireController {
         });
         return emprunteList;
     }
+    @GetMapping("/reserves")
+    public List<Reserve> getReservations(){
+        List<Reserve> reserves=bibliothecaireService.getAllReservations();
+        reserves.forEach(reservation -> {
+            reservation.setEtudiant(reservation.getEtudiant());
+            reservation.setNomEtudiant(reservation.getEtudiant().getNom());
+            reservation.setTitreLivre(reservation.getLivre().getTitre());
+            reservation.setDomaine(reservation.getLivre().getCategory().getDomaine());
+            reserveRepo.save(reservation);
+
+        });
+        return reserves;
+    }
+    @GetMapping("/emprunt/{id}")
+    public Emprunte getEmprunt(@PathVariable Long id){
+        return emprunteRepo.findById(id).orElseThrow();
+    }
     @GetMapping("/etudiant/{id}/emprunts")
     public List<Emprunte> getEmpruntsByEtudiant(@PathVariable Long id){
         return bibliothecaireService.getEtudiantById(id).getEmprunts();
@@ -60,8 +79,12 @@ public class BibliotecaireController {
                 .map(emprunte -> new Emprunte(emprunte.getDateEmprunt(),emprunte.getDateRetour()))
                 .collect(Collectors.toList());
     }
+    @GetMapping("/etudiantNom/emprunt/{nom}/{idEmprunte}")
+    public Etudiant getEtudiantEmprunt(@PathVariable String nom,@PathVariable Long idEmprunte){
+        return bibliothecaireService.getEtudiantEmprunt(nom,idEmprunte);
+    }
     @GetMapping("/reservations")
-    public List<Reserve> getReservations(){
+    public List<Reserve> getAllReservations(){
         return bibliothecaireService.getAllReservations();
     }
     @GetMapping("/livres")
@@ -185,7 +208,7 @@ public class BibliotecaireController {
     public void approveEmprunt(@PathVariable Long id){
         bibliothecaireService.ConfirmerEmprunt(id);
     }
-    @DeleteMapping("/emprunt/refuse/{id}")
+    @DeleteMapping("/emprunt/delete/{id}")
     public void refuseEmprunt(@PathVariable Long id){
         bibliothecaireService.RefuserEmprunt(id);
     }
@@ -228,6 +251,17 @@ public class BibliotecaireController {
     @GetMapping("/livres/number/{sousDomaine}")
     public Long getNombreLivresBySousDomaine(@PathVariable String sousDomaine){
         return bibliothecaireService.getNombreLivresBySousDomaine(sousDomaine);
+    }
+    @PutMapping("/return/{etudiantId}/{emprunteId}")
+    public ResponseEntity<String> markEmpruntAsReturned(@PathVariable Long etudiantId,@PathVariable Long emprunteId) {
+        try {
+            Etudiant etudiant = etudiantRepo.findById(etudiantId).orElseThrow();
+            Emprunte emprunte=emprunteRepo.findById(emprunteId).orElseThrow();
+            bibliothecaireService.MarkEmpruntAsReturned(etudiant,emprunte);
+            return ResponseEntity.ok("Emprunt marked as returned successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error marking emprunt as returned: " + e.getMessage());
+        }
     }
 
 }

@@ -6,10 +6,12 @@ import jakarta.transaction.Transactional;
 import ka.adham.stage_gestion_bibliotheque.Entities.Category;
 import ka.adham.stage_gestion_bibliotheque.Entities.Emprunte;
 import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Entities.Reserve;
 import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Repositories.CategoryRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.EmprunteRepo;
 import ka.adham.stage_gestion_bibliotheque.Repositories.LivreRepo;
+import ka.adham.stage_gestion_bibliotheque.Repositories.ReserveRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class LivresImpl implements LivreService {
     @Autowired
     CategoryRepo categoryRepo;
     @Autowired private EmprunteRepo emprunteRepo;
-
+    @Autowired private ReserveRepo reserveRepo;
 
     @Override
     public List<Livre> SearchLivre(String query) {
@@ -47,6 +49,11 @@ public class LivresImpl implements LivreService {
     @Override
     public List<Emprunte> SearchEmprunte(String search) {
         return emprunteRepo.SearchEmprunt(search);
+    }
+
+    @Override
+    public List<Reserve> SearchReservation(String search) {
+        return  reserveRepo.SearchReserve(search);
     }
 }
 

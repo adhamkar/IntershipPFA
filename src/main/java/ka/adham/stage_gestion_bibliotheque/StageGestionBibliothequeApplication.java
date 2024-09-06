@@ -4,6 +4,7 @@ import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
 import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Enums.Genre;
+import ka.adham.stage_gestion_bibliotheque.QRCode.QRCodeGenerator;
 import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import ka.adham.stage_gestion_bibliotheque.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,12 +21,14 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-
+@EnableScheduling
 public class StageGestionBibliothequeApplication {
 
     private final LivreRepo livreRepo;
     @Autowired
     private ReserveRepo reserveRepo;
+    @Autowired
+    private EtudiantRepo etudiantRepo;
 
 
     public StageGestionBibliothequeApplication(LivreRepo livreRepo) {
@@ -138,9 +142,9 @@ public class StageGestionBibliothequeApplication {
 
                 //etudiantService.ajouterCommentaire(comment.getLivre().getId(), comment.getCommentaire(), comment.getEtudiant().getId());
             });
-            etudiantService.emprunterLivre(1L, 1L);
-            etudiantService.reserverLivre(5L, 2L);
-            etudiantService.reserverLivre(5L, 1L);
+            //etudiantService.emprunterLivre(1L, 1L);
+            //etudiantService.reserverLivre(5L, 2L);
+            //etudiantService.reserverLivre(5L, 1L);
 
 
             List<Livre> livres = new ArrayList<>();
@@ -151,7 +155,7 @@ public class StageGestionBibliothequeApplication {
                 }
             });
             livres.forEach(livre -> {
-                etudiantService.emprunterLivre(livre.getId(), (long) random.nextInt(3) + 1);
+                //etudiantService.emprunterLivre(livre.getId(), (long) random.nextInt(3) + 1);
             });
         };
     }
@@ -162,20 +166,14 @@ public class StageGestionBibliothequeApplication {
                                     BibliothecaireService bibliothecaireService,
                                     EmprunteRepo emprunteRepo, CommentRepo commentRepo,
                                     TacheService tacheService, UserService userService,
-                                    ImageRepo imageRepo, StorageService storageService
-                                    ) {
+                                    ImageRepo imageRepo, StorageService storageService, MailService mailService) {
 
         return args -> {
-            Admin admin = new Admin();
-            admin.setNom("Bargage");
-            admin.setPrenom("Lamia");
-                admin.setEmail("lamia99@gmail.com");
-            admin.setPassword("lamia@123");
-            admin.setTel("0660045678");
-            admin.setSexe(Genre.Feminin);
-            admin.setVille("Rabat");
-            adminService.addAdmin(admin);
-                //yassin10@gmail.com-yassin@123
+
+
+
+
+
 
         };
 }

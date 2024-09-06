@@ -10,8 +10,8 @@ public interface EtudiantService {
     List<Livre> getLivres();
     List<Category> getCategories();
     List<Livre> searchLivres(String keyword);
-    Emprunte emprunterLivre(Long idLivre, Long idEtudiant);
-    Reserve reserverLivre(Long idLivre, Long idEtudiant);
+    void emprunterLivre(Emprunte emprunte,Long idLivre, Long idEtudiant);
+    void reserverLivre(Reserve reserve,Long idLivre, Long idEtudiant);
     List<Emprunte> getEmprunts(Long id);
     List<Reserve> getReservations(Long id);
     Category getCategoryById(Long id);

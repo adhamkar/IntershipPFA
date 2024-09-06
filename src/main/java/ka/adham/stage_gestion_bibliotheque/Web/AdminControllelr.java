@@ -5,6 +5,7 @@ import ka.adham.stage_gestion_bibliotheque.EtudiantViews;
 import ka.adham.stage_gestion_bibliotheque.Repositories.ImageRepo;
 import ka.adham.stage_gestion_bibliotheque.Service.AdminService;
 import ka.adham.stage_gestion_bibliotheque.Service.StorageService;
+import ka.adham.stage_gestion_bibliotheque.Service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class AdminControllelr {
     @Autowired
     private ImageRepo imageRepo;
     @Autowired private StorageService storageService;
+    @Autowired private UserService userService;
 
     @GetMapping("/etudiants")
     public List<Etudiant> getEtudiants(){
@@ -171,5 +173,8 @@ public class AdminControllelr {
     public void deleteBibliothecaire(@PathVariable Long id){
         adminService.deleteBibliothecaire(id);
     }
-
+@GetMapping("users")
+    public List<User> getUsers(){
+        return userService.findAllUsers();
+}
 }

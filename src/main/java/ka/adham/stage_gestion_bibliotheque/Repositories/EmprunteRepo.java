@@ -2,6 +2,8 @@ package ka.adham.stage_gestion_bibliotheque.Repositories;
 
 import ka.adham.stage_gestion_bibliotheque.Entities.Emprunte;
 import ka.adham.stage_gestion_bibliotheque.Entities.Etudiant;
+import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,10 @@ public interface EmprunteRepo extends JpaRepository<Emprunte, Long>{
     List<Emprunte> getEmpruntesByEtudiant(Etudiant etudiant);
     @Query("SELECT e FROM Emprunte e WHERE e.livre.category.sous_domaine LIKE %:search% OR e.NomEtudiant LIKE %:search% OR e.TitreLivre LIKE %:search%")
     List<Emprunte> SearchEmprunt(@Param("search") String search);
+    long countByEtudiantAndStatus(Etudiant etudiant, EmpruntStatus status);
+    Emprunte findByEtudiantAndLivre(Etudiant etudiant, Livre livre);
+    @Query("SELECT e FROM Emprunte e WHERE e.dateRetour < CURRENT_DATE")
+    List<Emprunte> findOverdueEmprunts();
+
+
 }

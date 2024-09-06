@@ -33,4 +33,9 @@ public class SearchEngine {
     public Object searchEmprunte(@RequestParam String search){
         return livreService.SearchEmprunte(search);
     }
+    @GetMapping("/reservations")
+    public Object searchreservations(@RequestParam String search){
+        return livreService.SearchReservation(search);
+    }
+
 }
