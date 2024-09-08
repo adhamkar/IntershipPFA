@@ -8,4 +8,5 @@ public interface UserService {
     User findUserByEmail(String email);
     void HashUserPassword(User user);
     List<User> findAllUsers();
+    void deleteUser(Long id);
 }

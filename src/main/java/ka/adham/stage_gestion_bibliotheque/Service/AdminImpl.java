@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import ka.adham.stage_gestion_bibliotheque.Enums.EmpruntStatus;
+import ka.adham.stage_gestion_bibliotheque.Enums.EtatLivre;
 import ka.adham.stage_gestion_bibliotheque.Repositories.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class AdminImpl implements AdminService{
     @Autowired private EmprunteRepo emprunteRepo;
     @Autowired private MailService mailService;
     @Autowired private ReserveRepo reserveRepo;
+    @Autowired private UserRepo userRepo;
     @Override
     public List<Etudiant> getAllEtudiants() {
         return etudiantRepo.findAll();
@@ -122,6 +124,11 @@ public class AdminImpl implements AdminService{
     }
 
     @Override
+    public List<User> searchUsers(String query) {
+        return userRepo.searchUsers(query);
+    }
+
+    @Override
     public Livre getLivreById(Long id) {
         return livreRepo.findById(id).orElseThrow();
     }
@@ -161,8 +168,7 @@ public class AdminImpl implements AdminService{
             etudiantRepo.save(etudiant);
         });
     }
-    @Transactional
-    @Scheduled(cron = "0 51 0 * * *")
+    @Scheduled(cron = "0 01 17 * * *")
     public void ReservationToEmprunt(){
         List<Reserve> reservations=reserveRepo.findAll();
         reservations.forEach(reserve -> {
@@ -194,6 +200,15 @@ public class AdminImpl implements AdminService{
         });
     }
 
+    @Scheduled(cron = "0 40 02 * * *")
+    public void BookDispoCheck(){
+        List<Livre> livres=livreRepo.findAll();
+        livres.forEach(livre->{
+            if(livre.getQuantite()==0){
+                livre.setDisponibilite(EtatLivre.Indisponible);
+            }
+        });
+    }
 
 }
 

@@ -56,6 +56,23 @@ public class AdminControllelr {
         return adminService.addEtudiant(etudiant);
 
     }
+
+@PostMapping(value="/new/admin", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Admin addAdmin(@RequestBody Admin admin){
+        //String uploadImage = storageService.uploadImage(file);
+       List<Image> images = imageRepo.findAll();
+       Image image = images.get(images.size()-1);
+       admin.setImage(image);
+       return adminService.addAdmin(admin);
+    }
+    @PostMapping(value="/new/bibliothecaire", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Bibliothecaire addAdmin(@RequestBody Bibliothecaire bibliothecaire){
+        List<Image> images = imageRepo.findAll();
+        Image image = images.get(images.size()-1);
+        bibliothecaire.setImage(image);
+      return adminService.addBibliothecaire(bibliothecaire);
+
+   }
     @PatchMapping(value="/etudiant/{id}", consumes = "application/json")
     public Etudiant updateEtudiant(@RequestBody Etudiant etudiant, @PathVariable Long id){
         Etudiant existingEtudiant = adminService.getEtudiantById(id);
@@ -172,6 +189,10 @@ public class AdminControllelr {
     @DeleteMapping("/bibliothecaire/{id}")
     public void deleteBibliothecaire(@PathVariable Long id){
         adminService.deleteBibliothecaire(id);
+    }
+    @DeleteMapping("/user/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
     }
 @GetMapping("users")
     public List<User> getUsers(){

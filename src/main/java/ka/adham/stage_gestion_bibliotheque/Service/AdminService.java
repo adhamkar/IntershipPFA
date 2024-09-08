@@ -1,9 +1,6 @@
 package ka.adham.stage_gestion_bibliotheque.Service;
 
-import ka.adham.stage_gestion_bibliotheque.Entities.Admin;
-import ka.adham.stage_gestion_bibliotheque.Entities.Bibliothecaire;
-import ka.adham.stage_gestion_bibliotheque.Entities.Etudiant;
-import ka.adham.stage_gestion_bibliotheque.Entities.Livre;
+import ka.adham.stage_gestion_bibliotheque.Entities.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -25,6 +22,7 @@ public interface AdminService {
     List<Etudiant> getBlackList();
     Page<Etudiant> findAllEtudiants(Pageable pageable);
     List<Etudiant> searchEtudiants(String query);
+    List<User> searchUsers(String query);
     Livre getLivreById(Long id);
     void ToBlackList();
 }

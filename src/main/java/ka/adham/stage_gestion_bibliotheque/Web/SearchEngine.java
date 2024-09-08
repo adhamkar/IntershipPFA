@@ -25,6 +25,10 @@ public class SearchEngine {
     public Object searchStudents(@RequestParam String search){
         return adminService.searchEtudiants(search);
     }
+    @GetMapping("/users")
+    public Object searchUsers(@RequestParam String search){
+        return adminService.searchUsers(search);
+    }
     @GetMapping("/categories")
     public Object searchCategory(@RequestParam String search){
         return livreService.SearchCategory(search);

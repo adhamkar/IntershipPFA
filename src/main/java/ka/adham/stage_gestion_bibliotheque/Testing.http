@@ -1,8 +1,20 @@
 POST http://localhost:8085/auth/login
 Content-Type: application/x-www-form-urlencoded
 
-email=yassin10@gmail.com&password=yassin@123
+email=lamia99@gmail.com&password=lamia@123
 
 ###
-POST http://localhost:8085/etudiant/borrow/2/45
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXNzaW4xMEBnbWFpbC5jb20iLCJleHAiOjE3MjQ5NjI1ODgsImlhdCI6MTcyNDk1ODk4OCwic2NvcGUiOiJST0xFX0V0dWRpYW50In0.BWzuF2AklxZizwDlZLY3ThgRyFbmQinOIg2WIaJghfZthOpUfivAQeEZQ-g2OonAAlF25zXffbCDqbrCrQykzg
+POST http://localhost:8085/admin/new/admin
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsYW1pYTk5QGdtYWlsLmNvbSIsImV4cCI6MTcyNTczNDI2NCwiaWF0IjoxNzI1NzMwNjY0LCJzY29wZSI6IlJPTEVfQWRtaW4ifQ.CUX4WnTP-kRFIQEqMs1HV5UOA86fepOMDVMEYEp_t7pkQ_L8mAkrwolunYOeTWHcZ2jra1sfloZJzADMT9WvQw
+Content-Type: application/json
+
+{
+  "nom": "John",
+  "prenom": "Doe",
+  "ville": "Casablanca-Settat",
+  "sexe": "Masculin",
+  "email": "john01@example.com",
+  "password": "john@123",
+  "tel": "0512345678"
+
+}
