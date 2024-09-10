@@ -39,7 +39,7 @@ public class Etudiant extends User{
     private List<Emprunte> emprunts;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JsonManagedReference
     private List<Reserve> reservations;
 

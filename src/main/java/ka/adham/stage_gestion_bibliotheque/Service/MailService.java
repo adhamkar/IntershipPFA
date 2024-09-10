@@ -41,7 +41,7 @@ public class MailService {
                 + "Merci d'utiliser notre bibliothéque.";
         helper.setText(text);
 
-        String content = "Etudiant : " + etudiant.getNom() + " " + etudiant.getPrenom()
+        String content = "Employé : " + etudiant.getNom() + " " + etudiant.getPrenom()
                 + "\nCNE : " + etudiant.getCne() + "\nEmail : " + etudiant.getEmail() + "\n"
                 +"Filiere : " + etudiant.getFiliere() +" "+"\n"+ "Niveau :"+ etudiant.getNiveau()+ "\n"
                 + "Id du Livre : " + livre.getId() +"Livre : " + livre.getTitre() + "\nAuteur : " + livre.getAuteur() + "\n"

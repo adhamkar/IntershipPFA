@@ -134,7 +134,7 @@ public class AdminImpl implements AdminService{
     }
 
     @Override
-    @Scheduled(cron = "0 51 19 * * *")
+    @Scheduled(cron = "0 00 01 * * *")
     public void ToBlackList() {
         List<Emprunte> overdueEmprunts=emprunteRepo.findOverdueEmprunts();
         overdueEmprunts.forEach(emprunte -> {
@@ -149,7 +149,7 @@ public class AdminImpl implements AdminService{
             etudiantRepo.save(etudiant);
         });
     }
-    @Scheduled(cron = "0 51 19 * * *")
+    @Scheduled(cron = "0 00 01 * * *")
     public void RemoveFromBlackList(){
         List<Etudiant> etudiants=etudiantRepo.getEtudiantsByBlackListedTrue();
         etudiants.forEach(etudiant -> {
@@ -200,12 +200,21 @@ public class AdminImpl implements AdminService{
         });
     }
 
-    @Scheduled(cron = "0 40 02 * * *")
+    @Scheduled(cron = "0 13 13 * * *")
     public void BookDispoCheck(){
         List<Livre> livres=livreRepo.findAll();
         livres.forEach(livre->{
-            if(livre.getQuantite()==0){
+            if(livre.getQuantite()==0 && livre.getDisponibilite().equals(EtatLivre.Disponible)  ){
                 livre.setDisponibilite(EtatLivre.Indisponible);
+            }
+        });
+    }
+    @Scheduled(cron = "0 13 13 * * *")
+    public void BookDispoChecking(){
+        List<Livre> livres=livreRepo.findAll();
+        livres.forEach(livre->{
+            if(livre.getQuantite()>0 && livre.getDisponibilite().equals(EtatLivre.Indisponible)){
+                livre.setDisponibilite(EtatLivre.Disponible);
             }
         });
     }

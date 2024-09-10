@@ -169,8 +169,14 @@ public class StageGestionBibliothequeApplication {
                                     ImageRepo imageRepo, StorageService storageService, MailService mailService) {
 
         return args -> {
+            Emprunte emprunte=emprunteRepo.findById(65L).orElseThrow();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2024, Calendar.AUGUST, 20);
+            emprunte.setDateEmprunt(calendar.getTime());
 
-
+            calendar.add(Calendar.DAY_OF_YEAR, 15);
+            emprunte.setDateRetour(calendar.getTime());
+            emprunteRepo.save(emprunte);
 
 
 
